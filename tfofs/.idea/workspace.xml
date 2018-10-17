@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/../asteroids-master/game.py" line="0" />
+    <bookmark url="file://$PROJECT_DIR$/../asteroids-master/game.py" line="8" />
+    <bookmark url="file://$PROJECT_DIR$/../asteroids-master/game.py" line="25" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="2a8f37c2-29a0-404f-8c1d-2c162f7dfd1b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../asteroids-master/game.py" beforeDir="false" afterPath="$PROJECT_DIR$/../asteroids-master/game.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -56,21 +61,58 @@
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
-      <usages-collector id="statistics.file.types.open" />
-      <usages-collector id="statistics.file.extensions.open" />
-      <usages-collector id="statistics.file.types.edit" />
-      <usages-collector id="statistics.file.extensions.edit" />
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="Python" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="py" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="Python" value="206" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="py" value="206" />
+        </counts>
+      </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tensorintro.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="323">
               <caret line="19" column="36" selection-start-line="19" selection-start-column="32" selection-end-line="19" selection-end-column="36" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../asteroids-master/game.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1734">
+              <caret line="26" selection-start-line="26" selection-end-line="26" />
+              <folding>
+                <element signature="e#291#322#0" expanded="true" />
+                <element signature="e#2744#3212#0" />
+                <element signature="e#3699#4551#0" />
+                <element signature="e#4586#5300#0" />
+                <element signature="e#5344#6501#0" />
+                <element signature="e#8580#8994#0" />
+                <element signature="e#9028#9633#0" />
+                <element signature="e#9695#10677#0" />
+                <element signature="e#14342#14772#0" />
+                <element signature="e#14803#14933#0" />
               </folding>
             </state>
           </provider>
@@ -85,6 +127,11 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>speed</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="ROOT_SYNC" value="DONT_SYNC" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -96,10 +143,11 @@
         <option value="$PROJECT_DIR$/test.py" />
         <option value="$PROJECT_DIR$/coin_sums.py" />
         <option value="$PROJECT_DIR$/tensorintro.py" />
+        <option value="$PROJECT_DIR$/../asteroids-master/game.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-22" />
     <option name="y" value="-12" />
     <option name="width" value="2800" />
@@ -127,7 +175,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="C:/Program Files/Git/bin/git.exe" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.selected.configurable" value="reference.idesettings.debugger.python" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -141,7 +189,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.tensorintro">
+  <component name="RunManager" selected="Python.game">
     <configuration name="DistPerm" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="tfofs" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -163,27 +211,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="cartthing" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="tfofs" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/cartthing.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="coin_sums" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="tfofs" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -197,6 +224,27 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/coin_sums.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="game" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="tfofs" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../asteroids-master" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../asteroids-master/game.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -248,19 +296,19 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.cartthing" />
       <item itemvalue="Python.tensorintro" />
       <item itemvalue="Python.DistPerm" />
       <item itemvalue="Python.coin_sums" />
       <item itemvalue="Python.test" />
+      <item itemvalue="Python.game" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.game" />
         <item itemvalue="Python.tensorintro" />
         <item itemvalue="Python.coin_sums" />
         <item itemvalue="Python.test" />
         <item itemvalue="Python.DistPerm" />
-        <item itemvalue="Python.cartthing" />
       </list>
     </recent_temporary>
   </component>
@@ -286,7 +334,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4993679" weight="0.32614556" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4993679" visible="true" weight="0.32614556" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -344,6 +392,25 @@
           <caret line="19" column="36" selection-start-line="19" selection-start-column="32" selection-end-line="19" selection-end-column="36" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../asteroids-master/game.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1734">
+          <caret line="26" selection-start-line="26" selection-end-line="26" />
+          <folding>
+            <element signature="e#291#322#0" expanded="true" />
+            <element signature="e#2744#3212#0" />
+            <element signature="e#3699#4551#0" />
+            <element signature="e#4586#5300#0" />
+            <element signature="e#5344#6501#0" />
+            <element signature="e#8580#8994#0" />
+            <element signature="e#9028#9633#0" />
+            <element signature="e#9695#10677#0" />
+            <element signature="e#14342#14772#0" />
+            <element signature="e#14803#14933#0" />
           </folding>
         </state>
       </provider>

@@ -12,7 +12,6 @@ from __future__ import division
 import math
 import sys
 import os
-import datetime
 import random
 import pygame
 
@@ -161,7 +160,7 @@ class Missile(GameObject):
     
 class Rock(GameObject):
     """Resembles a rock"""
-    def __init__(self, position, size, speed=4):
+    def __init__(self, position, size, speed=10):
         """Initialize a Rock object, given its position and size"""
 
         # if the size is valid
@@ -257,7 +256,7 @@ class MyGame(object):
 
         # used to monitor missile firing time
         # to prevent firing too many missiles in a short time
-        self.fire_time = datetime.datetime.now()
+        self.fire_time = 0
 
 
     def do_welcome(self):
@@ -351,6 +350,7 @@ class MyGame(object):
             # player is asking to quit
             if event.type == pygame.QUIT:
                 running = False
+                print("quit")
 
             # time to draw a new frame
             elif event.type == MyGame.REFRESH:
@@ -360,9 +360,7 @@ class MyGame(object):
                     keys = pygame.key.get_pressed()
                 
                     if keys[pygame.K_SPACE]:
-                        new_time = datetime.datetime.now()
-                        if new_time - self.fire_time > \
-                                datetime.timedelta(seconds=0.15):
+                        if self.fire_time < 1:
                             # there should be a minimum of 0.15 delay between
                             # firing each missile
 
@@ -372,8 +370,11 @@ class MyGame(object):
                             # play the sound
                             self.missile_sound.play()
 
-                            # record the current fire time
-                            self.fire_time = new_time
+                            # reset the current fire time
+                            self.fire_time = 6
+                        else:
+                            self.fire_time -= 1
+
 
                     if self.state == MyGame.PLAYING:
                         # if the game is going on
@@ -418,6 +419,7 @@ class MyGame(object):
 
                 # draw everything
                 self.draw()
+                #print("step")
 
             # resume after losing a life
             elif event.type == MyGame.START:
@@ -431,11 +433,13 @@ class MyGame(object):
                         self.make_rock()
                     # start again
                     self.start()
+                print("lost life,",self.lives,"remaining")
 
             # switch from game over screen to new game
             elif event.type == MyGame.RESTART:
                 pygame.time.set_timer(MyGame.RESTART, 0) # turn the timer off
                 self.state = MyGame.STARTING
+                print("game is over")
 
             # user is clicking to start a new game
             elif event.type == pygame.MOUSEBUTTONDOWN \
