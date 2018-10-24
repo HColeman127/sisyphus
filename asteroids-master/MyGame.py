@@ -6,7 +6,6 @@ import random
 import pygame
 
 from GameObjects import *
-import MyGame
 
 def load_image_convert_alpha(filename):
     """Load an image with the given filename from the images directory"""
@@ -44,6 +43,7 @@ class MyGame(object):
     REFRESH, START, RESTART = range(pygame.USEREVENT, pygame.USEREVENT + 3)
 
     next = False
+    nextFrame = True
 
     def __init__(self):
         """Initialize a new game"""
@@ -184,6 +184,7 @@ class MyGame(object):
             # time to draw a new frame
             elif event.type == MyGame.REFRESH:
 
+
                 if self.state != MyGame.WELCOME:
 
                     keys = pygame.key.get_pressed()
@@ -204,6 +205,7 @@ class MyGame(object):
                         else:
                             self.fire_time -= 1
 
+                    # ----------- the big kahuna --------------
                     if self.state == MyGame.PLAYING:
                         # if the game is going on
 
@@ -245,8 +247,10 @@ class MyGame(object):
                         # do the spaceship physics
                         self.physics()
 
+                        # --------- end of great turkey ------------
+
                 # draw everything
-                self.draw()
+                #self.draw() ## <--- the big money right here to toggle display output.
                 # print("step")
 
             # resume after losing a life
