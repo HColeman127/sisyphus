@@ -53,6 +53,9 @@ class GameObject(object):
 
 
 class Spaceship(GameObject):
+
+    velocity = [0, 0]
+
     def __init__(self, position):
         """initializing an Spaceship object given it's position"""
         super(Spaceship, self).__init__(position, \
@@ -62,6 +65,8 @@ class Spaceship(GameObject):
         self.direction = [0, -1]
         self.is_throttle_on = False
         self.angle = 0
+        self.velocity[0] = 0
+        self.velocity[1] = 0
 
         # a list to hold the missiles fired by the spaceship
         # (that are active (on the screen))
@@ -85,12 +90,10 @@ class Spaceship(GameObject):
         """Do one frame's worth of updating for the object"""
 
         # calculate the direction from the angle variable
-        self.direction[0] = math.sin(-math.radians(self.angle))
-        self.direction[1] = -math.cos(math.radians(self.angle))
 
-        # calculate the position from the direction and speed
-        self.position[0] += self.direction[0] * self.speed
-        self.position[1] += self.direction[1] * self.speed
+        self.position[0] += self.velocity[0]
+        self.position[1] += self.velocity[1]
+
 
     def fire(self):
         """create a new Missile and fire it!!"""
@@ -114,6 +117,9 @@ class Spaceship(GameObject):
 
 class Missile(GameObject):
     """Resembles a missile"""
+
+    lifeSpan = 0
+    lifeMax = 60
 
     def __init__(self, position, angle, speed=15):
         super(Missile, self).__init__(position, \
@@ -174,5 +180,5 @@ class Rock(GameObject):
     def move(self):
         """Move the rock"""
 
-        self.position[0] += self.direction[0] * self.speed
-        self.position[1] += self.direction[1] * self.speed
+        self.position[0] += self.direction[0] * self.speed * .4
+        self.position[1] += self.direction[1] * self.speed * .4

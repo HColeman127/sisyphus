@@ -87,8 +87,9 @@ class MyGame(object):
         self.death_distances = {"big": 90, "normal": 65, "small": 40}
 
         # display the welcome screen
-        self.do_welcome()
-
+        #self.do_welcome()
+        self.do_init()
+        self.start()
         # used to monitor missile firing time
         # to prevent firing too many missiles in a short time
         self.fire_time = 0
@@ -118,6 +119,7 @@ class MyGame(object):
 
         # starting the game
         self.start()
+
 
         # create 4 big rocks
         for i in range(4):
@@ -227,13 +229,25 @@ class MyGame(object):
                             self.spaceship.is_throttle_on = True
 
                             # increase the speed
-                            if self.spaceship.speed < 20:
-                                self.spaceship.speed += 1
+                            self.spaceship.velocity[0] += 0.5 * math.sin(-math.radians(self.spaceship.angle))
+                            self.spaceship.velocity[1] += 0.5 -math.cos(math.radians(self.spaceship.angle))
+
+                            if self.spaceship.velocity[0] > 9:
+                                self.spaceship.velocity[0] = 9
+                            elif self.spaceship.velocity[0] < -9:
+                                self.spaceship.velocity[0] = -9
+                            if self.spaceship.velocity[1] > 9:
+                                self.spaceship.velocity[1] = 9
+                            elif self.spaceship.velocity[1] < -9:
+                                self.spaceship.velocity[1] = -9
+
+
                         else:
                             # if the throttle key ("d" or "up")
                             # is not pressed, slow down
                             if self.spaceship.speed > 0:
-                                self.spaceship.speed -= 1
+                                self.spaceship.velocity[0] -= 0.1
+                                self.spaceship.velocity[1] -= 0.1
                             self.spaceship.is_throttle_on = False
 
                         # if there are any missiles on the screen, process them
@@ -247,10 +261,12 @@ class MyGame(object):
                         # do the spaceship physics
                         self.physics()
 
+
+
                         # --------- end of great turkey ------------
 
                 # draw everything
-                #self.draw() ## <--- the big money right here to toggle display output.
+                self.draw() ## <--- the big money right here to toggle display output.
                 # print("step")
 
             # resume after losing a life
@@ -294,9 +310,7 @@ class MyGame(object):
         self.soundtrack.stop()
         # play game over sound and wait for it to end before continuing
         self.state = MyGame.GAME_OVER
-        self.gameover_sound.play()
-        delay = int((self.gameover_sound.get_length() + 1) * 1000)
-        pygame.time.set_timer(MyGame.RESTART, delay)
+        pygame.time.set_timer(MyGame.RESTART, 1)
 
     def die(self):
         """Losing a life"""
@@ -305,9 +319,9 @@ class MyGame(object):
         self.lives -= 1
         self.counter = 0
         self.state = MyGame.DYING
-        self.die_sound.play()
-        delay = int((self.die_sound.get_length() + 1) * 1000)
-        pygame.time.set_timer(MyGame.START, delay)
+        self.spaceship.velocity[0] = 0
+        self.spaceship.velocity[1] = 0
+        pygame.time.set_timer(MyGame.START, 1)
 
     def physics(self):
         """Do spaceship physics here"""
@@ -315,6 +329,16 @@ class MyGame(object):
         if self.state == MyGame.PLAYING:
             # call the move function of the object
             self.spaceship.move()
+
+            if self.spaceship.position[0] < 0:
+                self.spaceship.position[0] = 800
+            elif self.spaceship.position[0] > 800:
+                self.spaceship.position[0] = 0
+
+            if self.spaceship.position[1] < 0:
+                self.spaceship.position[1] = 600
+            elif self.spaceship.position[1] > 600:
+                self.spaceship.position[1] = 0
 
             """Note that this is a good place to make the spaceship
             bounce for example, when it hits the walls (sides of screen)
@@ -330,9 +354,24 @@ class MyGame(object):
             for missile in self.spaceship.active_missiles:
                 # move the missile
                 missile.move()
+                missile.lifeSpan += 1
+                if missile.lifeSpan > missile.lifeMax:
+                    self.spaceship.active_missiles.remove(missile)
+
+                if missile.position[0] < 0:
+                    missile.position[0] = 800
+                elif missile.position[0] > 800:
+                    missile.position[0] = 0
+
+                if missile.position[1] < 0:
+                    missile.position[1] = 600
+                elif missile.position[1] > 600:
+                    missile.position[1] = 0
 
                 # check the collision with each rock
                 for rock in self.rocks:
+
+
                     if rock.size == "big":
                         # if the missile hits a big rock, destroy it,
                         # make two medium sized rocks and give 20 scores
@@ -382,6 +421,16 @@ class MyGame(object):
                 # move the rock
                 rock.move()
 
+                if rock.position[0] < 0:
+                    rock.position[0] = 800
+                elif rock.position[0] > 800:
+                    rock.position[0] = 0
+
+                if rock.position[1] < 0:
+                    rock.position[1] = 600
+                elif rock.position[1] > 600:
+                    rock.position[1] = 0
+
                 # if the rock hits the spaceship, die once
                 if distance(rock.position, self.spaceship.position) < \
                         self.death_distances[rock.size]:
@@ -392,7 +441,7 @@ class MyGame(object):
                 elif distance(rock.position, (self.width / 2, self.height / 2)) > \
                         math.sqrt((self.width / 2) ** 2 + (self.height / 2) ** 2):
 
-                    self.rocks.remove(rock)
+                    #self.rocks.remove(rock)
                     if len(self.rocks) < 10:
                         self.make_rock(rock.size)
 
