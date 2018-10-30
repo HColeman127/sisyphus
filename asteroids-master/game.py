@@ -17,7 +17,10 @@ import pygame
 import GameObjects
 from MyGame import MyGame
 
-MyGame().run()
+game = MyGame()
+game.run()
+
+
 pygame.quit()
 sys.exit()
 

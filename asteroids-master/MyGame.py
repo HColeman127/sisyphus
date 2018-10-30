@@ -7,14 +7,10 @@ import pygame
 
 from GameObjects import *
 
+
 def load_image_convert_alpha(filename):
     """Load an image with the given filename from the images directory"""
     return pygame.image.load(os.path.join('images', filename)).convert_alpha()
-
-
-def load_sound(filename):
-    """Load a sound with the given filename from the sounds directory"""
-    return pygame.mixer.Sound(os.path.join('sounds', filename))
 
 
 def draw_centered(surface1, surface2, position):
@@ -52,29 +48,19 @@ class MyGame(object):
         pygame.init()
 
         # set up a 800 x 600 window
-        self.width = 800
-        self.height = 600
+        self.width = 1200
+        self.height = 900
         self.screen = pygame.display.set_mode((self.width, self.height))
 
         # use a black background
         self.bg_color = 0, 0, 0
-
-        # loading the sound track for the game
-        self.soundtrack = load_sound('soundtrack.wav')
-        self.soundtrack.set_volume(.3)
-
-        # loading the dying, game over and missile sounds
-        self.die_sound = load_sound('die.wav')
-        self.gameover_sound = load_sound('game_over.wav')
-        self.missile_sound = load_sound('fire.wav')
 
         # get the default system font (with different sizes of 100, 50, 25)
         self.big_font = pygame.font.SysFont(None, 100)
         self.medium_font = pygame.font.SysFont(None, 50)
         self.small_font = pygame.font.SysFont(None, 25)
         # and make the game over text using the big font just loaded
-        self.gameover_text = self.big_font.render('GAME OVER', \
-                                                  True, (255, 0, 0))
+        self.gameover_text = self.big_font.render('GAME OVER', True, (255, 0, 0))
 
         # load a spaceship image (only used to display number of lives)
         self.lives_image = load_image_convert_alpha('spaceship-off.png')
@@ -87,7 +73,7 @@ class MyGame(object):
         self.death_distances = {"big": 90, "normal": 65, "small": 40}
 
         # display the welcome screen
-        #self.do_welcome()
+        # self.do_welcome()
         self.do_init()
         self.start()
         # used to monitor missile firing time
@@ -101,10 +87,8 @@ class MyGame(object):
         self.state = MyGame.WELCOME
 
         # making the welcome title and description
-        self.welcome_asteroids = self.big_font.render("Asteroids", \
-                                                      True, (255, 215, 0))
-        self.welcome_desc = self.medium_font.render( \
-            "[Click anywhere/press Enter] to begin!", True, (35, 107, 142))
+        self.welcome_asteroids = self.big_font.render("Asteroids", True, (255, 215, 0))
+        self.welcome_desc = self.medium_font.render(True, (35, 107, 142))
 
     def do_init(self):
         """This function is called in the beginning or when
@@ -166,9 +150,6 @@ class MyGame(object):
         self.spaceship = Spaceship((self.width // 2, self.height // 2))
         self.missiles = []
 
-        # start the sound track loop
-        self.soundtrack.play(-1, 0, 1000)
-
         # set the state to PLAYING
         self.state = MyGame.PLAYING
 
@@ -186,84 +167,76 @@ class MyGame(object):
             # time to draw a new frame
             elif event.type == MyGame.REFRESH:
 
+                keys = pygame.key.get_pressed()
 
-                if self.state != MyGame.WELCOME:
+                if keys[pygame.K_SPACE]:
+                    if self.fire_time < 1:
+                        # there should be a minimum of 0.15 delay between
+                        # firing each missile
 
-                    keys = pygame.key.get_pressed()
+                        # fire a missile
+                        self.spaceship.fire()
 
-                    if keys[pygame.K_SPACE]:
-                        if self.fire_time < 1:
-                            # there should be a minimum of 0.15 delay between
-                            # firing each missile
+                        # reset the current fire time
+                        self.fire_time = 6
+                    else:
+                        self.fire_time -= 1
 
-                            # fire a missile
-                            self.spaceship.fire()
+                # ----------- the big kahuna --------------
+                if self.state == MyGame.PLAYING:
+                    # if the game is going on
 
-                            # play the sound
-                            self.missile_sound.play()
+                    if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
+                        # when pressing "d" or "right arrow" rotate
+                        # the spaceship clockwise by 10 degrees
+                        self.spaceship.angle -= 10
+                        self.spaceship.angle %= 360
 
-                            # reset the current fire time
-                            self.fire_time = 6
-                        else:
-                            self.fire_time -= 1
+                    if keys[pygame.K_LEFT] or keys[pygame.K_a]:
+                        # when pressing "d" or "right arrow" rotate
+                        # the spaceship counter clockwise by 10 degrees
+                        self.spaceship.angle += 10
+                        self.spaceship.angle %= 360
 
-                    # ----------- the big kahuna --------------
-                    if self.state == MyGame.PLAYING:
-                        # if the game is going on
+                    if keys[pygame.K_UP] or keys[pygame.K_w]:
+                        # if "w" or "up arrow" is pressed,
+                        # we should accelerate
+                        self.spaceship.is_throttle_on = True
 
-                        if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
-                            # when pressing "d" or "right arrow" rotate
-                            # the spaceship clockwise by 10 degrees
-                            self.spaceship.angle -= 10
-                            self.spaceship.angle %= 360
+                        # increase the speed
+                        self.spaceship.velocity[0] += 0.5 * math.sin(-math.radians(self.spaceship.angle))
+                        self.spaceship.velocity[1] += 0.5 -math.cos(math.radians(self.spaceship.angle))
 
-                        if keys[pygame.K_LEFT] or keys[pygame.K_a]:
-                            # when pressing "d" or "right arrow" rotate
-                            # the spaceship counter clockwise by 10 degrees
-                            self.spaceship.angle += 10
-                            self.spaceship.angle %= 360
-
-                        if keys[pygame.K_UP] or keys[pygame.K_w]:
-                            # if "w" or "up arrow" is pressed,
-                            # we should accelerate
-                            self.spaceship.is_throttle_on = True
-
-                            # increase the speed
-                            self.spaceship.velocity[0] += 0.5 * math.sin(-math.radians(self.spaceship.angle))
-                            self.spaceship.velocity[1] += 0.5 -math.cos(math.radians(self.spaceship.angle))
-
-                            if self.spaceship.velocity[0] > 9:
-                                self.spaceship.velocity[0] = 9
-                            elif self.spaceship.velocity[0] < -9:
-                                self.spaceship.velocity[0] = -9
-                            if self.spaceship.velocity[1] > 9:
-                                self.spaceship.velocity[1] = 9
-                            elif self.spaceship.velocity[1] < -9:
-                                self.spaceship.velocity[1] = -9
+                        if self.spaceship.velocity[0] > 9:
+                            self.spaceship.velocity[0] = 9
+                        elif self.spaceship.velocity[0] < -9:
+                            self.spaceship.velocity[0] = -9
+                        if self.spaceship.velocity[1] > 9:
+                            self.spaceship.velocity[1] = 9
+                        elif self.spaceship.velocity[1] < -9:
+                            self.spaceship.velocity[1] = -9
 
 
-                        else:
-                            # if the throttle key ("d" or "up")
-                            # is not pressed, slow down
-                            if self.spaceship.speed > 0:
-                                self.spaceship.velocity[0] -= 0.1
-                                self.spaceship.velocity[1] -= 0.1
-                            self.spaceship.is_throttle_on = False
+                    else:
+                        # if the throttle key ("d" or "up")
+                        # is not pressed, slow down
+                        if self.spaceship.speed > 0:
+                            self.spaceship.velocity[0] -= 0.1
+                            self.spaceship.velocity[1] -= 0.1
+                        self.spaceship.is_throttle_on = False
 
-                        # if there are any missiles on the screen, process them
-                        if len(self.spaceship.active_missiles) > 0:
-                            self.missiles_physics()
+                    # if there are any missiles on the screen, process them
+                    if len(self.spaceship.active_missiles) > 0:
+                        self.missiles_physics()
 
-                        # if there are any rocks, do their physics
-                        if len(self.rocks) > 0:
-                            self.rocks_physics()
+                    # if there are any rocks, do their physics
+                    if len(self.rocks) > 0:
+                        self.rocks_physics()
 
-                        # do the spaceship physics
-                        self.physics()
+                    # do the spaceship physics
+                    self.physics()
 
-
-
-                        # --------- end of great turkey ------------
+                    # --------- end of great turkey ------------
 
                 # draw everything
                 self.draw() ## <--- the big money right here to toggle display output.
@@ -289,17 +262,7 @@ class MyGame(object):
                 self.state = MyGame.STARTING
                 print("game is over")
 
-            # user is clicking to start a new game
-            elif event.type == pygame.MOUSEBUTTONDOWN \
-                    and (self.state == MyGame.STARTING or \
-                         self.state == MyGame.WELCOME):
-                self.do_init()
-
-            # user is pressing enter to start a new game
-            elif event.type == pygame.KEYDOWN \
-                    and event.key == pygame.K_RETURN and \
-                    (self.state == MyGame.STARTING or \
-                     self.state == MyGame.WELCOME):
+            # start a new game
                 self.do_init()
 
             else:
@@ -307,15 +270,11 @@ class MyGame(object):
 
     def game_over(self):
         """Losing a life"""
-        self.soundtrack.stop()
-        # play game over sound and wait for it to end before continuing
         self.state = MyGame.GAME_OVER
         pygame.time.set_timer(MyGame.RESTART, 1)
 
     def die(self):
         """Losing a life"""
-        self.soundtrack.stop()
-        # play dying sound and wait for it to end before continuing
         self.lives -= 1
         self.counter = 0
         self.state = MyGame.DYING
@@ -331,13 +290,13 @@ class MyGame(object):
             self.spaceship.move()
 
             if self.spaceship.position[0] < 0:
-                self.spaceship.position[0] = 800
-            elif self.spaceship.position[0] > 800:
+                self.spaceship.position[0] = self.width
+            elif self.spaceship.position[0] > self.width:
                 self.spaceship.position[0] = 0
 
             if self.spaceship.position[1] < 0:
-                self.spaceship.position[1] = 600
-            elif self.spaceship.position[1] > 600:
+                self.spaceship.position[1] = self.height
+            elif self.spaceship.position[1] > self.height:
                 self.spaceship.position[1] = 0
 
             """Note that this is a good place to make the spaceship
@@ -359,13 +318,13 @@ class MyGame(object):
                     self.spaceship.active_missiles.remove(missile)
 
                 if missile.position[0] < 0:
-                    missile.position[0] = 800
-                elif missile.position[0] > 800:
+                    missile.position[0] = self.width
+                elif missile.position[0] > self.width:
                     missile.position[0] = 0
 
                 if missile.position[1] < 0:
-                    missile.position[1] = 600
-                elif missile.position[1] > 600:
+                    missile.position[1] = self.height
+                elif missile.position[1] > self.height:
                     missile.position[1] = 0
 
                 # check the collision with each rock
@@ -422,13 +381,13 @@ class MyGame(object):
                 rock.move()
 
                 if rock.position[0] < 0:
-                    rock.position[0] = 800
-                elif rock.position[0] > 800:
+                    rock.position[0] = self.width
+                elif rock.position[0] > self.width:
                     rock.position[0] = 0
 
                 if rock.position[1] < 0:
-                    rock.position[1] = 600
-                elif rock.position[1] > 600:
+                    rock.position[1] = self.height
+                elif rock.position[1] > self.height:
                     rock.position[1] = 0
 
                 # if the rock hits the spaceship, die once
