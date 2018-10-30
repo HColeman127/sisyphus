@@ -1,10 +1,4 @@
 from __future__ import division
-import math
-import sys
-import os
-import random
-import pygame
-
 from GameObjects import *
 
 
@@ -31,15 +25,14 @@ def distance(p, q):
     """Helper function to calculate distance between 2 points"""
     return math.sqrt((p[0]-q[0])**2 + (p[1]-q[1])**2)
 
+
 class MyGame(object):
+
     # defining and initializing game states
-    PLAYING, DYING, GAME_OVER, STARTING, WELCOME = range(5)
+    PLAYING, GAME_OVER, STARTING = range(3)
 
     # defining custom events
     REFRESH, START, RESTART = range(pygame.USEREVENT, pygame.USEREVENT + 3)
-
-    next = False
-    nextFrame = True
 
     def __init__(self):
         """Initialize a new game"""
@@ -59,8 +52,6 @@ class MyGame(object):
         self.big_font = pygame.font.SysFont(None, 100)
         self.medium_font = pygame.font.SysFont(None, 50)
         self.small_font = pygame.font.SysFont(None, 25)
-        # and make the game over text using the big font just loaded
-        self.gameover_text = self.big_font.render('GAME OVER', True, (255, 0, 0))
 
         # load a spaceship image (only used to display number of lives)
         self.lives_image = load_image_convert_alpha('spaceship-off.png')
@@ -79,16 +70,6 @@ class MyGame(object):
         # used to monitor missile firing time
         # to prevent firing too many missiles in a short time
         self.fire_time = 0
-
-    def do_welcome(self):
-        """make a welcome screen"""
-
-        # go to WELCOME state
-        self.state = MyGame.WELCOME
-
-        # making the welcome title and description
-        self.welcome_asteroids = self.big_font.render("Asteroids", True, (255, 215, 0))
-        self.welcome_desc = self.medium_font.render(True, (35, 107, 142))
 
     def do_init(self):
         """This function is called in the beginning or when
@@ -110,11 +91,19 @@ class MyGame(object):
             self.make_rock()
 
         # initialize the number of lives and the score
-        self.lives = 3
         self.score = 0
 
         # counter used to help count seconds
         self.counter = 0
+
+
+    def start(self):
+        """Start the game by creating the spaceship object"""
+        self.spaceship = Spaceship((self.width // 2, self.height // 2))
+        self.missiles = []
+
+        # set the state to PLAYING
+        self.state = MyGame.PLAYING
 
     def make_rock(self, size="big", pos=None):
         """Make a new rock"""
@@ -145,16 +134,84 @@ class MyGame(object):
         # add the recently created rock the the actual rocks list
         self.rocks.append(temp_rock)
 
-    def start(self):
-        """Start the game by creating the spaceship object"""
-        self.spaceship = Spaceship((self.width // 2, self.height // 2))
-        self.missiles = []
 
-        # set the state to PLAYING
-        self.state = MyGame.PLAYING
+    # command[0] is the shoot command
+    # command[1] is the left command
+    # command[2] is the right command
+    # command[3] is the throttle command
+    def step(self, commands):
 
+        if commands[0] == 1:
+            if self.fire_time < 1:
+                # there should be a minimum of 0.15 delay between
+                # firing each missile
+
+                # fire a missile
+                self.spaceship.fire()
+
+                # reset the current fire time
+                self.fire_time = 6
+            else:
+                self.fire_time -= 1
+
+        # ----------- the big kahuna --------------
+        if self.state == MyGame.PLAYING:
+            # if the game is going on
+
+            if commands[2] == 1:
+                self.spaceship.angle -= 10
+                self.spaceship.angle %= 360
+
+            if commands[1] == 1:
+                self.spaceship.angle += 10
+                self.spaceship.angle %= 360
+
+            if commands[4] == 1:
+                # if "w" or "up arrow" is pressed,
+                # we should accelerate
+                self.spaceship.is_throttle_on = True
+
+                # increase the speed
+                self.spaceship.velocity[0] += 0.5 * math.sin(-math.radians(self.spaceship.angle))
+                self.spaceship.velocity[1] += 0.5 * -math.cos(math.radians(self.spaceship.angle))
+
+                if self.spaceship.velocity[0] > 9:
+                    self.spaceship.velocity[0] = 9
+                elif self.spaceship.velocity[0] < -9:
+                    self.spaceship.velocity[0] = -9
+                if self.spaceship.velocity[1] > 9:
+                    self.spaceship.velocity[1] = 9
+                elif self.spaceship.velocity[1] < -9:
+                    self.spaceship.velocity[1] = -9
+
+
+            else:
+                # if the throttle key ("d" or "up")
+                # is not pressed, slow down
+                if self.spaceship.speed > 0:
+                    self.spaceship.velocity[0] -= 0.1
+                    self.spaceship.velocity[1] -= 0.1
+                self.spaceship.is_throttle_on = False
+
+            # if there are any missiles on the screen, process them
+            if len(self.spaceship.active_missiles) > 0:
+                self.missiles_physics()
+
+            # if there are any rocks, do their physics
+            if len(self.rocks) > 0:
+                self.rocks_physics()
+
+            # do the spaceship physics
+            self.physics()
+
+            # --------- end of great turkey ------------
+
+        # draw everything
+        self.draw()  ## <--- the big money right here to toggle display output.
+        print("step")
+
+    """
     def run(self):
-        """Loop forever processing events"""
         running = True
         while running:
             event = pygame.event.wait()
@@ -205,7 +262,7 @@ class MyGame(object):
 
                         # increase the speed
                         self.spaceship.velocity[0] += 0.5 * math.sin(-math.radians(self.spaceship.angle))
-                        self.spaceship.velocity[1] += 0.5 -math.cos(math.radians(self.spaceship.angle))
+                        self.spaceship.velocity[1] += 0.5 * -math.cos(math.radians(self.spaceship.angle))
 
                         if self.spaceship.velocity[0] > 9:
                             self.spaceship.velocity[0] = 9
@@ -267,6 +324,7 @@ class MyGame(object):
 
             else:
                 pass  # an event type we don't handle
+        """
 
     def game_over(self):
         """Losing a life"""
@@ -274,10 +332,6 @@ class MyGame(object):
         pygame.time.set_timer(MyGame.RESTART, 1)
 
     def die(self):
-        """Losing a life"""
-        self.lives -= 1
-        self.counter = 0
-        self.state = MyGame.DYING
         self.spaceship.velocity[0] = 0
         self.spaceship.velocity[1] = 0
         pygame.time.set_timer(MyGame.START, 1)
@@ -409,69 +463,51 @@ class MyGame(object):
         # everything we draw now is to a buffer that is not displayed
         self.screen.fill(self.bg_color)
 
-        # if we are not on the welcome screen
-        if self.state != MyGame.WELCOME:
+        # draw the spaceship
+        self.spaceship.draw_on(self.screen)
 
-            # draw the spaceship
-            self.spaceship.draw_on(self.screen)
+        # if there are any active missiles draw them
+        if len(self.spaceship.active_missiles) > 0:
+            for missile in self.spaceship.active_missiles:
+                missile.draw_on(self.screen)
 
-            # if there are any active missiles draw them
-            if len(self.spaceship.active_missiles) > 0:
-                for missile in self.spaceship.active_missiles:
-                    missile.draw_on(self.screen)
+        # draw the rocks
+        if len(self.rocks) > 0:
+            for rock in self.rocks:
+                rock.draw_on(self.screen)
 
-            # draw the rocks
-            if len(self.rocks) > 0:
-                for rock in self.rocks:
-                    rock.draw_on(self.screen)
+        # if we are in game play mode
+        if self.state == MyGame.PLAYING:
 
-            # if we are in game play mode
-            if self.state == MyGame.PLAYING:
+            # increment the counter by 1
+            self.counter += 1
 
-                # increment the counter by 1
-                self.counter += 1
+            if self.counter == 20 * self.FPS:
+                # time to increase difficulty (20 secs without dying)
 
-                if self.counter == 20 * self.FPS:
-                    # time to increase difficulty (20 secs without dying)
+                if len(self.rocks) < 15:  # keeping it sane
+                    # add a new rock
+                    self.make_rock()
 
-                    if len(self.rocks) < 15:  # keeping it sane
-                        # add a new rock
-                        self.make_rock()
+                # decrease the minimum rock creation distance
+                if self.min_rock_distance < 200:
+                    self.min_rock_distance -= 50
 
-                    # decrease the minimum rock creation distance
-                    if self.min_rock_distance < 200:
-                        self.min_rock_distance -= 50
+                # set the counter back to zero
+                self.counter = 0
 
-                    # set the counter back to zero
-                    self.counter = 0
+        # create and display the text for score
+        scores_text = self.medium_font.render(str(self.score), \
+                                              True, (0, 155, 0))
+        draw_centered(scores_text, self.screen, \
+                      (self.width - scores_text.get_width(), scores_text.get_height() + \
+                       10))
 
-            # create and display the text for score
-            scores_text = self.medium_font.render(str(self.score), \
-                                                  True, (0, 155, 0))
-            draw_centered(scores_text, self.screen, \
-                          (self.width - scores_text.get_width(), scores_text.get_height() + \
-                           10))
+        # if the game is over, display the game over text
+        if self.state == MyGame.GAME_OVER or self.state == MyGame.STARTING:
+            draw_centered(self.gameover_text, self.screen, \
+                          (self.width // 2, self.height // 2))
 
-            # if the game is over, display the game over text
-            if self.state == MyGame.GAME_OVER or self.state == MyGame.STARTING:
-                draw_centered(self.gameover_text, self.screen, \
-                              (self.width // 2, self.height // 2))
-
-            # draw lives
-            for i in range(self.lives):
-                draw_centered(self.lives_image, self.screen, \
-                              (self.lives_image.get_width() * i * 1.2 + 40, \
-                               self.lives_image.get_height() // 2))
-
-        else:
-            # draw the welcome texts
-            draw_centered(self.welcome_asteroids, self.screen, \
-                          (self.width // 2, self.height // 2 \
-                           - self.welcome_asteroids.get_height()))
-
-            draw_centered(self.welcome_desc, self.screen, \
-                          (self.width // 2, self.height // 2 \
-                           + self.welcome_desc.get_height()))
 
         # flip buffers so that everything we have drawn gets displayed
         pygame.display.flip()
