@@ -1,6 +1,7 @@
 # imports -------------------------------------------------
 import sys
 import pygame
+import time
 from MyGame import MyGame
 
 # variables -----------------------------------------------
@@ -13,18 +14,10 @@ obs = []        # returned by game.step and are the observations or input for th
 
 # main loop -----------------------------------------------
 while running:
+    time.sleep(.05)
     obs = game.step(commands)
 
-    commands = [0, 0, 0, 0]
-    keys = pygame.key.get_pressed()
-    if keys[pygame.K_SPACE]:
-        commands[0] = 1
-    if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
-        commands[2] = 1
-    if keys[pygame.K_LEFT] or keys[pygame.K_a]:
-        commands[1] = 1
-    if keys[pygame.K_UP] or keys[pygame.K_w]:
-        commands[3] = 1
+
 
 
 # quit game -----------------------------------------------

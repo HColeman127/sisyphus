@@ -158,6 +158,20 @@ class MyGame(object):
         if self.state == MyGame.PLAYING:
             # if the game is going on
 
+            # temp user input
+            commands = [0, 0, 0, 0]
+            keys = pygame.key.get_pressed()
+            if keys[pygame.K_SPACE]:
+                commands[0] = 1
+                print("yes")
+            if keys[pygame.K_LEFT] or keys[pygame.K_a]:
+                commands[1] = 1
+            if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
+                commands[2] = 1
+            if keys[pygame.K_UP] or keys[pygame.K_w]:
+                commands[3] = 1
+            # end temp
+
             if commands[2] == 1:
                 self.spaceship.angle -= 10
                 self.spaceship.angle %= 360
@@ -166,7 +180,7 @@ class MyGame(object):
                 self.spaceship.angle += 10
                 self.spaceship.angle %= 360
 
-            if commands[4] == 1:
+            if commands[3] == 1:
                 # if "w" or "up arrow" is pressed,
                 # we should accelerate
                 self.spaceship.is_throttle_on = True
@@ -208,7 +222,7 @@ class MyGame(object):
 
         # draw everything
         self.draw()  ## <--- the big money right here to toggle display output.
-        print("step")
+        #print("step")
 
     """
     def run(self):
