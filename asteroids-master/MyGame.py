@@ -141,19 +141,9 @@ class MyGame(object):
     # command[3] is the throttle command
     def step(self, commands):
 
-        if commands[0] == 1:
-            if self.fire_time < 1:
-                # there should be a minimum of 0.15 delay between
-                # firing each missile
-
-                # fire a missile
-                self.spaceship.fire()
-
-                # reset the current fire time
-                self.fire_time = 6
-            else:
-                self.fire_time -= 1
-
+        event = pygame.event.wait()
+        print(MyGame.START)
+        print(self.state)
         # ----------- the big kahuna --------------
         if self.state == MyGame.PLAYING:
             # if the game is going on
@@ -163,7 +153,7 @@ class MyGame(object):
             keys = pygame.key.get_pressed()
             if keys[pygame.K_SPACE]:
                 commands[0] = 1
-                print("yes")
+                #print("yes")
             if keys[pygame.K_LEFT] or keys[pygame.K_a]:
                 commands[1] = 1
             if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
@@ -171,6 +161,21 @@ class MyGame(object):
             if keys[pygame.K_UP] or keys[pygame.K_w]:
                 commands[3] = 1
             # end temp
+
+            if commands[0] == 1:
+                if self.fire_time < 1:
+                    #print("FIRING!")
+                    # there should be a minimum of 0.15 delay between
+                    # firing each missile
+
+                    # fire a missile
+                    self.spaceship.fire()
+
+                    # reset the current fire time
+                    self.fire_time = 6
+                else:
+                    #print("RECHARGING")
+                    self.fire_time -= 1
 
             if commands[2] == 1:
                 self.spaceship.angle -= 10
@@ -219,6 +224,17 @@ class MyGame(object):
             self.physics()
 
             # --------- end of great turkey ------------
+        elif self.state == MyGame.START:
+            print("Death process")
+            pygame.time.set_timer(MyGame.START, 0)  # turn the timer off
+            self.game_over()
+            self.rocks = []
+            # make 4 rocks
+            for i in range(4):
+                self.make_rock()
+            # start again
+            self.start()
+            #print("lost life,", self.lives, "remaining")
 
         # draw everything
         self.draw()  ## <--- the big money right here to toggle display output.
@@ -346,9 +362,10 @@ class MyGame(object):
         pygame.time.set_timer(MyGame.RESTART, 1)
 
     def die(self):
+        print("DIE!")
         self.spaceship.velocity[0] = 0
         self.spaceship.velocity[1] = 0
-        pygame.time.set_timer(MyGame.START, 1)
+        self.state = MyGame.START
 
     def physics(self):
         """Do spaceship physics here"""
