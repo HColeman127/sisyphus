@@ -2,11 +2,59 @@
 <project version="4">
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/MyGame.py" line="44" />
+    <bookmark url="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.py" line="2" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="19ca22d6-578e-4a9d-8143-a15c98eaf4aa" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/MyGame.py" beforeDir="false" afterPath="$PROJECT_DIR$/MyGame.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/asteroids-master.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/asteroids-master.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ml_asteroids.py" beforeDir="false" afterPath="$PROJECT_DIR$/ml_asteroids.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tfofs/.idea/tfofs.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../tfofs/.idea/tfofs.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1537988904.HARRY-Y2P" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1537988930.HARRY-Y2P" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1537988953.HARRY-Y2P" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538067432.HARRY-Y2P" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538067589.HARRY-Y2P" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538067633.HARRY-Y2P" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538067640.HARRY-Y2P" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538067720.HARRY-Y2P" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538067732.HARRY-Y2P" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538067741.HARRY-Y2P" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538067748.HARRY-Y2P" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538067755.HARRY-Y2P" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538067814.HARRY-Y2P" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538067822.HARRY-Y2P" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538067833.HARRY-Y2P" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538067836.HARRY-Y2P" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538067847.HARRY-Y2P" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538067917.HARRY-Y2P" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538067949.HARRY-Y2P" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538072271.HARRY-Y2P" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538072276.HARRY-Y2P" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538072313.HARRY-Y2P" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538072340.HARRY-Y2P" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538073064.HARRY-Y2P" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538073092.HARRY-Y2P" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538073109.HARRY-Y2P" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538096365.HARRY-Y2P" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538503127.HARRY-Y2P" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538504091.HARRY-Y2P" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538762641.HARRY-Y2P" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538762783.HARRY-Y2P" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538762787.HARRY-Y2P" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538762855.HARRY-Y2P" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538762861.HARRY-Y2P" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538762869.HARRY-Y2P" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538762873.HARRY-Y2P" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538762879.HARRY-Y2P" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538762888.HARRY-Y2P" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538763243.HARRY-Y2P" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538763252.HARRY-Y2P" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538763258.HARRY-Y2P" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1539023422.HARRY-Y2P" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1539369884.HARRY-Y2P" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,31 +95,36 @@
     <session id="69815989">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="4" />
+          <entry key="project.closed" value="7" />
+          <entry key="project.open.time.4" value="1" />
           <entry key="project.open.time.5" value="1" />
           <entry key="project.open.time.6" value="1" />
-          <entry key="project.open.time.7" value="1" />
-          <entry key="project.opened" value="3" />
+          <entry key="project.open.time.7" value="2" />
+          <entry key="project.open.time.8" value="1" />
+          <entry key="project.opened" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="235" />
+          <entry key="Python Console" value="10" />
+          <entry key="py" value="544" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="235" />
+          <entry key="Python" value="308" />
+          <entry key="Scratch" value="246" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="2" />
+          <entry key="py" value="9" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="2" />
+          <entry key="Python" value="8" />
+          <entry key="Scratch" value="1" />
         </counts>
       </usages-collector>
     </session>
@@ -90,20 +143,35 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ml_asteroids.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="15" selection-start-line="15" selection-end-line="15" />
+            <state relative-caret-position="464">
+              <caret line="26" column="55" lean-forward="true" selection-start-line="26" selection-start-column="55" selection-end-line="26" selection-end-column="55" />
+              <folding>
+                <element signature="e#60#70#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/MyGame.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="19">
-              <caret line="240" column="16" selection-start-line="240" selection-start-column="16" selection-end-line="240" selection-end-column="47" />
+            <state relative-caret-position="95">
+              <caret line="5" lean-forward="true" selection-end-line="15" selection-end-column="52" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../tfofs/tensorintro.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="494">
+              <caret line="27" column="25" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="25" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -136,6 +204,7 @@
         <option value="$PROJECT_DIR$/GameObjects.py" />
         <option value="$PROJECT_DIR$/game.py" />
         <option value="$PROJECT_DIR$/MyGame.py" />
+        <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch.py" />
         <option value="$PROJECT_DIR$/ml_asteroids.py" />
       </list>
     </option>
@@ -154,12 +223,17 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="asteroids-master" type="b2602c69:ProjectViewProjectNode" />
               <item name="asteroids-master" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="asteroids-master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tfofs" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="asteroids-master" type="b2602c69:ProjectViewProjectNode" />
@@ -174,11 +248,11 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="Python" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../tfofs" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunDashboard">
@@ -193,7 +267,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.ml_asteroids">
+  <component name="RunManager" selected="Python.scratch">
     <configuration name="game" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="asteroids-master" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -236,7 +310,29 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="scratch" type="PythonConfigurationType" factoryName="Python">
+      <module name="asteroids-master" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\Harry\.virtualenvs\asteroids-master-rnKw9U9t\Scripts\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$APPLICATION_CONFIG_DIR$/scratches" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$APPLICATION_CONFIG_DIR$/scratches/scratch.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <list>
+      <item itemvalue="Python.scratch" />
       <item itemvalue="Python.game" />
       <item itemvalue="Python.ml_asteroids" />
     </list>
@@ -269,54 +365,42 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.35995623" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.35995623" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info anchor="bottom" id="Python Console" order="8" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.32932165" />
+      <window_info anchor="bottom" id="Python Console" order="8" weight="0.32932165" />
       <window_info anchor="bottom" id="Version Control" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
-    <layout-to-restore>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17370644" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.35995623" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info anchor="bottom" id="Python Console" order="8" />
-      <window_info anchor="bottom" id="Version Control" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-    </layout-to-restore>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/game.py" />
     <entry file="file://$PROJECT_DIR$/GameObjects.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="173">
           <caret line="95" lean-forward="true" selection-start-line="95" selection-end-line="95" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/game.py" />
+    <entry file="file://$PROJECT_DIR$/MyGame.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="848">
+          <caret line="240" column="16" selection-start-line="240" selection-start-column="16" selection-end-line="240" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../tfofs/test.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_1.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
@@ -327,17 +411,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ml_asteroids.py">
+    <entry file="file://$PROJECT_DIR$/../tfofs/tensorintro.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="15" selection-start-line="15" selection-end-line="15" />
+        <state relative-caret-position="494">
+          <caret line="27" column="25" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MyGame.py">
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="240" column="16" selection-start-line="240" selection-start-column="16" selection-end-line="240" selection-end-column="47" />
+        <state relative-caret-position="95">
+          <caret line="5" lean-forward="true" selection-end-line="15" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ml_asteroids.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="464">
+          <caret line="26" column="55" lean-forward="true" selection-start-line="26" selection-start-column="55" selection-end-line="26" selection-end-column="55" />
+          <folding>
+            <element signature="e#60#70#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

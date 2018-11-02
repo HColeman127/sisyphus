@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/asteroids-master.iml" filepath="$PROJECT_DIR$/.idea/asteroids-master.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../tfofs/.idea/tfofs.iml" filepath="$PROJECT_DIR$/../tfofs/.idea/tfofs.iml" />
     </modules>
   </component>
 </project>
