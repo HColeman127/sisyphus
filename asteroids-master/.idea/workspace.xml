@@ -1,194 +1,104 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/MyGame.py" line="44" />
-    <bookmark url="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.py" line="2" />
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="19ca22d6-578e-4a9d-8143-a15c98eaf4aa" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/asteroids-master.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/asteroids-master.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-<<<<<<< HEAD
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ml_asteroids.py" beforeDir="false" afterPath="$PROJECT_DIR$/ml_asteroids.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tfofs/.idea/tfofs.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../tfofs/.idea/tfofs.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1537988904.HARRY-Y2P" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1537988930.HARRY-Y2P" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1537988953.HARRY-Y2P" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538067432.HARRY-Y2P" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538067589.HARRY-Y2P" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538067633.HARRY-Y2P" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538067640.HARRY-Y2P" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538067720.HARRY-Y2P" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538067732.HARRY-Y2P" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538067741.HARRY-Y2P" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538067748.HARRY-Y2P" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538067755.HARRY-Y2P" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538067814.HARRY-Y2P" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538067822.HARRY-Y2P" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538067833.HARRY-Y2P" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538067836.HARRY-Y2P" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538067847.HARRY-Y2P" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538067917.HARRY-Y2P" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538067949.HARRY-Y2P" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538072271.HARRY-Y2P" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538072276.HARRY-Y2P" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538072313.HARRY-Y2P" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538072340.HARRY-Y2P" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538073064.HARRY-Y2P" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538073092.HARRY-Y2P" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538073109.HARRY-Y2P" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538096365.HARRY-Y2P" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538503127.HARRY-Y2P" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538504091.HARRY-Y2P" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538762641.HARRY-Y2P" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538762783.HARRY-Y2P" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538762787.HARRY-Y2P" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538762855.HARRY-Y2P" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538762861.HARRY-Y2P" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538762869.HARRY-Y2P" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538762873.HARRY-Y2P" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538762879.HARRY-Y2P" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538762888.HARRY-Y2P" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538763243.HARRY-Y2P" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538763252.HARRY-Y2P" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1538763258.HARRY-Y2P" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1539023422.HARRY-Y2P" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tfofs/logs/events.out.tfevents.1539369884.HARRY-Y2P" beforeDir="false" />
-=======
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyGame.py" beforeDir="false" afterPath="$PROJECT_DIR$/MyGame.py" afterDir="false" />
->>>>>>> 643bdeeccacd5c46fea42bef12b2c61b5242d818
-    </list>
+    <list default="true" id="e8fe4817-1203-46b2-8adf-5abbe027ee1c" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FUSProjectUsageTrigger">
-    <session id="1886717317">
-      <usages-collector id="statistics.lifecycle.project">
-        <counts>
-          <entry key="project.open.time.0" value="1" />
-          <entry key="project.open.time.8" value="2" />
-          <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="4" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.open">
-        <counts>
-          <entry key="py" value="8" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.open">
-        <counts>
-          <entry key="Python" value="8" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.edit">
-        <counts>
-          <entry key="py" value="1893" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.edit">
-        <counts>
-          <entry key="Python" value="1893" />
-        </counts>
-      </usages-collector>
-    </session>
-    <session id="69815989">
-      <usages-collector id="statistics.lifecycle.project">
-        <counts>
-          <entry key="project.closed" value="7" />
-          <entry key="project.open.time.4" value="1" />
-          <entry key="project.open.time.5" value="1" />
-          <entry key="project.open.time.6" value="1" />
-          <entry key="project.open.time.7" value="2" />
-          <entry key="project.open.time.8" value="1" />
-          <entry key="project.opened" value="6" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.edit">
-        <counts>
-          <entry key="Python Console" value="10" />
-          <entry key="py" value="544" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.edit">
-        <counts>
-          <entry key="Python" value="308" />
-          <entry key="Scratch" value="246" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.open">
-        <counts>
-          <entry key="py" value="9" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.open">
-        <counts>
-          <entry key="Python" value="8" />
-          <entry key="Scratch" value="1" />
-        </counts>
-      </usages-collector>
-    </session>
+  <component name="FavoritesManager">
+    <favorites_list name="asteroids-master" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ml_asteroids.py">
+        <entry file="file://$PROJECT_DIR$/fitnessTest.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-44">
-              <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+            <state relative-caret-position="95">
+              <caret line="5" column="33" selection-start-line="5" selection-start-column="33" selection-end-line="5" selection-end-column="33" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/evolution.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2736">
+              <caret line="150" lean-forward="true" selection-start-line="150" selection-end-line="150" />
+              <folding>
+                <element signature="e#0#13#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/FitnessWrapper.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="761">
+              <caret line="60" selection-start-line="60" selection-end-line="60" />
+              <folding>
+                <element signature="e#10#21#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CompGraph.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="176">
+              <caret line="26" column="9" selection-start-line="26" selection-start-column="9" selection-end-line="26" selection-end-column="9" />
+              <folding>
+                <element signature="e#60#83#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-<<<<<<< HEAD
-        <entry file="file://$PROJECT_DIR$/ml_asteroids.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="464">
-              <caret line="26" column="55" lean-forward="true" selection-start-line="26" selection-start-column="55" selection-end-line="26" selection-end-column="55" />
-              <folding>
-                <element signature="e#60#70#0" expanded="true" />
-              </folding>
-=======
         <entry file="file://$PROJECT_DIR$/MyGame.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="278">
-              <caret line="367" column="33" selection-start-line="367" selection-start-column="33" selection-end-line="367" selection-end-column="33" />
->>>>>>> 643bdeeccacd5c46fea42bef12b2c61b5242d818
+            <state relative-caret-position="305">
+              <caret line="119" column="93" selection-start-line="119" selection-start-column="93" selection-end-line="119" selection-end-column="93" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-<<<<<<< HEAD
-        <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="5" lean-forward="true" selection-end-line="15" selection-end-column="52" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../tfofs/tensorintro.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="494">
-              <caret line="27" column="25" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="25" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-              </folding>
-=======
         <entry file="file://$PROJECT_DIR$/GameObjects.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-135">
-              <caret line="93" column="30" selection-start-line="93" selection-start-column="30" selection-end-line="93" selection-end-column="30" />
->>>>>>> 643bdeeccacd5c46fea42bef12b2c61b5242d818
+            <state relative-caret-position="19">
+              <caret line="2" selection-start-line="2" selection-end-line="2" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MyGame_display.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="167">
+              <caret line="167" column="93" selection-start-line="167" selection-start-column="93" selection-end-line="167" selection-end-column="93" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/GameObjects_display.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="38">
+              <caret line="5" selection-start-line="5" selection-end-line="5" selection-end-column="20" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -204,41 +114,45 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>refresh</find>
-      <find>lives</find>
-      <find>keys</find>
-      <find>key</find>
-      <find>delay</find>
-      <find>wait</find>
-      <find>die</find>
+      <find>is_throttle_on</find>
+      <find>speed</find>
+      <find>thrott</find>
+      <find>angle</find>
+      <find>reset</find>
+      <find>state</find>
+      <find>make</find>
     </findStrings>
-  </component>
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/GameObjects.py" />
-        <option value="$PROJECT_DIR$/game.py" />
-<<<<<<< HEAD
-        <option value="$PROJECT_DIR$/MyGame.py" />
+        <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_1.py" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch.py" />
-=======
->>>>>>> 643bdeeccacd5c46fea42bef12b2c61b5242d818
+        <option value="$APPLICATION_CONFIG_DIR$/scratches/CreditCards.py" />
+        <option value="$APPLICATION_CONFIG_DIR$/scratches/characters.py" />
+        <option value="$APPLICATION_CONFIG_DIR$/scratches/josephus.py" />
+        <option value="$PROJECT_DIR$/asteroids_ai.py" />
+        <option value="$PROJECT_DIR$/failed_again.py" />
         <option value="$PROJECT_DIR$/ml_asteroids.py" />
+        <option value="$APPLICATION_CONFIG_DIR$/scratches/partitions.py" />
+        <option value="$PROJECT_DIR$/logs/change_format.py" />
+        <option value="$PROJECT_DIR$/GameObjects.py" />
+        <option value="$PROJECT_DIR$/CompGraph.py" />
+        <option value="$PROJECT_DIR$/GameObjects_display.py" />
+        <option value="$APPLICATION_CONFIG_DIR$/scratches/test_file.py" />
+        <option value="$PROJECT_DIR$/FitnessWrapper.py" />
+        <option value="$PROJECT_DIR$/evolution.py" />
+        <option value="$PROJECT_DIR$/fitnessTest.py" />
+        <option value="$PROJECT_DIR$/MyGame_display.py" />
         <option value="$PROJECT_DIR$/MyGame.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="82" />
-    <option name="y" value="22" />
-    <option name="width" value="1750" />
-    <option name="height" value="970" />
-  </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <ConfirmationsSetting value="2" id="Add" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -253,19 +167,6 @@
               <item name="asteroids-master" type="b2602c69:ProjectViewProjectNode" />
               <item name="asteroids-master" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="asteroids-master" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tfofs" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="asteroids-master" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
-            </path>
-            <path>
-              <item name="asteroids-master" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
-              <item name="Scratches" type="d62648e6:ScratchProjectViewPane$MyRootNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -274,8 +175,15 @@
   </component>
   <component name="PropertiesComponent">
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="Python" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../tfofs" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Harry\Desktop\asteroids-master" />
+      <recent name="C:\Users\Harry\Desktop" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -289,8 +197,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.scratch">
-    <configuration name="game" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.fitnessTest">
+    <configuration name="evolution" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="asteroids-master" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -302,7 +210,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/game.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/evolution.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -311,7 +219,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="ml_asteroids" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="fitnessTest" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="asteroids-master" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -323,7 +231,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ml_asteroids.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/fitnessTest.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -332,19 +240,61 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="scratch" type="PythonConfigurationType" factoryName="Python">
+    <configuration name="josephus" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="asteroids-master" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="C:\Users\Harry\.virtualenvs\asteroids-master-rnKw9U9t\Scripts\python.exe" />
+      <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$APPLICATION_CONFIG_DIR$/scratches" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$APPLICATION_CONFIG_DIR$/scratches/scratch.py" />
+      <option name="SCRIPT_NAME" value="$APPLICATION_CONFIG_DIR$/scratches/josephus.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="partitions" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="asteroids-master" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$APPLICATION_CONFIG_DIR$/scratches" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$APPLICATION_CONFIG_DIR$/scratches/partitions.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="test_file" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="asteroids-master" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$APPLICATION_CONFIG_DIR$/scratches" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$APPLICATION_CONFIG_DIR$/scratches/test_file.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -354,14 +304,19 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.scratch" />
-      <item itemvalue="Python.game" />
-      <item itemvalue="Python.ml_asteroids" />
+      <item itemvalue="Python.partitions" />
+      <item itemvalue="Python.josephus" />
+      <item itemvalue="Python.fitnessTest" />
+      <item itemvalue="Python.evolution" />
+      <item itemvalue="Python.test_file" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.ml_asteroids" />
-        <item itemvalue="Python.game" />
+        <item itemvalue="Python.fitnessTest" />
+        <item itemvalue="Python.evolution" />
+        <item itemvalue="Python.test_file" />
+        <item itemvalue="Python.partitions" />
+        <item itemvalue="Python.josephus" />
       </list>
     </recent_temporary>
   </component>
@@ -370,135 +325,163 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="19ca22d6-578e-4a9d-8143-a15c98eaf4aa" name="Default" comment="" />
-      <created>1535568931282</created>
+      <changelist id="e8fe4817-1203-46b2-8adf-5abbe027ee1c" name="Default Changelist" comment="" />
+      <created>1541872797308</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1535568931282</updated>
+      <updated>1541872797308</updated>
     </task>
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1731659" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-<<<<<<< HEAD
-=======
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.35886526" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info id="Favorites" order="0" side_tool="true" weight="0.32958803" />
+      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.49891067" weight="0.21268657" />
+      <window_info id="Structure" order="2" sideWeight="0.50108933" side_tool="true" weight="0.2129481" />
+      <window_info anchor="bottom" id="Version Control" order="0" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="1" side_tool="true" weight="0.3267974" />
+      <window_info anchor="bottom" id="Message" order="2" />
+      <window_info anchor="bottom" id="Find" order="3" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info anchor="bottom" id="Python Console" order="8" />
-      <window_info anchor="bottom" id="Version Control" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info active="true" anchor="right" id="Run" order="3" visible="true" weight="0.40511727" />
+      <window_info anchor="right" id="Terminal" order="4" weight="0.6292135" />
+      <window_info anchor="right" id="Python Console" order="5" weight="0.53344035" />
+      <window_info anchor="right" id="TODO" order="6" />
+      <window_info anchor="right" id="Debug" order="7" weight="0.3986089" />
     </layout>
-    <layout-to-restore>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17370644" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
->>>>>>> 643bdeeccacd5c46fea42bef12b2c61b5242d818
-      <window_info anchor="bottom" id="Run" order="2" weight="0.35995623" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.32932165" />
-      <window_info anchor="bottom" id="Python Console" order="8" weight="0.32932165" />
-      <window_info anchor="bottom" id="Version Control" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-    </layout>
-  </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/game.py" />
-<<<<<<< HEAD
-    <entry file="file://$PROJECT_DIR$/GameObjects.py">
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_1.py" />
+    <entry file="file://$PROJECT_DIR$/../truthTable.py" />
+    <entry file="file://$PROJECT_DIR$/../CreditCards.py" />
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/CreditCards.py" />
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/characters.py" />
+    <entry file="file://$USER_HOME$/.virtualenvs/asteroids-master-OVJYosp_/Lib/site.py" />
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/josephus.py" />
+    <entry file="file://$USER_HOME$/.virtualenvs/asteroids-master-OVJYosp_/Lib/site-packages/keras/engine/training_utils.py" />
+    <entry file="file://$PROJECT_DIR$/asteroids_ai.py" />
+    <entry file="file://$PROJECT_DIR$/failed_again.py" />
+    <entry file="file://$PROJECT_DIR$/bad_ai.py" />
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/partitions.py" />
+    <entry file="file://$USER_HOME$/Google Drive/Dev/Project Euler/P5.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
-          <caret line="95" lean-forward="true" selection-start-line="95" selection-end-line="95" />
+        <state relative-caret-position="732">
+          <caret line="60" column="29" lean-forward="true" selection-start-line="60" selection-start-column="29" selection-end-line="60" selection-end-column="50" />
+          <folding>
+            <element signature="e#0#107#1" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MyGame.py">
+    <entry file="file://$PROJECT_DIR$/logs/means.txt" />
+    <entry file="file://$PROJECT_DIR$/logs/change_format.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="848">
-          <caret line="240" column="16" selection-start-line="240" selection-start-column="16" selection-end-line="240" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../tfofs/test.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_1.py">
-=======
-    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_1.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="10" lean-forward="true" selection-start-column="10" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ml_asteroids.py">
->>>>>>> 643bdeeccacd5c46fea42bef12b2c61b5242d818
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-44">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-<<<<<<< HEAD
-    <entry file="file://$PROJECT_DIR$/../tfofs/tensorintro.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="494">
-          <caret line="27" column="25" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="25" />
+        <state relative-caret-position="154">
+          <caret line="7" column="96" selection-start-line="7" selection-start-column="96" selection-end-line="7" selection-end-column="96" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.py">
+    <entry file="file://$PROJECT_DIR$/ml_asteroids.py" />
+    <entry file="file://$USER_HOME$/Google Drive/CS045/truthTable.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" lean-forward="true" selection-end-line="15" selection-end-column="52" />
-=======
-    <entry file="file://$PROJECT_DIR$/GameObjects.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-135">
-          <caret line="93" column="30" selection-start-line="93" selection-start-column="30" selection-end-line="93" selection-end-column="30" />
->>>>>>> 643bdeeccacd5c46fea42bef12b2c61b5242d818
+        <state relative-caret-position="462">
+          <caret line="140" column="4" selection-start-line="140" selection-start-column="4" selection-end-line="140" selection-end-column="38" />
+          <folding>
+            <element signature="e#56#1345#0" />
+            <element signature="e#1906#3310#0" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ml_asteroids.py">
+    <entry file="file://$USER_HOME$/.virtualenvs/asteroids-master-OVJYosp_/Lib/site-packages/tensorflow/python/client/session.py">
       <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-        <state relative-caret-position="464">
-          <caret line="26" column="55" lean-forward="true" selection-start-line="26" selection-start-column="55" selection-end-line="26" selection-end-column="55" />
+        <state relative-caret-position="288">
+          <caret line="1439" selection-start-line="1439" selection-end-line="1439" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../MyGame_display.py" />
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/test_file.py" />
+    <entry file="file://$PROJECT_DIR$/GameObjects_display.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="5" selection-start-line="5" selection-end-line="5" selection-end-column="20" />
           <folding>
-            <element signature="e#60#70#0" expanded="true" />
+            <element signature="e#0#11#0" expanded="true" />
           </folding>
-=======
-        <state relative-caret-position="278">
-          <caret line="367" column="33" selection-start-line="367" selection-start-column="33" selection-end-line="367" selection-end-column="33" />
->>>>>>> 643bdeeccacd5c46fea42bef12b2c61b5242d818
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyGame_display.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="167">
+          <caret line="167" column="93" selection-start-line="167" selection-start-column="93" selection-end-line="167" selection-end-column="93" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GameObjects.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fitnessTest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="33" selection-start-line="5" selection-start-column="33" selection-end-line="5" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/evolution.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2736">
+          <caret line="150" lean-forward="true" selection-start-line="150" selection-end-line="150" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FitnessWrapper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="761">
+          <caret line="60" selection-start-line="60" selection-end-line="60" />
+          <folding>
+            <element signature="e#10#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CompGraph.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="26" column="9" selection-start-line="26" selection-start-column="9" selection-end-line="26" selection-end-column="9" />
+          <folding>
+            <element signature="e#60#83#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyGame.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="305">
+          <caret line="119" column="93" selection-start-line="119" selection-start-column="93" selection-end-line="119" selection-end-column="93" />
         </state>
       </provider>
     </entry>

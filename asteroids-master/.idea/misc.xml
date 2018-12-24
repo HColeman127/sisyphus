@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-<<<<<<< HEAD
-  <component name="ProjectRootManager" version="2" project-jdk-name="Pipenv (tfofs)" project-jdk-type="Python SDK" />
-=======
-  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.5 (SUPERTENSOR)" project-jdk-type="Python SDK" />
->>>>>>> 643bdeeccacd5c46fea42bef12b2c61b5242d818
+  <component name="ProjectRootManager" version="2" project-jdk-name="Pipenv (asteroids-master)" project-jdk-type="Python SDK" />
 </project>
