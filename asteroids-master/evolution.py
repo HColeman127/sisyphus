@@ -6,12 +6,14 @@ from FitnessWrapper import FitnessWrapper as FW
 
 
 # CONSTANTS
-POPULATION_SIZE = 300
-MAX_GENERATIONS = 1000
-NUMBER_OF_TRIALS = 2
+POPULATION_SIZE = 50
+NUMBER_OF_TRIALS = 10
+MAX_GENERATIONS = 100
 
-MUTATION_RATE_0 = 0.2
-CROSSOVER_CHANCE = 0.3
+SELECTION_PRESSURE = 2
+MUTATION_RATE_0 = 0.05
+MUTATION_STRENGTH = 0.5
+CROSSOVER_WEIGHT = 0.25
 
 
 def main():
@@ -22,10 +24,26 @@ def main():
     mutation_rate = MUTATION_RATE_0
 
     # file names
-    filename = "data/best_genome_log_" + time.strftime("%Y-%m-%d-%H%M%S", time.localtime()) + ".txt"
-    filename2 = "data/best_fitness_log_" + time.strftime("%Y-%m-%d-%H%M%S", time.localtime()) + ".txt"
-    filename3 = "data/average_fitness_log_" + time.strftime("%Y-%m-%d-%H%M%S", time.localtime()) + ".txt"
+    timestamp = time.strftime("%Y-%m-%d-%H%M%S", time.localtime())
+    filename = "data/best_genome_log_" + timestamp + ".txt"
+    filename2 = "data/best_fitness_log_" + timestamp + ".txt"
+    filename3 = "data/average_fitness_log_" + timestamp + ".txt"
 
+    print("--------------------------------------------------------")
+    print("SAVING TO FILES:")
+    print(filename)
+    print(filename2)
+    print(filename3)
+
+    print("\n      POPULATION SIZE: %4d" % POPULATION_SIZE)
+    print("     NUMBER OF TRIALS: %4d" % NUMBER_OF_TRIALS)
+    print("      MAX GENERATIONS: %4d\n" % MAX_GENERATIONS)
+
+    print("   SELECTION PRESSURE:", SELECTION_PRESSURE)
+    print("INITIAL MUTATION RATE:", MUTATION_RATE_0)
+    print("    MUTATION STRENGTH:", MUTATION_STRENGTH)
+    print("     CROSSOVER WEIGHT:", CROSSOVER_WEIGHT, "\n")
+    print("--------------------------------------------------------")
     print("SEEDING POPULATION...")
     start_time = time.time()
     population = generate_random_population(POPULATION_SIZE)
@@ -83,6 +101,10 @@ def main():
 
         print("\nSEEDING NEXT GENERATION...")
 
+        #mutation_rate = -delta_diversity
+
+        print("               MUTATION RATE: %f" % mutation_rate)
+
         for i in range(round(POPULATION_SIZE / 2)):
 
             parent_one = select_parent(ranked, fits)
@@ -103,11 +125,6 @@ def main():
 
         population.clear()
         population = next_generation.copy()
-
-        if delta_diversity < 0 and abs(delta_diversity) > 0.1:
-            mutation_rate = mutation_rate*1.5
-        elif delta_diversity > 0 and abs(delta_diversity) > 0.1:
-            mutation_rate = mutation_rate*0.5
 
         print("NEXT GENERATION SEEDED")
         print("--------------------------------------------------------")
@@ -131,7 +148,7 @@ def select_parent(population, fits):
 
 
 def gen_probability_distribution(fits):
-    weighted_fits = [fit ** 2 for fit in fits]
+    weighted_fits = [fit**SELECTION_PRESSURE for fit in fits]
     total_fitness = sum(weighted_fits)
 
     fit_percents = [fit/total_fitness for fit in weighted_fits]
@@ -178,19 +195,19 @@ def crossover(genome_one, genome_two):
         NOTE: Recombination method: The new list has a 50% chance of
                 receiving a given float (gene) from genes one or from genes two"""
 
-    c1 = genome_one.copy()
-    c2 = genome_two.copy()
+    child1 = []
+    child2 = []
 
     assert len(genome_one) == len(genome_two), "CROSSING OVER GENES OF DIFFERENT SIZE"
 
     for i in range(len(genome_one)):
-        if random.uniform(0, 1) <= CROSSOVER_CHANCE:
-            c1[i], c2[i] = c2[i], c1[i]
+        child1.append(CROSSOVER_WEIGHT*genome_one[i] + (1-CROSSOVER_WEIGHT)*genome_two[i])
+        child2.append(CROSSOVER_WEIGHT*genome_two[i] + (1-CROSSOVER_WEIGHT)*genome_one[i])
 
-    return c1, c2
+    return child1, child2
 
 
-def mutate(genetic_code, mutation_rate=0.05, variance=0.1, max_value=1, min_value=-1):
+def mutate(genetic_code, mutation_rate, max_value=1, min_value=-1):
     """ accepts:    GENETIC_CODE input of an n length list of floats
                     MUTATION_RATE the chance any given float (gene) mutates.
                                 between zero and one (default is .05)
@@ -203,7 +220,7 @@ def mutate(genetic_code, mutation_rate=0.05, variance=0.1, max_value=1, min_valu
     for i in range(len(genetic_code)):
         if random.uniform(0, 1) <= mutation_rate:
             # assigns new value using normal distribution, staying in upper and lower limits
-            genetic_code[i] = max(min_value, min(max_value, random.gauss(genetic_code[i], variance)))
+            genetic_code[i] = max(min_value, min(max_value, random.gauss(genetic_code[i], MUTATION_STRENGTH)))
 
 
 # run main
