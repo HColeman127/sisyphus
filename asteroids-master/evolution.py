@@ -2,17 +2,17 @@ import random
 import numpy as np
 import time
 import math
-from FitnessWrapper import FitnessWrapper as FW
+from FitnessWrapper import FitnessWrapper as fw
 
 
 # CONSTANTS
-POPULATION_SIZE = 50
+POPULATION_SIZE = 30
 NUMBER_OF_TRIALS = 10
-MAX_GENERATIONS = 100
+MAX_GENERATIONS = 1000
 
-SELECTION_PRESSURE = 2
+SELECTION_PRESSURE_0 = 2
 MUTATION_RATE_0 = 0.05
-MUTATION_STRENGTH = 0.5
+MUTATION_STRENGTH = 0.2
 CROSSOVER_WEIGHT = 0.25
 
 
@@ -20,26 +20,29 @@ def main():
     population = []
     next_generation = []
     best_individual = []
+
     best_fitness = 0
+    prev_gen_div = 0
+    prev_fit_div = 0
+
     mutation_rate = MUTATION_RATE_0
+    selection_pressure = SELECTION_PRESSURE_0
 
     # file names
     timestamp = time.strftime("%Y-%m-%d-%H%M%S", time.localtime())
-    filename = "data/best_genome_log_" + timestamp + ".txt"
-    filename2 = "data/best_fitness_log_" + timestamp + ".txt"
-    filename3 = "data/average_fitness_log_" + timestamp + ".txt"
+    filename = "data/average_fitness_log_" + timestamp + ".txt"
+    filename2 = "data/best_individual_log_" + timestamp + ".txt"
 
     print("--------------------------------------------------------")
     print("SAVING TO FILES:")
     print(filename)
     print(filename2)
-    print(filename3)
 
     print("\n      POPULATION SIZE: %4d" % POPULATION_SIZE)
     print("     NUMBER OF TRIALS: %4d" % NUMBER_OF_TRIALS)
     print("      MAX GENERATIONS: %4d\n" % MAX_GENERATIONS)
 
-    print("   SELECTION PRESSURE:", SELECTION_PRESSURE)
+    print("   SELECTION PRESSURE:", SELECTION_PRESSURE_0)
     print("INITIAL MUTATION RATE:", MUTATION_RATE_0)
     print("    MUTATION STRENGTH:", MUTATION_STRENGTH)
     print("     CROSSOVER WEIGHT:", CROSSOVER_WEIGHT, "\n")
@@ -47,11 +50,9 @@ def main():
     print("SEEDING POPULATION...")
     start_time = time.time()
     population = generate_random_population(POPULATION_SIZE)
-    print("POPULATION SEEDED!")
+    print("POPULATION SEEDED")
     print("SEEDING TIME: %ds" % (time.time() - start_time))
     print("--------------------------------------------------------")
-
-    previous_diversity = get_diversity(population)
 
     # increment generations
     for gen in range(MAX_GENERATIONS):
@@ -66,34 +67,38 @@ def main():
         ranked = rank_fit(population, fits)
         fits.sort()
 
-        f3 = open(filename3, "a")
+        f = open(filename, "a")
         average = np.mean(fits)
-        f3.write("%d\n" % average)
-        f3.close()
-        diversity = get_diversity(population)
-        delta_diversity = diversity - previous_diversity
+        f.write("%d\n" % average)
+        f.close()
 
-        print("  [GENERATION] AVERAGE FITNESS: %.0f" % average)
-        print("               DIVERSITY: %f" % diversity)
-        print("               CHANGE IN DIVERSITY: %f" % delta_diversity)
-        previous_diversity = diversity
+        gen_div = gen_diversity(population)
+        gen_delta = gen_div - prev_gen_div
+        prev_gen_div = gen_div
+
+        fit_div = math.sqrt(np.var(np.array(fits)))
+        fit_delta = fit_div - prev_fit_div
+        prev_fit_div = fit_div
+
+        print("  [GENERATION] AVERAGE FITNESS: %d" % average)
+        print("                 GEN DIVERSITY: %f" % gen_div)
+        print("                 GEN DELTA: %f" % gen_delta)
+        print("                 FIT DIVERSITY: %f" % fit_div)
+        print("                 FIT DELTA: %f" % fit_delta)
 
         if max(fits) > best_fitness:
             best_individual = ranked[-1]
             best_fitness = max(fits)
-            print("\n  [INDIVIDUAL] BEST FITNESS:", best_fitness)
-            print("               GENOME:", best_individual)
             best_numpy = np.asarray(best_individual)
 
-            f1 = open(filename, "a")
+            f2 = open(filename2, "a")
             writable = np.array2string(best_numpy, separator=",", max_line_width=5000,
                                        formatter={'float_kind': lambda x: "%f" % x})
-            f1.write(writable)
-            f1.close()
-
-            f2 = open(filename2, "a")
-            f2.write(str(best_fitness))
+            f2.write(str(best_fitness)+"\n"+writable+"\n\n")
             f2.close()
+
+            print("\n  [INDIVIDUAL] BEST FITNESS:", best_fitness)
+            print("               GENOME:", best_individual)
 
         # seed the next generation
 
@@ -101,19 +106,21 @@ def main():
 
         print("\nSEEDING NEXT GENERATION...")
 
-        #mutation_rate = -delta_diversity
+        mutation_rate = 0.01/gen_div
+        selection_pressure = fit_div/25
 
         print("               MUTATION RATE: %f" % mutation_rate)
+        print("          SELECTION PRESSURE: %f" % selection_pressure)
 
         for i in range(round(POPULATION_SIZE / 2)):
 
-            parent_one = select_parent(ranked, fits)
-            parent_two = select_parent(ranked, fits)
+            parent_one = select_parent(ranked, fits, selection_pressure)
+            parent_two = select_parent(ranked, fits, selection_pressure)
             # print("PARENT 1:", parent_one)
             # print("PARENT 2:", parent_two)
 
             while parent_one == parent_two:
-                parent_two = select_parent(ranked, fits)
+                parent_two = select_parent(ranked, fits, selection_pressure)
 
             child_one, child_two = crossover(parent_one, parent_two)
 
@@ -138,8 +145,8 @@ def main():
 # =================================================================
 
 
-def select_parent(population, fits):
-    fitness_percentages = gen_probability_distribution(fits)
+def select_parent(population, fits, selection_pressure):
+    fitness_percentages = gen_probability_distribution(fits, selection_pressure)
     x = random.uniform(0, 1)
 
     for index in range(len(population)):
@@ -147,8 +154,8 @@ def select_parent(population, fits):
             return population[index]
 
 
-def gen_probability_distribution(fits):
-    weighted_fits = [fit**SELECTION_PRESSURE for fit in fits]
+def gen_probability_distribution(fits, selection_pressure):
+    weighted_fits = [fit**selection_pressure for fit in fits]
     total_fitness = sum(weighted_fits)
 
     fit_percents = [fit/total_fitness for fit in weighted_fits]
@@ -167,7 +174,7 @@ def rank_fit(generation, fits):
 
 
 def assess_gen_fits(generation):
-    fit_test = FW(display=False)
+    fit_test = fw(display=False)
 
     # actual fitness
     return [fit_test.get_fitness(individual, games_max=NUMBER_OF_TRIALS) for individual in generation]
@@ -176,7 +183,7 @@ def assess_gen_fits(generation):
     # return [random.randint(0, 100) for individual in generation]
 
 
-def get_diversity(pop):
+def gen_diversity(pop):
     return np.average([math.sqrt(np.var(np.array(pop)[:, i])) for i in range(len(pop[0]))])
 
 

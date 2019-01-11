@@ -132,8 +132,15 @@ class MyGame(object):
         # of shape [xi1, yi1, xi2, yi2, xi3, yi3, xi4, yi4]
         observations = []
         for rock_index in rock_indices:
-            observations.append(self.rocks[rock_index].position[0] - self.spaceship.position[0])
-            observations.append(self.rocks[rock_index].position[1] - self.spaceship.position[1])
+            x = self.rocks[rock_index].position[0] - self.spaceship.position[0]
+            if x > self.width/2:
+                x = self.width-x
+            observations.append(x)
+
+            y = self.rocks[rock_index].position[1] - self.spaceship.position[1]
+            if y > self.height / 2:
+                y = self.height-y
+            observations.append(y)
 
         # if there are less than <num> rocks add max distances
         for _ in range(num - len(rock_indices)):

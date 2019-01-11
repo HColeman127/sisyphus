@@ -33,8 +33,8 @@ class FitnessWrapper(object):
 
             scores.append(score)
 
-        # returns the average score
-        return sum(scores)//len(scores)
+        # returns the average score times the proportion of nonzero scores
+        return round((sum(scores)/len(scores))*(1 - scores.count(0)/games_max))
 
     def get_mean_convergence(self, params, games_max=100, step_max=5000):
         graph = CompGraph(params)  # create graph with given parameters
