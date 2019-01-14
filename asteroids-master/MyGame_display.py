@@ -54,6 +54,8 @@ class MyGameDisplay(object):
         self.FPS = 60
         pygame.time.set_timer(pygame.USEREVENT, 1000 // self.FPS)
 
+    def random_seed(self, seed=None):
+        set_random_seed(seed)
 
     def reset(self):
         self.score = 0

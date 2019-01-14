@@ -1,12 +1,14 @@
 import math
 import random
 
-#random.seed(123456)
-
 
 def distance(p, q):
     """Helper function to calculate distance between 2 points"""
     return math.sqrt((p[0]-q[0])**2 + (p[1]-q[1])**2)
+
+
+def set_random_seed(n):
+    random.seed(n)
 
 
 class GameObject(object):

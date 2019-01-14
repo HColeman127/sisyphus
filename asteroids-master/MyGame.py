@@ -15,6 +15,9 @@ class MyGame(object):
 
         self.reset()
 
+    def random_seed(self, seed=None):
+        set_random_seed(seed)
+
     def reset(self):
         self.score = 0
 

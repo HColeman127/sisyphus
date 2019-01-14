@@ -3,7 +3,10 @@ import os
 import random
 import pygame
 
-#random.seed(123456)
+
+def set_random_seed(n):
+    random.seed(n)
+
 
 def load_image_convert_alpha(filename):
     """Load an image with the given filename from the images directory"""

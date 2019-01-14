@@ -17,6 +17,7 @@ class FitnessWrapper(object):
     def get_fitness(self, params, games_max=20, step_max=5000):
         graph = CompGraph(params)   # create graph with given parameters
         scores = []
+        self.game.random_seed(123456)
 
         for game_number in range(games_max):
             playing, score, obs = self.game.reset()

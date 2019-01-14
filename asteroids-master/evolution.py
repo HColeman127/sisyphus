@@ -6,12 +6,12 @@ from FitnessWrapper import FitnessWrapper as fw
 
 
 # CONSTANTS
-POPULATION_SIZE = 30
+POPULATION_SIZE = 10
 NUMBER_OF_TRIALS = 10
 MAX_GENERATIONS = 1000
 
 SELECTION_PRESSURE_0 = 2
-MUTATION_RATE_0 = 0.05
+MUTATION_RATE_0 = 0
 MUTATION_STRENGTH = 0.2
 CROSSOVER_WEIGHT = 0.25
 
@@ -106,21 +106,20 @@ def main():
 
         print("\nSEEDING NEXT GENERATION...")
 
-        mutation_rate = 0.01/gen_div
-        selection_pressure = fit_div/25
+        #mutation_rate = 0.005/gen_div
+        #selection_pressure = 1000/fit_div
 
         print("               MUTATION RATE: %f" % mutation_rate)
         print("          SELECTION PRESSURE: %f" % selection_pressure)
 
-        for i in range(round(POPULATION_SIZE / 2)):
+        fit_dist = gen_probability_distribution(fits, selection_pressure)
 
-            parent_one = select_parent(ranked, fits, selection_pressure)
-            parent_two = select_parent(ranked, fits, selection_pressure)
-            # print("PARENT 1:", parent_one)
-            # print("PARENT 2:", parent_two)
+        for i in range(round(POPULATION_SIZE / 2)):
+            parent_one = select_parent(ranked, fit_dist)
+            parent_two = select_parent(ranked, fit_dist)
 
             while parent_one == parent_two:
-                parent_two = select_parent(ranked, fits, selection_pressure)
+                parent_two = select_parent(ranked, fit_dist)
 
             child_one, child_two = crossover(parent_one, parent_two)
 
@@ -145,12 +144,11 @@ def main():
 # =================================================================
 
 
-def select_parent(population, fits, selection_pressure):
-    fitness_percentages = gen_probability_distribution(fits, selection_pressure)
+def select_parent(population, fit_dist):
     x = random.uniform(0, 1)
 
     for index in range(len(population)):
-        if x < fitness_percentages[index]:
+        if x < fit_dist[index]:
             return population[index]
 
 
@@ -159,6 +157,13 @@ def gen_probability_distribution(fits, selection_pressure):
     total_fitness = sum(weighted_fits)
 
     fit_percents = [fit/total_fitness for fit in weighted_fits]
+
+    """
+    f = open("div_test.txt", "a")
+    writable = np.array2string(np.array(fit_percents), separator=",", max_line_width=5000,
+                               formatter={'float_kind': lambda x: "%f" % x})[1:-1]
+    f.write(writable + "\n")
+    f.close()"""
 
     percent = 0
     fit_dist = []
