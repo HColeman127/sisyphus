@@ -20,7 +20,7 @@ class CompGraph(object):
         self.model = models.Sequential()
         self.model.add(layers.InputLayer(batch_size=1, input_shape=[self.input_size]))
         #self.model.add(layers.Dense(self.hidden_size))
-        self.model.add(layers.Dense(self.hidden_size))
+        self.model.add(layers.Dense(self.hidden_size, activation="relu"))
         self.model.add(layers.Dense(self.output_size, activation="sigmoid"))
         self.model.compile(optimizer=tf.train.GradientDescentOptimizer(0.01), loss='mse', metrics=['mae'])
 
@@ -32,7 +32,8 @@ class CompGraph(object):
 
     def eval(self, input_list):
         # takes a list of input values and evaluates the graph and returns outputs
-        return self.model.predict(np.array([np.array(input_list)]), batch_size=1)[0]
+        output = self.model.predict(np.array([np.array(input_list)]), batch_size=1)[0]
+        return np.round(output, 0)
 
     def format_params(self, params_list):
         # create numpy array out of list

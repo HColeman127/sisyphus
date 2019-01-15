@@ -27,6 +27,7 @@ class FitnessWrapper(object):
             while playing and step_number < step_max:
                 # gets actions and passes into environment
                 commands = graph.eval(obs)
+                #print(commands)
                 playing, score, obs = self.game.step(commands)
 
                 # increment step number
