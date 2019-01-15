@@ -6,13 +6,13 @@ from FitnessWrapper import FitnessWrapper as fw
 
 
 # CONSTANTS
-POPULATION_SIZE = 30
+POPULATION_SIZE = 5
 NUMBER_OF_TRIALS = 10
 MAX_GENERATIONS = 1000
 
 CROSSOVER_WEIGHT = 0.25
 MUTATION_RATE_0 = 0.001
-MUTATION_STRENGTH_0 = 0.1
+MUTATION_STRENGTH_0 = 1.4
 SELECTION_PRESSURE_0 = 0
 
 
@@ -81,7 +81,7 @@ def main():
         if len(avg_fit_history) > 10:
             avg_fit_history.pop(0)
 
-        avg_fit_delta
+        avg_fit_delta = (avg_fit_history[-1]-avg_fit_history[0])/len(avg_fit_history)
 
         # genetic diversity
         gen_div = gen_diversity(population)
@@ -94,6 +94,7 @@ def main():
         prev_fit_div = fit_div
 
         print("  [GENERATION] AVERAGE FITNESS: %d" % avg_fit)
+        print("               AVG FIT DELTA: %d\n" % avg_fit_delta)
         print("                 GEN DIVERSITY: %f" % gen_div)
         print("                 GEN DELTA: %f" % gen_delta)
         print("                 FIT DIVERSITY: %f" % fit_div)
@@ -167,18 +168,18 @@ def gen_probability_distribution(fits, selection_pressure):
     pop_size = len(fits)
     weighted_fits = []
     for i in range(pop_size):
-        weighted_fits.append((1/(pop_size-i))**(1+selection_pressure))
+        weighted_fits.append((1/(pop_size-i+1))**selection_pressure)
 
     total_fitness = sum(weighted_fits)
 
     fit_percents = [fit/total_fitness for fit in weighted_fits]
 
-    """
+
     f = open("div_test.txt", "a")
     writable = np.array2string(np.array(fit_percents), separator=",", max_line_width=5000,
                                formatter={'float_kind': lambda x: "%f" % x})[1:-1]
     f.write(writable + "\n")
-    f.close()"""
+    f.close()
 
     percent = 0
     fit_dist = []

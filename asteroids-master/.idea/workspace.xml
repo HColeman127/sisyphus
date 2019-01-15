@@ -2,39 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e8fe4817-1203-46b2-8adf-5abbe027ee1c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/data/average_fitness_log_2019-01-10-211124.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/average_fitness_log_2019-01-10-214636.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/average_fitness_log_2019-01-10-215849.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/average_fitness_log_2019-01-11-103942.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/average_fitness_log_2019-01-11-110120.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/average_fitness_log_2019-01-11-110609.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/average_fitness_log_2019-01-11-111613.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/average_fitness_log_2019-01-11-112506.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/average_fitness_log_2019-01-11-113732.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/average_fitness_log_2019-01-11-114008.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/average_fitness_log_2019-01-11-114200.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/average_fitness_log_2019-01-14-102721.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/average_fitness_log_2019-01-14-102757.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/average_fitness_log_2019-01-14-103545.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/average_fitness_log_2019-01-14-105432.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/average_fitness_log_2019-01-14-105618.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/best_individual_log_2019-01-10-211124.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/best_individual_log_2019-01-10-214636.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/best_individual_log_2019-01-10-215849.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/best_individual_log_2019-01-11-103942.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/best_individual_log_2019-01-11-110120.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/best_individual_log_2019-01-11-110609.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/best_individual_log_2019-01-11-111613.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/best_individual_log_2019-01-11-112506.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/best_individual_log_2019-01-11-113732.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/best_individual_log_2019-01-11-114008.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/best_individual_log_2019-01-11-114200.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/best_individual_log_2019-01-14-102721.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/best_individual_log_2019-01-14-102757.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/best_individual_log_2019-01-14-103545.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/best_individual_log_2019-01-14-105432.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/best_individual_log_2019-01-14-105618.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/div_test.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/evolution.py" beforeDir="false" afterPath="$PROJECT_DIR$/evolution.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -63,8 +30,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/evolution.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4048">
-              <caret line="184" column="28" lean-forward="true" selection-start-line="184" selection-start-column="28" selection-end-line="184" selection-end-column="28" />
+            <state relative-caret-position="176">
+              <caret line="8" column="19" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -516,8 +483,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/evolution.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4048">
-          <caret line="184" column="28" lean-forward="true" selection-start-line="184" selection-start-column="28" selection-end-line="184" selection-end-column="28" />
+        <state relative-caret-position="176">
+          <caret line="8" column="19" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
