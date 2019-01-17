@@ -1,5 +1,35 @@
 import math
+import os
 import random
+import pygame
+
+
+def set_random_seed(n):
+    random.seed(n)
+
+
+def load_image_convert_alpha(filename):
+    """Load an image with the given filename from the images directory"""
+    return pygame.image.load(os.path.join('images', filename)).convert_alpha()
+
+
+def load_sound(filename):
+    """Load a sound with the given filename from the sounds directory"""
+    return pygame.mixer.Sound(os.path.join('sounds', filename))
+
+
+def draw_centered(surface1, surface2, position):
+    """Draw surface1 onto surface2 with center at position"""
+    rect = surface1.get_rect()
+    rect = rect.move(position[0]-rect.width//2, position[1]-rect.height//2)
+    surface2.blit(surface1, rect)
+
+
+def rotate_center(image, rect, angle):
+        """rotate the given image around its center & return an image & rect"""
+        rotate_image = pygame.transform.rotate(image, angle)
+        rotate_rect = rotate_image.get_rect(center=rect.center)
+        return rotate_image, rotate_rect
 
 
 def distance(p, q):
@@ -7,33 +37,38 @@ def distance(p, q):
     return math.sqrt((p[0]-q[0])**2 + (p[1]-q[1])**2)
 
 
-def set_random_seed(n):
-    random.seed(n)
-
-
 class GameObject(object):
     """All game objects have a position and an image"""
-    def __init__(self, position, size, speed=0):
+    def __init__(self, position, image=None, speed=0, display=None):
         # max speed should be 6.5
-        self.size = size
+        self.image = image
         self.position = list(position[:])
         self.speed = speed
+        self.display = display
+
+    def draw_on(self, screen):
+        draw_centered(self.image, screen, self.position)
 
     def size(self):
-        return max(self.size[0], self.size[1])
+        return max(self.image.get_height(), self.image.get_width())
 
     def radius(self):
-        return self.size[1]/2
+        return self.image.get_width()/2
 
 
 class Spaceship(GameObject):
 
     velocity = [0, 0]
 
-    def __init__(self, position):
+    def __init__(self, position, display):
         """initializing an Spaceship object given it's position"""
-        super(Spaceship, self).__init__(position, [52, 90])
+        if display:
+            super(Spaceship, self).__init__(position, load_image_convert_alpha('spaceship-off.png'), display=True)
+        else:
+            super(Spaceship, self).__init__(position, display=False)
 
+        if self.display:
+            self.image_on = load_image_convert_alpha('spaceship-on.png')
         self.direction = [0, -1]
         self.is_throttle_on = False
         self.angle = 0
@@ -43,6 +78,18 @@ class Spaceship(GameObject):
         # a list to hold the missiles fired by the spaceship
         # (that are active (on the screen))
         self.active_missiles = []
+
+    def draw_on(self, screen):
+        """Draw the spaceship on the screen"""
+
+        # select the image, based on the fact that spaceship is accelerating
+        # or not
+        if self.is_throttle_on:
+            new_image, rect = rotate_center(self.image_on, self.image_on.get_rect(), self.angle)
+        else:
+            new_image, rect = rotate_center(self.image, self.image.get_rect(), self.angle)
+
+        draw_centered(new_image, screen, self.position)
 
     def move(self):
         """Do one frame's worth of updating for the object"""
@@ -66,7 +113,8 @@ class Spaceship(GameObject):
         adjust[1] = -math.cos(math.radians(self.angle)) * 90
 
         # create a new missile using the calculated adjusted position
-        new_missile = Missile((self.position[0] + adjust[0], self.position[1] + adjust[1] / 2), self.angle)
+        new_missile = Missile((self.position[0] + adjust[0], self.position[1] + adjust[1] / 2),
+                              self.angle, display=self.display)
         self.active_missiles.append(new_missile)
 
 
@@ -74,10 +122,13 @@ class Missile(GameObject):
     """Resembles a missile"""
 
     lifeSpan = 0
-    lifeMax = 60
+    lifeMax = 20
 
-    def __init__(self, position, angle, speed=15):
-        super(Missile, self).__init__(position, [9, 9])
+    def __init__(self, position, angle, speed=15, display=None):
+        if display:
+            super(Missile, self).__init__(position, load_image_convert_alpha('missile.png'), display=True)
+        else:
+            super(Missile, self).__init__(position, display=False)
 
         self.angle = angle
         self.direction = [0, 0]
@@ -98,21 +149,24 @@ class Missile(GameObject):
 class Rock(GameObject):
     """Resembles a rock"""
 
-    def __init__(self, position, size, speed=10):
+    def __init__(self, position, size, speed=10, display=None):
         """Initialize a Rock object, given its position and size"""
 
         # if the size is valid
-        if size == "big":
-            size_num = [150, 150]
-        if size == "normal":
-            size_num = [100, 100]
-        if size == "small":
-            size_num = [50, 50]
+        if size in {"big", "normal", "small"}:
 
-        # load the correct image from file
-        str_filename = "rock-" + str(size) + ".png"
-        super(Rock, self).__init__(position, size_num)
-        self.size = size
+            # load the correct image from file
+            str_filename = "rock-" + str(size) + ".png"
+            if display:
+                super(Rock, self).__init__(position, load_image_convert_alpha(str_filename), display=True)
+            else:
+                super(Rock, self).__init__(position, display=False)
+
+            self.size = size
+
+        else:
+            # the size is not pre-defined
+            return None
 
         self.position = list(position)
 

@@ -8,20 +8,21 @@ import numpy as np
 
 # class definition ----------------------------------------
 class CompGraph(object):
-    def __init__(self, params):
-        self.input_size = 11
-        self.hidden_size = 7
-        self.output_size = 4
+    INPUT_SIZE = 6
+    HIDDEN_SIZE = 8
+    OUTPUT_SIZE = 4
+    GENOME_LENGTH = INPUT_SIZE*HIDDEN_SIZE + HIDDEN_SIZE + HIDDEN_SIZE*OUTPUT_SIZE + OUTPUT_SIZE
 
+    def __init__(self, params):
         # clear backend
         backend.clear_session()
 
         # create graph
         self.model = models.Sequential()
-        self.model.add(layers.InputLayer(batch_size=1, input_shape=[self.input_size]))
-        #self.model.add(layers.Dense(self.hidden_size))
-        self.model.add(layers.Dense(self.hidden_size, activation="relu"))
-        self.model.add(layers.Dense(self.output_size, activation="sigmoid"))
+        self.model.add(layers.InputLayer(batch_size=1, input_shape=[self.INPUT_SIZE]))
+        self.model.add(layers.Dense(self.HIDDEN_SIZE, activation="sigmoid"))
+        #self.model.add(layers.Dense(self.HIDDEN_SIZE, activation="sigmoid"))
+        self.model.add(layers.Dense(self.OUTPUT_SIZE, activation="sigmoid"))
         self.model.compile(optimizer=tf.train.GradientDescentOptimizer(0.01), loss='mse', metrics=['mae'])
 
         #print(self.model.summary())
@@ -40,19 +41,19 @@ class CompGraph(object):
         params = np.array(params_list)
 
         # find separation indexes based on the sizes of each graph layer
-        ih_w_index = self.input_size * self.hidden_size
-        ih_b_index = ih_w_index + self.hidden_size
-        #hh_w_index = ih_b_index + self.hidden_size ** 2
-        #hh_b_index = hh_w_index + self.hidden_size
-        ho_w_index = ih_b_index + self.hidden_size * self.output_size
-        ho_b_index = ho_w_index + self.output_size
+        ih_w_index = self.INPUT_SIZE * self.HIDDEN_SIZE
+        ih_b_index = ih_w_index + self.HIDDEN_SIZE
+        #hh_w_index = ih_b_index + self.HIDDEN_SIZE ** 2
+        #hh_b_index = hh_w_index + self.HIDDEN_SIZE
+        ho_w_index = ih_b_index + self.HIDDEN_SIZE * self.OUTPUT_SIZE
+        ho_b_index = ho_w_index + self.OUTPUT_SIZE
 
         # create a 2d array for each set of weights and a 1d graph for each set of biases
-        ih_w = params[:ih_w_index].reshape((self.input_size, self.hidden_size))
+        ih_w = params[:ih_w_index].reshape((self.INPUT_SIZE, self.HIDDEN_SIZE))
         ih_b = params[ih_w_index:ih_b_index]
-        #hh_w = params[ih_b_index:hh_w_index].reshape((10, 10))
+        #hh_w = params[ih_b_index:hh_w_index].reshape((self.HIDDEN_SIZE, self.HIDDEN_SIZE))
         #hh_b = params[hh_w_index:hh_b_index]
-        ho_w = params[ih_b_index:ho_w_index].reshape((self.hidden_size, self.output_size))
+        ho_w = params[ih_b_index:ho_w_index].reshape((self.HIDDEN_SIZE, self.OUTPUT_SIZE))
         ho_b = params[ho_w_index:ho_b_index]
 
         # return all weights and biases as a single numpy array

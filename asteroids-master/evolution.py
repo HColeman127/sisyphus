@@ -6,14 +6,15 @@ from FitnessWrapper import FitnessWrapper as fw
 
 
 # CONSTANTS
-POPULATION_SIZE = 30
+POPULATION_SIZE = 100
 NUMBER_OF_TRIALS = 10
+MAX_STEPS = 500
 MAX_GENERATIONS = 1000
 
 CROSSOVER_WEIGHT = 0.25
-MUTATION_RATE_0 = 0.04
-MUTATION_STRENGTH_0 = .4
-SELECTION_PRESSURE_0 = 1.5
+MUTATION_RATE_0 = 0.10
+MUTATION_STRENGTH_0 = 0.2
+SELECTION_PRESSURE_0 = 1
 
 
 def main():
@@ -42,6 +43,7 @@ def main():
 
     print("\n      POPULATION SIZE: %4d" % POPULATION_SIZE)
     print("     NUMBER OF TRIALS: %4d" % NUMBER_OF_TRIALS)
+    print("       MAX GAME STEPS: %4d" % MAX_STEPS)
     print("      MAX GENERATIONS: %4d\n" % MAX_GENERATIONS)
 
     print("          CROSSOVER WEIGHT:", CROSSOVER_WEIGHT)
@@ -73,7 +75,7 @@ def main():
         # save average generation fitness to file
         f = open(filename, "a")
         avg_fit = np.mean(fits)
-        f.write("%d\n" % avg_fit)
+        f.write("%f\n" % avg_fit)
         f.close()
 
         # find average fitness change in past 10 generations
@@ -93,8 +95,8 @@ def main():
         fit_delta = fit_div - prev_fit_div
         prev_fit_div = fit_div
 
-        print("  [GENERATION] AVERAGE FITNESS: %d" % avg_fit)
-        print("               AVG FIT DELTA: %d\n" % avg_fit_delta)
+        print("  [GENERATION] AVERAGE FITNESS: %f" % avg_fit)
+        print("               AVG FIT DELTA: %f\n" % avg_fit_delta)
         print("                 GEN DIVERSITY: %f" % gen_div)
         print("                 GEN DELTA: %f" % gen_delta)
         print("                 FIT DIVERSITY: %f" % fit_div)
@@ -125,8 +127,8 @@ def main():
 
         fit_dist = gen_probability_distribution(fits, selection_pressure)
 
-        next_generation.clear()
-        for i in range(round(POPULATION_SIZE / 2)):
+        next_generation = population[20:]
+        for i in range(round(POPULATION_SIZE / 3)):
             parent_one = select_parent(ranked, fit_dist)
             parent_two = select_parent(ranked, fit_dist)
 
@@ -198,7 +200,7 @@ def assess_gen_fits(generation):
     fit_test = fw(display=False)
 
     # actual fitness
-    return [fit_test.get_fitness(individual, games_max=NUMBER_OF_TRIALS) for individual in generation]
+    return [fit_test.get_fitness(individual, games_max=NUMBER_OF_TRIALS, step_max=MAX_STEPS) for individual in generation]
 
     # random fitness. faster running for testing other features
     # return [random.randint(0, 100) for individual in generation]
@@ -209,7 +211,7 @@ def gen_diversity(pop):
 
 
 def generate_random_population(size=100):
-    return [generate_random_individual(-1, 1, 116) for _ in range(size)]
+    return [generate_random_individual(-1, 1, fw.GENOME_LENGTH) for _ in range(size)]
 
 
 def generate_random_individual(min_value=-1, max_value=1, length=116):
