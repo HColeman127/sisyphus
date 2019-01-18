@@ -11,6 +11,8 @@ class FitnessWrapper(object):
         # initializes game environment
         self.game = MyGame(display=display)
 
+    def set_random_seed(self, seed):
+        self.game.random_seed(seed)
 
     def get_fitness(self, params, games_max=20, step_max=5000):
         graph = CompGraph(params)   # create graph with given parameters
@@ -18,8 +20,6 @@ class FitnessWrapper(object):
         steps = []
         hit_total = 0
         shot_total = 0
-
-        #self.game.random_seed(123456)
 
         for game_number in range(games_max):
             playing, score, obs = self.game.reset()

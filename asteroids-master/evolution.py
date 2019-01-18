@@ -6,7 +6,7 @@ from FitnessWrapper import FitnessWrapper as fw
 
 
 # CONSTANTS
-POPULATION_SIZE = 50
+POPULATION_SIZE = 30
 NUMBER_OF_TRIALS = 10
 MAX_STEPS = 500
 MAX_GENERATIONS = 1000
@@ -14,7 +14,7 @@ MAX_GENERATIONS = 1000
 CROSSOVER_WEIGHT = 0.10
 MUTATION_RATE_0 = 0.10
 MUTATION_STRENGTH_0 = 0.2
-SELECTION_PRESSURE_0 = 1.4
+SELECTION_PRESSURE_0 = 1
 
 
 def main():
@@ -115,9 +115,8 @@ def main():
             best_numpy = np.array(best_individual)
 
             f2 = open(filename2, "a")
-            writable = np.array2string(best_numpy, separator=",", max_line_width=5000,
-                                       formatter={'float_kind': lambda x: "%f" % x})
-            f2.write(str(best_fit_value)+"\n"+writable+"\n\n")
+            #writable = np.array2string(best_numpy, separator=",", max_line_width=5000)
+            f2.write(str(best_fit_value)+"\n"+str(best_individual)+"\n\n")
             f2.close()
 
             print("\n      ALL TIME BEST FITNESS:", best_fit_value)
@@ -185,12 +184,12 @@ def gen_probability_distribution(fits, selection_pressure):
 
     fit_percents = [fit/total_fitness for fit in weighted_fits]
 
-
+    """
     f = open("div_test.txt", "a")
     writable = np.array2string(np.array(fit_percents), separator=",", max_line_width=5000,
                                formatter={'float_kind': lambda x: "%f" % x})[1:-1]
     f.write(writable + "\n")
-    f.close()
+    f.close()"""
 
     percent = 0
     fit_dist = []
@@ -207,6 +206,8 @@ def rank_fit(generation, fits):
 
 def assess_gen_fits(generation):
     fit_test = fw(display=False)
+
+    fit_test.set_random_seed(random.random)
 
     # actual fitness
     return [fit_test.get_fitness(individual, games_max=NUMBER_OF_TRIALS, step_max=MAX_STEPS) for individual in generation]
