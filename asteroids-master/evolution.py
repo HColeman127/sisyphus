@@ -6,15 +6,15 @@ from FitnessWrapper import FitnessWrapper as fw
 
 
 # CONSTANTS
-POPULATION_SIZE = 100
+POPULATION_SIZE = 50
 NUMBER_OF_TRIALS = 10
 MAX_STEPS = 500
 MAX_GENERATIONS = 1000
 
-CROSSOVER_WEIGHT = 0.25
+CROSSOVER_WEIGHT = 0.10
 MUTATION_RATE_0 = 0.10
 MUTATION_STRENGTH_0 = 0.2
-SELECTION_PRESSURE_0 = 1
+SELECTION_PRESSURE_0 = 1.4
 
 
 def main():
@@ -102,19 +102,28 @@ def main():
         print("                 FIT DIVERSITY: %f" % fit_div)
         print("                 FIT DELTA: %f" % fit_delta)
 
-        if max(fits) > best_fit_value:
-            best_individual = ranked[-1]
-            best_fit_value = max(fits)
-            best_numpy = np.asarray(best_individual)
+        gen_best_individual = ranked[-1]
+        gen_best_value = max(fits)
+
+        print("\n  [INDIVIDUAL] BEST FITNESS:", gen_best_value)
+        print("               GENOME:", gen_best_individual)
+
+
+        if gen_best_value > best_fit_value:
+            best_individual = gen_best_individual
+            best_fit_value = gen_best_value
+            best_numpy = np.array(best_individual)
 
             f2 = open(filename2, "a")
             writable = np.array2string(best_numpy, separator=",", max_line_width=5000,
-                                       formatter={'float_kind': lambda x: "%f" % x})[1:-1]
+                                       formatter={'float_kind': lambda x: "%f" % x})
             f2.write(str(best_fit_value)+"\n"+writable+"\n\n")
             f2.close()
 
-            print("\n  [INDIVIDUAL] BEST FITNESS:", best_fit_value)
+            print("\n      ALL TIME BEST FITNESS:", best_fit_value)
             print("               GENOME:", best_individual)
+
+
 
         print("\nSEEDING NEXT GENERATION...")
 
@@ -214,7 +223,7 @@ def generate_random_population(size=100):
     return [generate_random_individual(-1, 1, fw.GENOME_LENGTH) for _ in range(size)]
 
 
-def generate_random_individual(min_value=-1, max_value=1, length=116):
+def generate_random_individual(min_value=-1, max_value=1, length=fw.GENOME_LENGTH):
     return [random.uniform(min_value, max_value) for _ in range(length)]
 
 

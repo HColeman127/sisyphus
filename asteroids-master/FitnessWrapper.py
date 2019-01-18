@@ -15,6 +15,7 @@ class FitnessWrapper(object):
     def get_fitness(self, params, games_max=20, step_max=5000):
         graph = CompGraph(params)   # create graph with given parameters
         scores = []
+        steps = []
         hit_total = 0
         shot_total = 0
 
@@ -37,11 +38,17 @@ class FitnessWrapper(object):
                 step_number += 1
 
             scores.append(score)
+            steps.append(step_number)
             hit_total += hits
             shot_total += shots
 
-        # returns the average score times the proportion of nonzero scores
-        return (sum(scores)/len(scores))*(1 - scores.count(0)/games_max)*hit_total/max(1, shot_total)
+        #print(hit_total, shot_total)
+
+        hitrate = hit_total/(shot_total+1)
+        avg_score = sum(scores)/len(scores)
+        avg_steps = sum(steps)/len(steps)
+
+        return avg_score*avg_steps*(hitrate**2)
 
     def get_mean_convergence(self, params, games_max=100, step_max=5000):
         graph = CompGraph(params)  # create graph with given parameters

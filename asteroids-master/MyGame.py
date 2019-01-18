@@ -105,17 +105,17 @@ class MyGame(object):
         if self.display:
             pygame.event.wait()
 
-        """
-        commands = [0, 0, 0, 0]
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_SPACE]:
-            commands[0] = 1
-        if keys[pygame.K_LEFT] or keys[pygame.K_a]:
-            commands[1] = 1
-        if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
-            commands[2] = 1
-        if keys[pygame.K_UP] or keys[pygame.K_w]:
-            commands[3] = 1"""
+        if self.display and False:
+            commands = [0, 0, 0, 0]
+            keys = pygame.key.get_pressed()
+            if keys[pygame.K_SPACE]:
+                commands[0] = 1
+            if keys[pygame.K_LEFT] or keys[pygame.K_a]:
+                commands[1] = 1
+            if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
+                commands[2] = 1
+            if keys[pygame.K_UP] or keys[pygame.K_w]:
+                commands[3] = 1
 
         if self.dead:
             self.reset()
@@ -176,44 +176,63 @@ class MyGame(object):
         return not self.dead, self.score, self.hits, self.shots, self.get_observations()
 
     def get_observations(self):
-        norm_angle = (-self.spaceship.angle - 90) % 360
-        facing_x = math.cos(math.radians(norm_angle))
-        facing_y = math.sin(math.radians(norm_angle))
+        rocks = self.get_closest_rocks(4)
 
-        rocks = self.get_closest_rocks(1)
-
+        # flip display because get_closest_rocks draws dots
         if self.display:
             pygame.display.flip()
 
-        return [self.spaceship.velocity[0], self.spaceship.velocity[1], facing_x, facing_y] + rocks
+        #print(rocks)
+
+        # self.spaceship.velocity[0], self.spaceship.velocity[1],
+        return rocks
 
     def get_closest_rocks(self, num):
         # distances of all rocks
-        distances = [distance(rock.position, self.spaceship.position) for rock in self.rocks]
+        distances = []
+        relative_positions = []
+        for rock in self.rocks:
+            x = rock.position[0] - self.spaceship.position[0]
+            if x > self.width/2:
+                x -= self.width
+            elif x < -self.width/2:
+                x += self.width
 
-        # get <num> closest rocks
-        rock_indices = []
-        for _ in range(min(num, len(distances))):
-            min_index = 0
-            for i in range(len(distances)):
-                if min_index in rock_indices or distances[i] < distances[min_index] and i not in rock_indices:
-                    min_index = i
-            rock_indices.append(min_index)
+            y = rock.position[1] - self.spaceship.position[1]
+            if y > self.height / 2:
+                y -= self.height
+            elif y < -self.height/2:
+                y += self.height
+
+            distances.append(math.sqrt(x**2 + y**2))
+            relative_positions.append((x, y))
+
+        # creates a list of tuples sorted with respect to the respective distances to the spaceship
+        sorted_rocks = [rock for rock in sorted(zip(distances, relative_positions))]
 
         # construct list where xi, yi is the x and y distance of the spaceship to rock i
         # of shape [xi1, yi1, xi2, yi2, xi3, yi3, xi4, yi4]
         observations = []
-        for rock_index in rock_indices:
-            observations.append(self.rocks[rock_index].position[0] - self.spaceship.position[0])
-            observations.append(self.rocks[rock_index].position[1] - self.spaceship.position[1])
+        for magnitude, vector in sorted_rocks[:num]:
+            rock_angle = math.acos(vector[0]/magnitude)
+            if vector[1] < 0:
+                rock_angle = 2*math.pi - rock_angle
+
+            rel_angle = (-math.radians(self.spaceship.angle) - rock_angle) % (2*math.pi)
+            rel_x = magnitude * math.cos(rel_angle)
+            rel_y = magnitude * math.sin(rel_angle)
+
+            observations += (rel_x, rel_y)
 
             if self.display:
-                draw_centered(self.blip_image, self.screen, self.rocks[rock_index].position)
+                abs_rock_pos = (vector[0] + self.spaceship.position[0],
+                                vector[1] + self.spaceship.position[1])
+                draw_centered(self.blip_image, self.screen, abs_rock_pos)
+                pygame.draw.line(self.screen, pygame.Color(255, 255, 255, 100), self.spaceship.position, abs_rock_pos)
 
         # if there are less than <num> rocks add max distances
-        for _ in range(num - len(rock_indices)):
-            observations.append(self.width)
-            observations.append(self.height)
+        for _ in range(num - len(observations)//2):
+            observations += (self.width, self.height)
 
         return observations
 

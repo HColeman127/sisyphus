@@ -8,7 +8,7 @@ import numpy as np
 
 # class definition ----------------------------------------
 class CompGraph(object):
-    INPUT_SIZE = 6
+    INPUT_SIZE = 8
     HIDDEN_SIZE = 8
     OUTPUT_SIZE = 4
     GENOME_LENGTH = INPUT_SIZE*HIDDEN_SIZE + HIDDEN_SIZE + HIDDEN_SIZE*OUTPUT_SIZE + OUTPUT_SIZE
