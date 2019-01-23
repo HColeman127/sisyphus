@@ -23,6 +23,10 @@ def main():
     next_generation = []
     best_individual = []
     avg_fit_history = []
+    load_from_file = False
+    save_at_gens = [] # ex: [1,5,6] - this will save at generations 1, 5 and 6
+    file_loc_load = "???"
+    file_loc_save = "???"
 
     best_fit_value = 0
     prev_gen_div = 0
@@ -55,8 +59,13 @@ def main():
     print("INITIAL SELECTION PRESSURE:", SELECTION_PRESSURE_0, "\n")
     print("--------------------------------------------------------")
     print("SEEDING POPULATION...")
-    start_time = time.time()
-    population = generate_random_population(POPULATION_SIZE)
+
+    if load_from_file:
+        start_time = time.time()
+        population = load_from_file(file_loc_load + ".txt")
+    else:
+        start_time = time.time()
+        population = generate_random_population(POPULATION_SIZE)
     print("POPULATION SEEDED")
     print("SEEDING TIME: %ds" % (time.time() - start_time))
     print("--------------------------------------------------------")
@@ -125,6 +134,11 @@ def main():
             print("\n      ALL TIME BEST FITNESS:", best_fit_value)
             print("               GENOME:", best_individual)
 
+        if generation in save_at_gens:
+            timestamp = time.strftime("%Y-%m-%d-%H%M%S", time.localtime())
+            save_population(population, file_loc_save + timestamp + ".txt")
+
+
         print("\nSEEDING NEXT GENERATION...")
 
         print("               MUTATION RATE: %f" % mutation_rate)
@@ -163,6 +177,32 @@ def main():
 # =================================================================
 # =    HELPER METHODS                                             =
 # =================================================================
+
+
+# reads and loads the popoulation from the file at filedest.txt
+
+def load_population(filedest):
+
+    print("LOADING FROM FILE AT " + filedest +"...")
+    with open(filedest, "r") as ins:
+        gen = []
+        for line in ins:
+            line.strip("\n")
+            print("line", line)
+            gen.append(line)
+
+    return gen
+
+# saves the inputted population to a file created at filedest.txt
+def save_population(generation, filedest):
+
+    #print("Saving Generation at", filedest, ".txt...")
+    #print("Generation: ", generation)
+    f = open(filedest, "a")
+    for individual in generation:
+        f.write(str(individual) + "\n")
+    f.close()
+
 
 
 def select_parent(population, fit_dist):
