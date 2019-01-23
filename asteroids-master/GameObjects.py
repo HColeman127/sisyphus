@@ -6,6 +6,7 @@ import pygame
 
 def set_random_seed(n):
     random.seed(n)
+    #print("RANDOM SEED:", n)
 
 
 def load_image_convert_alpha(filename):
@@ -154,6 +155,12 @@ class Rock(GameObject):
 
         # if the size is valid
         if size in {"big", "normal", "small"}:
+            if size == "big":
+                self.radius = 80
+            elif size == "normal":
+                self.radius = 55
+            elif size == "small":
+                self.radius = 30
 
             # load the correct image from file
             str_filename = "rock-" + str(size) + ".png"
@@ -171,22 +178,11 @@ class Rock(GameObject):
         self.position = list(position)
 
         self.speed = speed
-
-        # create a random movement direction vector
-        if bool(random.getrandbits(1)):
-            rand_x = random.random() * -1
-        else:
-            rand_x = random.random()
-
-        if bool(random.getrandbits(1)):
-            rand_y = random.random() * -1
-        else:
-            rand_y = random.random()
-
-        self.direction = [rand_x, rand_y]
+        self.angle = random.uniform(0, 2*math.pi)
+        self.velocity = [self.speed*math.cos(self.angle), self.speed*math.sin(self.angle)]
 
     def move(self):
         """Move the rock"""
 
-        self.position[0] += self.direction[0] * self.speed * .4
-        self.position[1] += self.direction[1] * self.speed * .4
+        self.position[0] += self.velocity[0] * .3
+        self.position[1] += self.velocity[1] * .3

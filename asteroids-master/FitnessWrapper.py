@@ -1,5 +1,7 @@
 # imports
 import time
+import numpy as np
+import math
 from MyGame import MyGame
 from CompGraph import CompGraph
 
@@ -11,10 +13,7 @@ class FitnessWrapper(object):
         # initializes game environment
         self.game = MyGame(display=display)
 
-    def set_random_seed(self, seed):
-        self.game.random_seed(seed)
-
-    def get_fitness(self, params, games_max=20, step_max=5000):
+    def get_fitness(self, params, games_max=20, step_max=5000, random_seed=None):
         graph = CompGraph(params)   # create graph with given parameters
         scores = []
         steps = []
@@ -22,19 +21,16 @@ class FitnessWrapper(object):
         shot_total = 0
 
         for game_number in range(games_max):
+            if random_seed is not None:
+                self.game.random_seed(random_seed+game_number)
+
             playing, score, obs = self.game.reset()
 
-            # game will play until lost or until max_step is reached
             step_number = 0
             while playing and step_number < step_max:
-                # gets actions and passes into environment
                 commands = graph.eval(obs)
-                #print(obs)
-                #time.sleep(0.1)
+                #print(commands)
                 playing, score, hits, shots, obs = self.game.step(commands)
-
-
-                # increment step number
                 step_number += 1
 
             scores.append(score)
@@ -42,33 +38,22 @@ class FitnessWrapper(object):
             hit_total += hits
             shot_total += shots
 
-        #print(hit_total, shot_total)
-
         hitrate = hit_total/(shot_total+1)
         avg_score = sum(scores)/len(scores)
         avg_steps = sum(steps)/len(steps)
 
-        return avg_score*avg_steps*(hitrate**2)
+        score_var = np.var(scores)
+        step_var = np.var(steps)
+        #score_std_dev = math.sqrt(score_var)
+        sum_std_dev = math.sqrt(score_var + step_var)
 
-    def get_mean_convergence(self, params, games_max=100, step_max=5000):
-        graph = CompGraph(params)  # create graph with given parameters
-        total_score = 0
-        mean_scores = []
+        fitness = avg_score*avg_steps*(hitrate**4)/sum_std_dev
 
-        for game_number in range(1, games_max+1):
-            playing, score, obs = self.game.reset()
 
-            # game will play until lost or until max_step is reached
-            step_number = 0
-            while playing and step_number < step_max:
-                # gets actions and passes into environment
-                commands = graph.eval(obs)
-                playing, score, obs = self.game.step(commands)
+        #print("  AVG SCORE: ", avg_score)
+        #print("  AVG STEPS: ", avg_steps)
+        #print("    HITRATE: ", hitrate)
+        #print("SUM STD DEV:", sum_std_dev)
 
-                step_number += 1
+        return fitness
 
-            total_score += score
-            mean_scores.append(total_score//game_number)
-
-        # returns the average score
-        return mean_scores

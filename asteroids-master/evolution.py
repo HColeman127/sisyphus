@@ -6,15 +6,16 @@ from FitnessWrapper import FitnessWrapper as fw
 
 
 # CONSTANTS
-POPULATION_SIZE = 30
+POPULATION_SIZE = 100
 NUMBER_OF_TRIALS = 10
 MAX_STEPS = 500
-MAX_GENERATIONS = 1000
+MAX_GENERATIONS = 10000
 
+CARRY_OVER = 80
 CROSSOVER_WEIGHT = 0.10
-MUTATION_RATE_0 = 0.10
-MUTATION_STRENGTH_0 = 0.2
-SELECTION_PRESSURE_0 = 1
+MUTATION_RATE_0 = 0.05
+MUTATION_STRENGTH_0 = 0.5
+SELECTION_PRESSURE_0 = 1.3
 
 
 def main():
@@ -41,11 +42,13 @@ def main():
     print(filename)
     print(filename2)
 
-    print("\n      POPULATION SIZE: %4d" % POPULATION_SIZE)
+    print("\n        GENOME LENGTH: %4d" % fw.GENOME_LENGTH)
+    print("      POPULATION SIZE: %4d" % POPULATION_SIZE)
     print("     NUMBER OF TRIALS: %4d" % NUMBER_OF_TRIALS)
     print("       MAX GAME STEPS: %4d" % MAX_STEPS)
     print("      MAX GENERATIONS: %4d\n" % MAX_GENERATIONS)
 
+    print("                CARRY OVER:", CARRY_OVER)
     print("          CROSSOVER WEIGHT:", CROSSOVER_WEIGHT)
     print("     INITIAL MUTATION RATE:", MUTATION_RATE_0)
     print(" INITIAL MUTATION STRENGTH:", MUTATION_STRENGTH_0)
@@ -122,12 +125,7 @@ def main():
             print("\n      ALL TIME BEST FITNESS:", best_fit_value)
             print("               GENOME:", best_individual)
 
-
-
         print("\nSEEDING NEXT GENERATION...")
-
-
-
 
         print("               MUTATION RATE: %f" % mutation_rate)
         print("           MUTATION STRENGTH: %f" % mutation_strength)
@@ -135,8 +133,8 @@ def main():
 
         fit_dist = gen_probability_distribution(fits, selection_pressure)
 
-        next_generation = population[20:]
-        for i in range(round(POPULATION_SIZE / 3)):
+        next_generation = ranked[-CARRY_OVER:]
+        for i in range((POPULATION_SIZE-CARRY_OVER)//2):
             parent_one = select_parent(ranked, fit_dist)
             parent_two = select_parent(ranked, fit_dist)
 
@@ -154,6 +152,7 @@ def main():
         population.clear()
         population = next_generation.copy()
 
+        print("POPULATION SIZE:", len(population))
         print("NEXT GENERATION SEEDED")
         print("--------------------------------------------------------")
     # exit loop at generation max
@@ -206,14 +205,21 @@ def rank_fit(generation, fits):
 
 def assess_gen_fits(generation):
     fit_test = fw(display=False)
+    size = len(generation)
+    print(end="|")
+    for _ in range(size):
+        print(end="-")
+    print(end="|\n|")
 
-    fit_test.set_random_seed(random.random)
+    fits = []
+    seed = random.random()
+    for i in range(size):
+        fits.append(fit_test.get_fitness(generation[i], games_max=NUMBER_OF_TRIALS,
+                                         step_max=MAX_STEPS, random_seed=seed))
+        print("#", end="", flush=True)
+    print("|")
 
-    # actual fitness
-    return [fit_test.get_fitness(individual, games_max=NUMBER_OF_TRIALS, step_max=MAX_STEPS) for individual in generation]
-
-    # random fitness. faster running for testing other features
-    # return [random.randint(0, 100) for individual in generation]
+    return fits
 
 
 def gen_diversity(pop):
@@ -221,7 +227,7 @@ def gen_diversity(pop):
 
 
 def generate_random_population(size=100):
-    return [generate_random_individual(-1, 1, fw.GENOME_LENGTH) for _ in range(size)]
+    return [generate_random_individual(length=fw.GENOME_LENGTH) for _ in range(size)]
 
 
 def generate_random_individual(min_value=-1, max_value=1, length=fw.GENOME_LENGTH):
@@ -260,7 +266,9 @@ def mutate(genetic_code, mutation_rate, mutation_strength, max_value=1, min_valu
     for i in range(len(genetic_code)):
         if random.uniform(0, 1) <= mutation_rate:
             # assigns new value using normal distribution, staying in upper and lower limits
-            genetic_code[i] = max(min_value, min(max_value, random.gauss(genetic_code[i], mutation_strength)))
+            new_value = max(min_value, min(max_value, random.gauss(genetic_code[i], mutation_strength)))
+            #new_value = random.uniform(-1, 1)
+            genetic_code[i] = new_value
 
 
 # run main
