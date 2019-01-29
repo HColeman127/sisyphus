@@ -225,7 +225,7 @@ class MyGame(object):
         for distance, index in sorted_rocks[:num]:
             rock = self.rocks[index]
             observations += self.get_relative_vector(rock.position)
-            observations += self.get_relative_vector(rock.velocity)
+            #observations += self.get_relative_vector(rock.velocity)
 
             if self.display:
                 draw_centered(self.blip_image, self.screen, rock.position)
