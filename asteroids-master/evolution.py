@@ -2,13 +2,13 @@ import random
 import numpy as np
 import time
 import math
-from FitnessWrapper import FitnessWrapper as fw
+from FitnessWrapper_small import FitnessWrapper as fw
 
 
 # CONSTANTS
 POPULATION_SIZE = 50
-NUMBER_OF_TRIALS = 100
-MAX_STEPS = 500
+NUMBER_OF_TRIALS = 1
+MAX_STEPS = 5000
 MAX_GENERATIONS = 1000
 
 CARRY_OVER = 40
@@ -259,6 +259,7 @@ def assess_gen_fits(generation):
         print("#", end="", flush=True)
     print("|")
 
+    fit_test.close()
     return fits
 
 

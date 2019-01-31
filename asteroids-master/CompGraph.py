@@ -8,9 +8,9 @@ import numpy as np
 
 # class definition ----------------------------------------
 class CompGraph(object):
-    INPUT_SIZE = 11
-    HIDDEN_SIZE = 16
-    OUTPUT_SIZE = 4
+    INPUT_SIZE = 4
+    HIDDEN_SIZE = 4
+    OUTPUT_SIZE = 1
     GENOME_LENGTH = INPUT_SIZE*HIDDEN_SIZE + HIDDEN_SIZE + HIDDEN_SIZE*OUTPUT_SIZE + OUTPUT_SIZE
     #GENOME_LENGTH += HIDDEN_SIZE**2 + HIDDEN_SIZE
 
@@ -21,8 +21,8 @@ class CompGraph(object):
         # create graph
         self.model = models.Sequential()
         self.model.add(layers.InputLayer(batch_size=1, input_shape=[self.INPUT_SIZE]))
-        self.model.add(layers.Dense(self.HIDDEN_SIZE, activation="sigmoid"))
-        #self.model.add(layers.Dense(self.HIDDEN_SIZE, activation="sigmoid"))
+        self.model.add(layers.Dense(self.HIDDEN_SIZE, activation="tanh"))
+        #self.model.add(layers.Dense(self.HIDDEN_SIZE, activation="tanh"))
         self.model.add(layers.Dense(self.OUTPUT_SIZE, activation="sigmoid"))
         self.model.compile(optimizer=tf.train.GradientDescentOptimizer(0.01), loss='mse', metrics=['mae'])
 

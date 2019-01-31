@@ -9,6 +9,7 @@ pygame = "*"
 keras = "*"
 tensorflow = "*"
 guppy = "*"
+universe = "*"
 
 [dev-packages]
 
