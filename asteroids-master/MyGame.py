@@ -198,39 +198,49 @@ class MyGame(object):
 
     def get_closest_rocks(self, num):
         # distances of all rocks
+        space_x, space_y = self.spaceship.position
+
         distances = []
         indices = []
-        relative_positions = []
+        edge_positions = []
+
         for index in range(len(self.rocks)):
-            x = self.rocks[index].position[0] - self.spaceship.position[0]
+            rock = self.rocks[index]
+            x = rock.position[0] - space_x
             if x > self.width/2:
                 x -= self.width
             elif x < -self.width/2:
                 x += self.width
 
-            y = self.rocks[index].position[1] - self.spaceship.position[1]
+            y = rock.position[1] - space_y
             if y > self.height / 2:
                 y -= self.height
             elif y < -self.height/2:
                 y += self.height
 
-            distances.append(math.sqrt(x**2 + y**2) - self.rocks[index].radius)
+            dist = math.sqrt(x**2 + y**2)
+            new_distance = dist - rock.radius
+            new_x = new_distance * x / dist
+            new_y = new_distance * y / dist
+
+            distances.append(new_distance)
+            edge_positions.append([new_x, new_y])
             indices.append(index)
 
         # creates a list of tuples sorted with respect to the respective distances to the spaceship
-        sorted_rocks = [rock for rock in sorted(zip(distances, indices))]
+        sorted_rocks = [rock for rock in sorted(zip(distances, indices, edge_positions))]
 
         observations = []
         weight = 0
-        for distance, index in sorted_rocks[:num]:
+        for _, index, pos in sorted_rocks[:num]:
             rock = self.rocks[index]
-            observations += self.get_relative_vector(rock.position)
+            observations += self.get_relative_vector(pos)
             #observations += self.get_relative_vector(rock.velocity)
 
             if self.display:
                 draw_centered(self.blip_image, self.screen, rock.position)
                 pygame.draw.line(self.screen, pygame.Color(255, 255*weight, 255*weight, 100),
-                                 self.spaceship.position, rock.position)
+                                 self.spaceship.position, (space_x + pos[0], space_y + pos[1]))
                 weight = 1
 
         # if there are less than <num> rocks add max distances
