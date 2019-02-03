@@ -15,38 +15,33 @@ class FitnessWrapper(object):
 
     def __init__(self, display=False):
         # initializes game environment
-        self.game = gym.make("CartPole-v1")
+        self.game = gym.make("LunarLander-v2")
         self.display = display
 
     def get_fitness(self, params, games_max=20, step_max=5000, random_seed=None):
         graph = CompGraph(params)   # create graph with given parameters
 
-        steps = []
+        score = 0
         for game_number in range(games_max):
 
             obs = self.game.reset()
-            playing = True
+            done = False
 
             step_number = 0
-            while playing:
-                commands = int(graph.eval(obs)[0])
+            while not done:
+                commands = int(round(graph.eval(obs)[0]*3))
+                #print(commands)
+
                 obs, reward, done, info = self.game.step(commands)
                 if self.display:
                     self.game.render()
                 step_number += 1
 
-                if not (-2.4 < obs[0] < 2.4) or \
-                   not (-0.2 < obs[2] < 0.2) or \
-                   step_number > step_max:
-
-                    playing = False
-
-            steps.append(step_number)
+                score += reward
 
 
-        avg_steps = sum(steps)/len(steps)
 
-        fitness = avg_steps
+        fitness = score
 
 
         #print("  AVG SCORE: ", avg_score)

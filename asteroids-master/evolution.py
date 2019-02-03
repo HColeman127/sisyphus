@@ -2,20 +2,40 @@ import random
 import numpy as np
 import time
 import math
+import threading
 from FitnessWrapper_small import FitnessWrapper as fw
 
 
 # CONSTANTS
 POPULATION_SIZE = 50
 NUMBER_OF_TRIALS = 1
-MAX_STEPS = 5000
+MAX_STEPS = 200
 MAX_GENERATIONS = 1000
 
-CARRY_OVER = 40
+CARRY_OVER = 0
 CROSSOVER_WEIGHT = 0.25
-MUTATION_RATE_0 = 0.05
-MUTATION_STRENGTH_0 = 0.4
+MUTATION_RATE_0 = 0.10
+MUTATION_STRENGTH_0 = 0.2
 SELECTION_PRESSURE_0 = 1.3
+
+
+class AssessFit(threading.Thread):
+    def __init__(self, individual, seed, fits, index):
+        threading.Thread.__init__(self)
+
+        self.individual = individual
+        self.seed = seed
+        self.fits = fits
+        self.index = index
+
+    def run(self):
+        #print(self.fits)
+
+        fit_test = fw(display=False)
+        self.fits[self.index] = fit_test.get_fitness(self.individual, games_max=NUMBER_OF_TRIALS,
+                                           step_max=MAX_STEPS, random_seed=self.seed)
+        fit_test.close()
+        print("#", end="", flush=True)
 
 
 def main():
@@ -147,7 +167,11 @@ def main():
 
         fit_dist = gen_probability_distribution(fits, selection_pressure)
 
-        next_generation = ranked[-CARRY_OVER:]
+        if CARRY_OVER > 0:
+            next_generation = ranked[-CARRY_OVER:]
+        else:
+            next_generation = []
+
         for i in range((POPULATION_SIZE-CARRY_OVER)//2):
             parent_one = select_parent(ranked, fit_dist)
             parent_two = select_parent(ranked, fit_dist)
@@ -244,22 +268,28 @@ def rank_fit(generation, fits):
 
 
 def assess_gen_fits(generation):
-    fit_test = fw(display=False)
+
     size = len(generation)
     print(end="|")
     for _ in range(size):
         print(end="-")
     print(end="|\n|")
 
-    fits = []
+    fits = list(range(size))
     seed = random.random()
+
+    threads = []
     for i in range(size):
-        fits.append(fit_test.get_fitness(generation[i], games_max=NUMBER_OF_TRIALS,
-                                         step_max=MAX_STEPS, random_seed=seed))
-        print("#", end="", flush=True)
+        thread = AssessFit(generation[i], seed, fits, i)
+        thread.start()
+        threads.append(thread)
+
+    for t in threads:
+        t.join()
+
     print("|")
 
-    fit_test.close()
+
     return fits
 
 

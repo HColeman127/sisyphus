@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e8fe4817-1203-46b2-8adf-5abbe027ee1c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/NEAT_Genome.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NEAT_Individual.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CompGraph.py" beforeDir="false" afterPath="$PROJECT_DIR$/CompGraph.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pipfile" beforeDir="false" afterPath="$PROJECT_DIR$/Pipfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FitnessWrapper_small.py" beforeDir="false" afterPath="$PROJECT_DIR$/FitnessWrapper_small.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/evolution.py" beforeDir="false" afterPath="$PROJECT_DIR$/evolution.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fitnessTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/fitnessTest.py" afterDir="false" />
     </list>
@@ -20,10 +23,15 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fitnessTest.py">
+        <entry file="file://$PROJECT_DIR$/NEAT_Individual.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="110">
-              <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+            <state relative-caret-position="22">
+              <caret line="3" column="14" lean-forward="true" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
+              <folding>
+                <element signature="e#0#25#0" expanded="true" />
+                <element signature="e#1014#1333#1" expanded="true" />
+                <element signature="e#1369#1455#1" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -31,8 +39,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/evolution.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="286">
-              <caret line="13" column="6" lean-forward="true" selection-start-line="13" selection-start-column="6" selection-end-line="17" selection-end-column="26" />
+            <state relative-caret-position="254">
+              <caret line="265" column="31" lean-forward="true" selection-start-line="265" selection-start-column="31" selection-end-line="265" selection-end-column="31" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -41,24 +49,36 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CompGraph.py">
+        <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="11" column="19" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
+            <state relative-caret-position="462">
+              <caret line="25" column="26" selection-start-line="25" selection-start-column="26" selection-end-line="25" selection-end-column="26" />
               <folding>
-                <element signature="e#60#83#0" expanded="true" />
+                <element signature="e#0#18#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/FitnessWrapper_small.py">
+        <entry file="file://$PROJECT_DIR$/NEAT_Genome.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
-              <caret line="7" column="16" lean-forward="true" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
+            <state relative-caret-position="649">
+              <caret line="263" column="29" selection-start-line="263" selection-start-column="29" selection-end-line="263" selection-end-column="29" />
               <folding>
-                <element signature="e#10#21#0" expanded="true" />
+                <element signature="e#0#11#0" expanded="true" />
+                <element signature="e#546#716#1" expanded="true" />
+                <element signature="e#1510#1616#0" />
+                <element signature="e#1686#1792#0" />
+                <element signature="e#1516#1623#0" />
+                <element signature="e#1679#1765#0" />
+                <element signature="e#2206#2405#0" />
+                <element signature="e#2106#2300#0" />
+                <element signature="e#2930#3933#0" />
+                <element signature="e#3972#5005#0" />
+                <element signature="e#5163#5335#0" />
+                <element signature="e#5457#6401#0" />
+                <element signature="e#7230#7330#0" />
               </folding>
             </state>
           </provider>
@@ -82,6 +102,7 @@
       <find>reset</find>
       <find>state</find>
       <find>make</find>
+      <find>zip</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -91,7 +112,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_1.py" />
-        <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch.py" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/CreditCards.py" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/characters.py" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/josephus.py" />
@@ -107,9 +127,13 @@
         <option value="$PROJECT_DIR$/FitnessWrapper.py" />
         <option value="$PROJECT_DIR$/MyGame.py" />
         <option value="$PROJECT_DIR$/FitnessWrapper_small.py" />
-        <option value="$PROJECT_DIR$/CompGraph.py" />
-        <option value="$PROJECT_DIR$/evolution.py" />
         <option value="$PROJECT_DIR$/fitnessTest.py" />
+        <option value="$PROJECT_DIR$/evolution.py" />
+        <option value="$PROJECT_DIR$/CompGraph.py" />
+        <option value="$PROJECT_DIR$/NEAT_Graph.py" />
+        <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch.py" />
+        <option value="$PROJECT_DIR$/NEAT_Individual.py" />
+        <option value="$PROJECT_DIR$/NEAT_Genome.py" />
       </list>
     </option>
   </component>
@@ -119,7 +143,9 @@
     <option name="width" value="1936" />
     <option name="height" value="1056" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -135,8 +161,12 @@
             </path>
             <path>
               <item name="asteroids-master" type="b2602c69:ProjectViewProjectNode" />
-              <item name="asteroids-master" type="462c0819:PsiDirectoryNode" />
-              <item name="OLD" type="462c0819:PsiDirectoryNode" />
+              <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
+            </path>
+            <path>
+              <item name="asteroids-master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
+              <item name="Scratches" type="d62648e6:ScratchProjectViewPane$MyRootNode" />
             </path>
           </expand>
           <select />
@@ -168,8 +198,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.fitnessTest">
-    <configuration name="cartthing" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.NEAT_Individual">
+    <configuration name="NEAT_Individual" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="asteroids-master" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -177,11 +207,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../tfofs" />
-      <option name="IS_MODULE_SDK" value="false" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../tfofs/cartthing.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/NEAT_Individual.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -232,7 +262,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="partitions" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="scratch (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="asteroids-master" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -244,28 +274,7 @@
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$APPLICATION_CONFIG_DIR$/scratches/partitions.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="test_file" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="asteroids-master" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$APPLICATION_CONFIG_DIR$/scratches" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$APPLICATION_CONFIG_DIR$/scratches/test_file.py" />
+      <option name="SCRIPT_NAME" value="$APPLICATION_CONFIG_DIR$/scratches/scratch.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -277,17 +286,15 @@
     <list>
       <item itemvalue="Python.evolution" />
       <item itemvalue="Python.fitnessTest" />
-      <item itemvalue="Python.partitions" />
-      <item itemvalue="Python.test_file" />
-      <item itemvalue="Python.cartthing" />
+      <item itemvalue="Python.scratch (1)" />
+      <item itemvalue="Python.NEAT_Individual" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.fitnessTest" />
+        <item itemvalue="Python.NEAT_Individual" />
+        <item itemvalue="Python.scratch (1)" />
         <item itemvalue="Python.evolution" />
-        <item itemvalue="Python.cartthing" />
-        <item itemvalue="Python.test_file" />
-        <item itemvalue="Python.partitions" />
+        <item itemvalue="Python.fitnessTest" />
       </list>
     </recent_temporary>
   </component>
@@ -306,6 +313,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1933" height="1053" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" weight="0.32958803" />
       <window_info content_ui="combo" id="Project" order="1" sideWeight="0.49836066" weight="0.21508828" />
@@ -319,7 +327,7 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info active="true" anchor="right" id="Run" order="3" visible="true" weight="0.4034243" />
+      <window_info active="true" anchor="right" id="Run" order="3" visible="true" weight="0.5045479" />
       <window_info anchor="right" id="Python Console" order="4" weight="0.53344035" />
       <window_info anchor="right" id="TODO" order="5" />
       <window_info anchor="right" id="Debug" order="6" weight="0.3986089" />
@@ -338,7 +346,7 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info active="true" anchor="right" id="Run" order="3" visible="true" weight="0.40502942" />
+      <window_info active="true" anchor="right" id="Run" order="3" visible="true" weight="0.5050829" />
       <window_info anchor="right" id="Python Console" order="4" weight="0.53344035" />
       <window_info anchor="right" id="TODO" order="5" />
       <window_info anchor="right" id="Debug" order="6" weight="0.3986089" />
@@ -464,12 +472,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CompGraph.py">
+    <entry file="file://$PROJECT_DIR$/FitnessWrapper_small.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="11" column="19" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
+        <state relative-caret-position="726">
+          <caret line="38" selection-start-line="38" selection-end-line="38" />
           <folding>
-            <element signature="e#60#83#0" expanded="true" />
+            <element signature="e#10#21#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -477,26 +485,90 @@
     <entry file="file://$PROJECT_DIR$/fitnessTest.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="110">
-          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/multithreading.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="18" column="21" selection-start-line="18" selection-start-column="21" selection-end-line="18" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NEAT_Graph.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="333">
+          <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CompGraph.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
+          <folding>
+            <element signature="e#60#83#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="25" column="26" selection-start-line="25" selection-start-column="26" selection-end-line="25" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/evolution.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="13" column="6" lean-forward="true" selection-start-line="13" selection-start-column="6" selection-end-line="17" selection-end-column="26" />
+        <state relative-caret-position="254">
+          <caret line="265" column="31" lean-forward="true" selection-start-line="265" selection-start-column="31" selection-end-line="265" selection-end-column="31" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/FitnessWrapper_small.py">
+    <entry file="file://$PROJECT_DIR$/NEAT_Individual.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="7" column="16" lean-forward="true" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
+        <state relative-caret-position="22">
+          <caret line="3" column="14" lean-forward="true" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
           <folding>
-            <element signature="e#10#21#0" expanded="true" />
+            <element signature="e#0#25#0" expanded="true" />
+            <element signature="e#1014#1333#1" expanded="true" />
+            <element signature="e#1369#1455#1" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NEAT_Genome.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="649">
+          <caret line="263" column="29" selection-start-line="263" selection-start-column="29" selection-end-line="263" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#546#716#1" expanded="true" />
+            <element signature="e#1510#1616#0" />
+            <element signature="e#1686#1792#0" />
+            <element signature="e#1516#1623#0" />
+            <element signature="e#1679#1765#0" />
+            <element signature="e#2206#2405#0" />
+            <element signature="e#2106#2300#0" />
+            <element signature="e#2930#3933#0" />
+            <element signature="e#3972#5005#0" />
+            <element signature="e#5163#5335#0" />
+            <element signature="e#5457#6401#0" />
+            <element signature="e#7230#7330#0" />
           </folding>
         </state>
       </provider>
