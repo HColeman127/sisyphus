@@ -1,7 +1,8 @@
 import math
-import matplotlib as mpl
 import matplotlib.pyplot as plt
 import networkx as nx
+import time
+
 
 class Connection(object):
     def __init__(self, in_node: int, out_node: int, weight: float, id: int):
@@ -29,7 +30,7 @@ class Node(object):
 
 
 class Genome(object):
-    def __init__(self, input_size, output_size):
+    def __init__(self, input_size: int, output_size: int):
         self.nodes = []
         self.connections = []
 
@@ -50,10 +51,7 @@ class Genome(object):
 
     # node functions ------------------------------------------------
     def get_node_ids(self) -> list:
-        node_ids = []
-        for node in self.nodes:
-            node_ids.append(node.id)
-        return node_ids
+        return [node.id for node in self.nodes]
 
     def get_output_node_ids(self) -> list:
         node_ids = []
@@ -72,6 +70,7 @@ class Genome(object):
         for node in self.nodes:
             if node.id == node_id:
                 return node
+        return None
 
     def get_node_out_connections(self, node_id: int) -> list:
         out_connections = []
@@ -89,10 +88,13 @@ class Genome(object):
 
         return out_connections
 
-    def insert_node(self, old_connection_id: int, next_node_id: int, next_connection_id: int) -> None:
+    def insert_node(self, old_connection_id: int, next_node_id: int, next_connection_id: int) -> bool:
 
         # select and disable the old connection
-        old_connection = self.connections[old_connection_id]
+        old_connection = self.get_connection_by_id(old_connection_id)
+        if not old_connection.expressed:
+            return False
+
         old_connection.expressed = False
 
         # create a new node
@@ -116,8 +118,9 @@ class Genome(object):
 
         # recalculate node depths
         self.calculate_node_depths()
+        return True
 
-    def calculate_node_depths(self):
+    def calculate_node_depths(self) -> None:
         node_queue = self.nodes.copy()
 
         # initialize node depths
@@ -148,21 +151,30 @@ class Genome(object):
             self.get_node(output_id).depth = max(output_depths)
 
     # connection functions ------------------------------------------
-    def get_connection(self, in_node: int, out_node: int) -> Connection:
+    def get_connection_by_nodes(self, in_node: int, out_node: int) -> Connection:
         for connection in self.connections:
             if connection.in_node == in_node and connection.out_node == out_node:
                 return connection
         return None
 
+    def get_connection_by_id(self, connection_id: int):
+        for connection in self.connections:
+            if connection.id == connection_id:
+                return connection
+        return None
+
+    def get_connection_ids(self):
+        return [connection.id for connection in self.connections]
+
     def add_connection(self, in_node: int, out_node: int, weight: float, next_connection_id: int) -> bool:
         # find existing connection, None if doesn't exist
-        connection = self.get_connection(in_node=in_node, out_node=out_node)
+        connection = self.get_connection_by_nodes(in_node=in_node, out_node=out_node)
 
         # if the connection exists
         if connection is not None:
             # return False if already expressed
             if connection.expressed:
-                print("EXISTING CONNECTION", in_node, "-->", out_node)
+                #print("EXISTING CONNECTION", in_node, "-->", out_node)
                 return False
             # make change and return True if previously not expressed
             else:
@@ -170,7 +182,7 @@ class Genome(object):
                 return True
         # if the depth of the in node is greater than the out node return False
         elif self.get_node(in_node).depth >= self.get_node(out_node).depth:
-            print("INVALID CONNECTION", in_node, "-->", out_node)
+            #print("INVALID CONNECTION", in_node, "-->", out_node)
             return False
 
         # create new connection and add to list
@@ -220,17 +232,17 @@ class Genome(object):
 
         output = []
         for output_id in self.get_output_node_ids():
-            output.append(node_values[output_id])
+            output.append(round((node_values[output_id]+1)/2))
 
         return output
 
     def activate(self, value: float) -> float:
         # sigmoid function
-        output = 1.0/(1 + math.e**(-value))
+        output = 2.0/(1 + math.e**(-max(-50, min(50, value))))-1
         return output
 
     # drawing functions ---------------------------------------------
-    def draw(self):
+    def draw(self) -> None:
         G = nx.DiGraph()
         G.add_nodes_from(self.get_node_ids())
         pos = {}
@@ -253,7 +265,9 @@ class Genome(object):
                 for connection in self.get_node_in_connections(node.id):
                     input_heights.append(pos[connection.in_node][1])
 
-                pos[node.id] = (node.depth, sum(input_heights)/len(input_heights))
+                height = sum(input_heights)/len(input_heights)
+                pos[node.id] = (node.depth, height)
+
 
         for edge in self.connections:
             if edge.expressed:
@@ -263,7 +277,9 @@ class Genome(object):
                 pos=pos,
                 node_color='c',
                 with_labels=True)
-
-        plt.show()
+        plt.show(block=False)
+        plt.pause(0.0001)
+        plt.clf()
+        plt.cla()
 
 

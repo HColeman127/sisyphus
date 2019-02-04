@@ -8,9 +8,9 @@ import numpy as np
 
 # class definition ----------------------------------------
 class CompGraph(object):
-    INPUT_SIZE = 8
+    INPUT_SIZE = 11
     HIDDEN_SIZE = 10
-    OUTPUT_SIZE = 1
+    OUTPUT_SIZE = 4
     GENOME_LENGTH = INPUT_SIZE*HIDDEN_SIZE + HIDDEN_SIZE + HIDDEN_SIZE*OUTPUT_SIZE + OUTPUT_SIZE
     #GENOME_LENGTH += HIDDEN_SIZE**2 + HIDDEN_SIZE
     graph = tf.get_default_graph()
@@ -19,24 +19,21 @@ class CompGraph(object):
         # clear backend
         backend.clear_session()
 
+        # create graph
+        self.model = models.Sequential()
+        self.model.add(layers.InputLayer(batch_size=1, input_shape=[self.INPUT_SIZE]))
+        self.model.add(layers.Dense(self.HIDDEN_SIZE, activation="tanh"))
+        #self.model.add(layers.Dense(self.HIDDEN_SIZE, activation="tanh"))
+        self.model.add(layers.Dense(self.OUTPUT_SIZE, activation="sigmoid"))
+        self.model.compile(optimizer=tf.train.GradientDescentOptimizer(0.01), loss='mse', metrics=['mae'])
+
+        #print(self.model.summary())
 
 
-        with self.graph.as_default():
-            # create graph
-            self.model = models.Sequential()
-            self.model.add(layers.InputLayer(batch_size=1, input_shape=[self.INPUT_SIZE]))
-            self.model.add(layers.Dense(self.HIDDEN_SIZE, activation="tanh"))
-            #self.model.add(layers.Dense(self.HIDDEN_SIZE, activation="tanh"))
-            self.model.add(layers.Dense(self.OUTPUT_SIZE, activation="sigmoid"))
-            self.model.compile(optimizer=tf.train.GradientDescentOptimizer(0.01), loss='mse', metrics=['mae'])
-
-            #print(self.model.summary())
-
-
-            # format graph parameters and assign to graph
-            self.params = self.format_params(params)
-            #print(self.params)
-            self.model.set_weights(self.params)
+        # format graph parameters and assign to graph
+        self.params = self.format_params(params)
+        #print(self.params)
+        self.model.set_weights(self.params)
 
     def eval(self, input_list):
         # takes a list of input values and evaluates the graph and returns outputs

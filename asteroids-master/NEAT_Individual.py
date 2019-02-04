@@ -1,66 +1,93 @@
 from NEAT_Genome import *
+from MyGame import MyGame
 import random
 
-INPUT_SIZE = 2
-OUTPUT_SIZE = 2
 
-global_node_number = INPUT_SIZE+OUTPUT_SIZE+1
-global_connection_number = 0
+class Individual(object):
+    def __init__(self, input_size: int, output_size: int):
+        # initialize genome
+        self.genome = Genome(input_size=input_size, output_size=output_size)
+        self.fitness = 0
 
-jeremy = Genome(INPUT_SIZE, OUTPUT_SIZE)
+        # initialize starting dense connections
+        connection_number = 0
+        for i in range(input_size):
+            for j in range(output_size):
+                self.genome.add_connection(in_node=(1 + i),
+                                           out_node=(1 + input_size + j),
+                                           weight=random.uniform(-1, 1),
+                                           next_connection_id=connection_number)
+                connection_number += 1
+
+    def draw(self):
+        self.genome.draw()
+
+    def mutate_weights(self, rate: float, strength: float) -> None:
+        for connection in self.genome.connections:
+            mu = connection.weight
+            sigma = strength
+
+            if random.random() < rate:
+                new_weight = max(-1, min(1, random.gauss(mu, sigma)))
+                connection.weight = new_weight
+
+    def mutate_node(self, attempts: int, global_node_number: int, global_connection_number: int) -> bool:
+        connection_id = random.choice(self.genome.get_connection_ids())
+
+        # tries to mutate a number of times
+        for _ in range(attempts):
+            if self.genome.insert_node(old_connection_id=connection_id,
+                                       next_node_id=global_node_number,
+                                       next_connection_id=global_connection_number):
+                return True
+        return False
+
+    def mutate_connection(self, attempts: int, global_connection_number: int) -> bool:
+        # tries to mutate a number of times
+        for _ in range(attempts):
+            node_id_list = self.genome.get_node_ids()
+            if self.genome.add_connection(in_node=random.choice(node_id_list),
+                                          out_node=random.choice(node_id_list),
+                                          weight=random.uniform(-1, 1),
+                                          next_connection_id=global_connection_number):
+                return True
+        # if no mutation is successful, return False
+        return False
+
+    def assess_fitness(self, max_trials: int, max_steps: int, display: bool) -> None:
+        game = MyGame(display=display)
+        scores = []
+        steps = []
+        hit_total = 0
+        shot_total = 0
+
+        for game_number in range(max_trials):
+            playing, score, obs = game.reset()
+
+            step_number = 0
+            while playing and step_number < max_steps:
+                commands = self.genome.evaluate(obs)
+                playing, score, hits, shots, obs = game.step(commands)
+                step_number += 1
+
+            scores.append(score)
+            steps.append(step_number)
+            hit_total += hits
+            shot_total += shots
+
+        hitrate = hit_total / (shot_total + 1)
+        avg_score = sum(scores) / len(scores)
+        avg_steps = sum(steps) / len(steps)
+
+        self.fitness = avg_score * avg_steps * (hitrate ** 4)
+
+        # print("  AVG SCORE: ", avg_score)
+        # print("  AVG STEPS: ", avg_steps)
+        # print("    HITRATE: ", hitrate)
+        # print("SUM STD DEV:", sum_std_dev)
 
 
-for i in range(INPUT_SIZE):
-    for j in range(OUTPUT_SIZE):
-        jeremy.add_connection(1+i, 1+INPUT_SIZE+j, 0.1, global_connection_number)
-        global_connection_number += 1
 
-jeremy.insert_node(0, global_node_number, global_connection_number)
-global_node_number += 1
-global_connection_number += 2
-
-jeremy.insert_node(3, global_node_number, global_connection_number)
-global_node_number += 1
-global_connection_number += 2
-
-jeremy.insert_node(4, global_node_number, global_connection_number)
-global_node_number += 1
-global_connection_number += 2
-
-
-jeremy.add_connection(0, 7, 0.1, global_connection_number)
-global_connection_number += 1
-
-jeremy.add_connection(2, 5, 0.1, global_connection_number)
-global_connection_number += 1
-
-jeremy.add_connection(1, 5, 0.1, global_connection_number)
-global_connection_number += 1
-
-jeremy.add_connection(6, 5, 0.1, global_connection_number)
-global_connection_number += 1
-
-"""
-for node in jeremy.nodes:
-    print(node.id, node.tag, node.depth)
-
-for connection in jeremy.connections:
-    print("CONNECTION:", connection.id, "|", connection.in_node, "-->", connection.out_node)
-    print("         WEIGHT:", connection.weight)
-    print("      EXPRESSED:", connection.expressed)
-    print()
-"""
-
-inputs = [2, 3]
-
-jeremy.draw()
-
-
-
-"""
-for i in range(1000):
-    for j in range(1000):
-        jeremy.evaluate([i, j])"""
 
 
 
