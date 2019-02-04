@@ -19,8 +19,8 @@ class Individual(object):
                                            next_connection_id=connection_number)
                 connection_number += 1
 
-    def draw(self):
-        self.genome.draw()
+    def draw(self, stopping: bool):
+        self.genome.draw(stopping)
 
     def mutate_weights(self, rate: float, strength: float) -> None:
         for connection in self.genome.connections:
@@ -31,16 +31,12 @@ class Individual(object):
                 new_weight = max(-1, min(1, random.gauss(mu, sigma)))
                 connection.weight = new_weight
 
-    def mutate_node(self, attempts: int, global_node_number: int, global_connection_number: int) -> bool:
-        connection_id = random.choice(self.genome.get_connection_ids())
+    def mutate_node(self, global_node_number: int, global_connection_number: int) -> bool:
+        connection_id = random.choice(self.genome.get_expressed_connection_ids())
 
-        # tries to mutate a number of times
-        for _ in range(attempts):
-            if self.genome.insert_node(old_connection_id=connection_id,
+        return self.genome.insert_node(old_connection_id=connection_id,
                                        next_node_id=global_node_number,
-                                       next_connection_id=global_connection_number):
-                return True
-        return False
+                                       next_connection_id=global_connection_number)
 
     def mutate_connection(self, attempts: int, global_connection_number: int) -> bool:
         # tries to mutate a number of times
@@ -86,8 +82,8 @@ class Individual(object):
         # print("    HITRATE: ", hitrate)
         # print("SUM STD DEV:", sum_std_dev)
 
-
-
-
-
-
+    def print_connections(self):
+        for connection in self.genome.get_connections():
+            print("CONNECTION:", connection.id, "|", connection.in_node, "-->", connection.out_node)
+            print("         WEIGHT:", connection.weight)
+            print(      "EXPRESSED:", connection.expressed)

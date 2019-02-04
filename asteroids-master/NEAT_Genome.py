@@ -166,6 +166,16 @@ class Genome(object):
     def get_connection_ids(self):
         return [connection.id for connection in self.connections]
 
+    def get_connections(self):
+        return self.connections.copy()
+
+    def get_expressed_connection_ids(self):
+        connection_ids = []
+        for connection in self.connections:
+            if connection.expressed:
+                connection_ids.append(connection.id)
+        return connection_ids
+
     def add_connection(self, in_node: int, out_node: int, weight: float, next_connection_id: int) -> bool:
         # find existing connection, None if doesn't exist
         connection = self.get_connection_by_nodes(in_node=in_node, out_node=out_node)
@@ -242,7 +252,20 @@ class Genome(object):
         return output
 
     # drawing functions ---------------------------------------------
-    def draw(self) -> None:
+    def draw(self, stopping:bool) -> None:
+        G, pos = self.create_digraph()
+
+        edges, weights = zip(*nx.get_edge_attributes(G, 'weight').items())
+
+        nx.draw(G, pos=pos, node_size=50, node_color='#5CB8B2', edgelist=edges, with_labels=False,
+                edge_color=weights, edge_cmap=plt.cm.get_cmap("bwr"))
+        plt.gcf().set_facecolor('#444444')
+        plt.show(block=stopping)
+        plt.pause(0.0001)
+        plt.clf()
+        plt.cla()
+
+    def create_digraph(self):
         G = nx.DiGraph()
         G.add_nodes_from(self.get_node_ids())
         pos = {}
@@ -266,20 +289,16 @@ class Genome(object):
                     input_heights.append(pos[connection.in_node][1])
 
                 height = sum(input_heights)/len(input_heights)
-                pos[node.id] = (node.depth, height)
 
+                while (node.depth, height) in pos.values():
+                    height += 1
+
+                pos[node.id] = (node.depth, height)
 
         for edge in self.connections:
             if edge.expressed:
-                G.add_edge(edge.in_node, edge.out_node, weight=edge.weight)
+                G.add_edge(edge.in_node, edge.out_node, weight=-edge.weight)
 
-        nx.draw(G,
-                pos=pos,
-                node_color='c',
-                with_labels=True)
-        plt.show(block=False)
-        plt.pause(0.0001)
-        plt.clf()
-        plt.cla()
+        return G, pos
 
 

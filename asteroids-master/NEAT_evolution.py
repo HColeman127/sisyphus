@@ -5,8 +5,8 @@ import time
 
 
 # individuals
-INPUT_SIZE = 11
-OUTPUT_SIZE = 8
+INPUT_SIZE = 3
+OUTPUT_SIZE = 3
 
 # population
 POPULATION_SIZE = 50
@@ -16,7 +16,6 @@ MAX_GENERATIONS = 1000
 
 # genetic
 MUTATE_CONNECTION_ATTEMPTS = 10
-MUTATE_NODE_ATTEMPTS = 10
 
 # global variables (sue me)
 global_node_number = INPUT_SIZE+OUTPUT_SIZE+1
@@ -26,7 +25,6 @@ global_connection_number = INPUT_SIZE*OUTPUT_SIZE+1
 class AssessFit(threading.Thread):
     def __init__(self, individual: Individual):
         threading.Thread.__init__(self)
-
         self.individual = individual
 
     def run(self):
@@ -41,18 +39,20 @@ def main():
     global global_connection_number
     population = generate_random_population(POPULATION_SIZE)
 
+    population[0].print_connections()
 
-    population[0].draw()
-    for _ in range(10):
-
+    for i in range(1000):
         mutate_node(population[0])
         mutate_connection(population[0])
+        population[0].draw(stopping=False)
 
-    population[0].draw()
 
-    thread = AssessFit(population[0])
-    thread.start()
-    thread.join()
+
+
+
+    #thread = AssessFit(population[0])
+    #thread.start()
+    #thread.join()
 
 
 
@@ -86,7 +86,7 @@ def assess_gen_fits(generation: list) -> list:
 def mutate_node(individual: Individual):
     global global_node_number
     global global_connection_number
-    if individual.mutate_node(MUTATE_NODE_ATTEMPTS, global_node_number, global_connection_number):
+    if individual.mutate_node(global_node_number, global_connection_number):
         global_node_number += 1
         global_connection_number += 2
     else:
