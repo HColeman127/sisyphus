@@ -153,7 +153,7 @@ class Genome(object):
         return list(self.connections.values())
 
     def get_connection_ids(self):
-        return [connection.id for connection in self.get_connections()]
+        return list(self.connections.keys())
 
     def get_connection_by_nodes(self, in_node: int, out_node: int) -> Connection:
         for connection in self.get_connections():
@@ -174,18 +174,17 @@ class Genome(object):
 
         # if the connection exists
         if connection is not None:
-            # return False if already expressed
-            if connection.expressed:
-                #print("EXISTING CONNECTION", in_node, "-->", out_node)
-                return False
-            # make change and return True if previously not expressed
-            else:
+            # express if not expressed
+            if not connection.expressed:
                 connection.expressed = True
-                return True
-        # if the depth of the in node is greater than the out node return False
-        elif self.nodes[in_node].depth >= self.nodes[out_node].depth:
-            #print("INVALID CONNECTION", in_node, "-->", out_node)
+            # either way, return False
             return False
+        # if the depth of the in node is greater than the out node return False
+        if self.nodes[in_node].depth == self.nodes[out_node].depth:
+            return False
+        else:
+            if self.nodes[in_node].depth > self.nodes[out_node].depth:
+                out_node, in_node = in_node, out_node
 
         # create new connection and add to list
         new_connection = Connection(in_node=in_node, out_node=out_node, weight=weight, id=next_connection_id)

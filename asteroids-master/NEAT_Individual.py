@@ -32,24 +32,18 @@ class Individual(object):
                 connection.weight = new_weight
 
     def mutate_node(self, global_node_number: int, global_connection_number: int) -> bool:
-
         connection = random.choice(self.genome.get_expressed_connections())
 
         return self.genome.insert_node(old_connection_id=connection.id,
                                        next_node_id=global_node_number,
                                        next_connection_id=global_connection_number)
 
-    def mutate_connection(self, attempts: int, global_connection_number: int) -> bool:
-        # tries to mutate a number of times
-        for _ in range(attempts):
-            node_id_list = self.genome.get_node_ids()
-            if self.genome.add_connection(in_node=random.choice(node_id_list),
+    def mutate_connection(self, global_connection_number: int) -> bool:
+        node_id_list = self.genome.get_node_ids()
+        return self.genome.add_connection(in_node=random.choice(node_id_list),
                                           out_node=random.choice(node_id_list),
                                           weight=random.uniform(-1, 1),
-                                          next_connection_id=global_connection_number):
-                return True
-        # if no mutation is successful, return False
-        return False
+                                          next_connection_id=global_connection_number)
 
     def assess_fitness(self, max_trials: int, max_steps: int, display: bool) -> None:
         game = MyGame(display=display)
