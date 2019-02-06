@@ -31,50 +31,44 @@ class Node(object):
 
 class Genome(object):
     def __init__(self, input_size: int, output_size: int):
-        self.nodes = []
-        self.connections = []
+        self.nodes = {}
+        self.connections = {}
 
         # add bias node to genome
         bias_node = Node(tag="bias", id=0)
-        self.nodes.append(bias_node)
+        self.nodes[0] = bias_node
 
         # add input nodes to genome
         for i in range(1, 1+input_size):
             input_node = Node(tag="input", id=i)
-            self.nodes.append(input_node)
+            self.nodes[i] = input_node
 
         # add output nodes to genome
         for i in range(1+input_size, 1+input_size+output_size):
             output_node = Node(tag="output", id=i)
             output_node.depth = 1
-            self.nodes.append(output_node)
+            self.nodes[i] = output_node
 
     # node functions ------------------------------------------------
     def get_node_ids(self) -> list:
-        return [node.id for node in self.nodes]
+        return list(self.nodes.keys())
 
-    def get_output_node_ids(self) -> list:
+    def get_nodes(self) -> list:
+        return list(self.nodes.values())
+
+    def get_sorted_nodes_by_depth(self) -> list:
+        node_depths = []
         node_ids = []
-        for node in self.nodes:
-            if node.tag == "output":
-                node_ids.append(node.id)
-        return node_ids
+        for node in self.get_nodes():
+            node_depths.append(node.depth)
+            node_ids.append(node.id)
 
-    def has_node(self, node_id: int) -> bool:
-        for node in self.nodes:
-            if node.id == node_id:
-                return True
-        return False
-
-    def get_node(self, node_id: int) -> Node:
-        for node in self.nodes:
-            if node.id == node_id:
-                return node
-        return None
+        sorted_pairs = sorted(zip(node_depths, node_ids))
+        return [self.nodes[pair[1]] for pair in sorted_pairs]
 
     def get_node_out_connections(self, node_id: int) -> list:
         out_connections = []
-        for connection in self.connections:
+        for connection in self.connections.values():
             if connection.expressed and connection.in_node == node_id:
                 out_connections.append(connection)
 
@@ -82,7 +76,7 @@ class Genome(object):
 
     def get_node_in_connections(self, node_id: int) -> list:
         out_connections = []
-        for connection in self.connections:
+        for connection in self.connections.values():
             if connection.expressed and connection.out_node == node_id:
                 out_connections.append(connection)
 
@@ -91,7 +85,7 @@ class Genome(object):
     def insert_node(self, old_connection_id: int, next_node_id: int, next_connection_id: int) -> bool:
 
         # select and disable the old connection
-        old_connection = self.get_connection_by_id(old_connection_id)
+        old_connection = self.connections[old_connection_id]
         if not old_connection.expressed:
             return False
 
@@ -112,16 +106,17 @@ class Genome(object):
                                       id=next_connection_id+1)
 
         # add to lists
-        self.nodes.append(new_node)
-        self.connections.append(new_connection_1)
-        self.connections.append(new_connection_2)
+        self.nodes[next_node_id] = new_node
+        self.connections[next_connection_id] = new_connection_1
+        self.connections[next_connection_id+1] = new_connection_2
 
         # recalculate node depths
         self.calculate_node_depths()
         return True
 
     def calculate_node_depths(self) -> None:
-        node_queue = self.nodes.copy()
+        node_queue = self.get_nodes()
+        output_depths = []
 
         # initialize node depths
         for node in node_queue.copy():
@@ -131,50 +126,47 @@ class Genome(object):
             else:
                 node.depth = -1
 
+        # while there are still undefined node depths
         while len(node_queue) > 0:
             for node in node_queue.copy():
                 # get the depths of all input nodes
                 input_depths = []
                 for connection in self.get_node_in_connections(node.id):
-                    input_depths.append(self.get_node(connection.in_node).depth)
+                    input_depths.append(self.nodes[connection.in_node].depth)
 
                 # if all input depths are defined
                 if min(input_depths) >= 0:
+                    # define depth and remove from queue
                     node.depth = max(input_depths)+1
                     node_queue.remove(node)
 
-        output_depths = []
-        for output_id in self.get_output_node_ids():
-            output_depths.append(self.get_node(output_id).depth)
+                # if the depth of an output is found, add to list
+                if node.tag == "output":
+                    output_depths.append(node.depth)
 
-        for output_id in self.get_output_node_ids():
-            self.get_node(output_id).depth = max(output_depths)
+        for node in self.get_nodes():
+            if node.tag == "output":
+                node.depth = max(output_depths)
 
     # connection functions ------------------------------------------
+    def get_connections(self) -> list:
+        return list(self.connections.values())
+
+    def get_connection_ids(self):
+        return [connection.id for connection in self.get_connections()]
+
     def get_connection_by_nodes(self, in_node: int, out_node: int) -> Connection:
-        for connection in self.connections:
+        for connection in self.get_connections():
             if connection.in_node == in_node and connection.out_node == out_node:
                 return connection
         return None
 
-    def get_connection_by_id(self, connection_id: int):
-        for connection in self.connections:
-            if connection.id == connection_id:
-                return connection
-        return None
-
-    def get_connection_ids(self):
-        return [connection.id for connection in self.connections]
-
-    def get_connections(self):
-        return self.connections.copy()
-
-    def get_expressed_connection_ids(self):
-        connection_ids = []
-        for connection in self.connections:
+    def get_expressed_connections(self) -> list:
+        connections = []
+        for connection in self.get_connections():
             if connection.expressed:
-                connection_ids.append(connection.id)
-        return connection_ids
+                connections.append(connection)
+        return connections
 
     def add_connection(self, in_node: int, out_node: int, weight: float, next_connection_id: int) -> bool:
         # find existing connection, None if doesn't exist
@@ -191,58 +183,37 @@ class Genome(object):
                 connection.expressed = True
                 return True
         # if the depth of the in node is greater than the out node return False
-        elif self.get_node(in_node).depth >= self.get_node(out_node).depth:
+        elif self.nodes[in_node].depth >= self.nodes[out_node].depth:
             #print("INVALID CONNECTION", in_node, "-->", out_node)
             return False
 
         # create new connection and add to list
         new_connection = Connection(in_node=in_node, out_node=out_node, weight=weight, id=next_connection_id)
-        self.connections.append(new_connection)
+        self.connections[next_connection_id] = new_connection
         return True
 
     # evaluation functions ------------------------------------------
-    def evaluate(self, inputs: list) -> list:
-        node_queue = self.nodes.copy()
+    def evaluate(self, sorted_nodes: list, inputs: list) -> list:
+        node_queue = self.get_nodes()
         node_values = {}
-
-        # assign bias (node 0) a value of 1
-        node_values[0] = 1
-        node_queue.pop(0)
+        output = []
 
         # assign input values
-        for node in node_queue.copy():
-            if node.tag == "input":
+        for node in sorted_nodes:
+            if node.tag == "bias":
+                node_values[node.id] = 1
+            elif node.tag == "input":
                 node_values[node.id] = inputs.pop(0)
-                node_queue.remove(node)
+            else:
+                weighted_sum = 0.0
+                for connection in self.get_node_in_connections(node.id):
+                    weighted_sum += connection.weight * node_values[connection.in_node]
 
-        # until all node values have been found
-        while len(node_queue) > 0:
-            for node in node_queue.copy():
-                # check if all of the input values for a node are defined
-                has_all_inputs = True
-                input_connections = self.get_node_in_connections(node.id)
+                value = self.activate(weighted_sum)
+                node_values[node.id] = value
 
-                for connection in input_connections:
-                    if connection.in_node not in node_values:
-                        has_all_inputs = False
-                        break
-
-                if has_all_inputs:
-                    # compute weighted sum
-                    weighted_sum = 0.0
-                    for connection in input_connections:
-                        weighted_sum += connection.weight * node_values[connection.in_node]
-
-                    # activate value
-                    value = self.activate(weighted_sum)
-                    node_values[node.id] = value
-                    node_queue.remove(node)
-
-        #print(node_values)
-
-        output = []
-        for output_id in self.get_output_node_ids():
-            output.append(round((node_values[output_id]+1)/2))
+                if node.tag == "output":
+                    output.append(round((node_values[node.id] + 1) / 2))
 
         return output
 
@@ -252,18 +223,24 @@ class Genome(object):
         return output
 
     # drawing functions ---------------------------------------------
-    def draw(self, stopping:bool) -> None:
+    def draw(self, block: bool) -> None:
         G, pos = self.create_digraph()
+        plt.ion()
 
         edges, weights = zip(*nx.get_edge_attributes(G, 'weight').items())
 
         nx.draw(G, pos=pos, node_size=50, node_color='#5CB8B2', edgelist=edges, with_labels=False,
                 edge_color=weights, edge_cmap=plt.cm.get_cmap("bwr"))
-        plt.gcf().set_facecolor('#444444')
-        plt.show(block=stopping)
+        plt.gcf().set_facecolor('#555555')
+        plt.subplots_adjust(top=1, bottom=0, right=1, left=0)
+        #plt.draw()
+        plt.show(block=block)
         plt.pause(0.0001)
-        plt.clf()
         plt.cla()
+        plt.clf()
+        #plt.ioff()
+
+
 
     def create_digraph(self):
         G = nx.DiGraph()
@@ -271,11 +248,7 @@ class Genome(object):
         pos = {}
         current_output_height = 1
 
-        # sort nodes by depth
-        node_depths = [node.depth for node in self.nodes]
-        sorted_nodes = []
-        for pair in sorted(zip(node_depths, self.get_node_ids(), self.nodes.copy())):
-            sorted_nodes.append(pair[2])
+        sorted_nodes = self.get_sorted_nodes_by_depth()
 
         for node in sorted_nodes:
             if node.tag in ["bias", "input"]:
@@ -295,10 +268,9 @@ class Genome(object):
 
                 pos[node.id] = (node.depth, height)
 
-        for edge in self.connections:
+
+        for edge in self.get_connections():
             if edge.expressed:
                 G.add_edge(edge.in_node, edge.out_node, weight=-edge.weight)
 
         return G, pos
-
-

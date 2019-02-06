@@ -1,16 +1,16 @@
 from NEAT_Individual import *
 import numpy as np
-import threading
 import time
+from multiprocessing import Pool
 
 
 # individuals
-INPUT_SIZE = 3
-OUTPUT_SIZE = 3
+INPUT_SIZE = 11
+OUTPUT_SIZE = 4
 
 # population
 POPULATION_SIZE = 50
-NUMBER_OF_TRIALS = 10
+NUMBER_OF_TRIALS = 100
 MAX_STEPS = 200
 MAX_GENERATIONS = 1000
 
@@ -22,37 +22,24 @@ global_node_number = INPUT_SIZE+OUTPUT_SIZE+1
 global_connection_number = INPUT_SIZE*OUTPUT_SIZE+1
 
 
-class AssessFit(threading.Thread):
-    def __init__(self, individual: Individual):
-        threading.Thread.__init__(self)
-        self.individual = individual
-
-    def run(self):
-        self.individual.assess_fitness(max_trials=NUMBER_OF_TRIALS,
-                                       max_steps=MAX_STEPS,
-                                       display=True)
-        print("#", end="", flush=True)
-
-
 def main():
     global global_node_number
     global global_connection_number
     population = generate_random_population(POPULATION_SIZE)
 
-    population[0].print_connections()
+    #assess_gen_fits(population)
+
+    population[0].draw(block=False)
+
+    population[0].assess_fitness(max_trials=NUMBER_OF_TRIALS, max_steps=MAX_STEPS, display=True)
 
     for i in range(1000):
+
         mutate_node(population[0])
         mutate_connection(population[0])
-        population[0].draw(stopping=False)
 
 
 
-
-
-    #thread = AssessFit(population[0])
-    #thread.start()
-    #thread.join()
 
 
 
@@ -64,21 +51,20 @@ def generate_random_population(size: int) -> list:
     return population
 
 
+def assess_fit(individual: Individual):
+    individual.assess_fitness(max_trials=NUMBER_OF_TRIALS,  max_steps=MAX_STEPS, display=False)
+    print("#", end="", flush=True)
+
 def assess_gen_fits(generation: list) -> list:
-    size = len(generation)
-    print(end="|"+"-"*size+"|\n|")
+    start_time = time.time()
+    print("ASSESSING POPULATION FITNESS...")
+    print(end="|"+"-"*len(generation)+"|\n|")
 
-    threads = []
-    for individual in generation:
-        thread = AssessFit(individual)
-        thread.start()
-        threads.append(thread)
-
-    for t in threads:
-        t.join()
+    Pool(processes=10).map(assess_fit, generation)
 
     print("|")
-
+    print("POPULATION FITNESS ASSESSED")
+    print("ASSESSMENT TIME: %ds\n" % (time.time() - start_time))
     fits = [individual.fitness for individual in generation]
     return fits
 
@@ -102,4 +88,7 @@ def mutate_connection(individual: Individual):
 
 
 # run main
-main()
+if __name__ == '__main__':
+    start_time = time.time()
+    main()
+    print("TOTAL EVALUATION TIME:", time.time()-start_time)

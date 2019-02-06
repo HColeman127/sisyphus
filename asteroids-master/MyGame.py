@@ -51,7 +51,6 @@ class MyGame(object):
 
             # Setup a timer to refresh the display FPS times per second
             self.FPS = 60
-            pygame.time.set_timer(pygame.USEREVENT, 1000 // self.FPS)
 
         self.reset()
 
@@ -104,7 +103,8 @@ class MyGame(object):
 
     def step(self, commands=(0, 0, 0, 0)):
         if self.display:
-            pygame.event.wait()
+            pygame.event.pump()
+            pygame.time.wait(round(1000/self.FPS))
 
         if self.display and False:
             commands = [0, 0, 0, 0]
