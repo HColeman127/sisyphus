@@ -8,6 +8,7 @@ class Individual(object):
         # initialize genome
         self.genome = Genome(input_size=input_size, output_size=output_size)
         self.fitness = 0
+        self.adj_fitness = 0
 
         # initialize starting dense connections
         connection_number = 0

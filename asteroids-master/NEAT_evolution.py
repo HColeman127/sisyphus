@@ -1,7 +1,7 @@
 from NEAT_Individual import *
 import numpy as np
 import time
-from multiprocessing import Pool
+from multiprocessing import Pool, Manager
 
 
 # individuals
@@ -10,7 +10,7 @@ OUTPUT_SIZE = 4
 
 # population
 POPULATION_SIZE = 50
-NUMBER_OF_TRIALS = 100
+NUMBER_OF_TRIALS = 10
 MAX_STEPS = 200
 MAX_GENERATIONS = 1000
 
@@ -18,7 +18,7 @@ MAX_GENERATIONS = 1000
 
 
 # speciation
-COMPATIBILITY_THRESHOLD = 0.5
+COMPATIBILITY_THRESHOLD = 3.0
 
 # global variables (sue me)
 global_node_number = INPUT_SIZE+OUTPUT_SIZE+1
@@ -30,16 +30,18 @@ def main():
     global global_connection_number
     population = generate_random_population(POPULATION_SIZE)
 
-    #assess_gen_fits(population)
+    fits = assess_gen_fits(population)
 
+    print(fits)
 
+    for individual in population:
+        for i in range(10):
+            mutate_node(individual)
+            mutate_connection(individual)
 
-    #population[0].assess_fitness(max_trials=NUMBER_OF_TRIALS, max_steps=MAX_STEPS, display=True)
+    calc_adjusted_fitness(population[0], population)
 
-    for i in range(1000):
-        population[0].draw(block=False)
-        mutate_node(population[0])
-        mutate_connection(population[0])
+    print(population[0].adj_fitness)
 
 
 
@@ -52,34 +54,58 @@ def generate_random_population(size: int) -> list:
     return population
 
 
-def assess_fit(individual: Individual) -> None:
-    individual.assess_fitness(max_trials=NUMBER_OF_TRIALS,  max_steps=MAX_STEPS, display=False)
+def assess_fit(target: Individual) -> None:
+    target.assess_fitness(max_trials=NUMBER_OF_TRIALS,  max_steps=MAX_STEPS, display=False)
+    #print(target.fitness)
     print("#", end="", flush=True)
+
 
 def assess_gen_fits(generation: list) -> list:
     start_time = time.time()
     print("ASSESSING POPULATION FITNESS...")
     print(end="|"+"-"*len(generation)+"|\n|")
 
-    Pool(processes=10).map(assess_fit, generation)
+    shared_gen = Manager().list(generation)
+
+    print(generation)
+    print(shared_gen)
+
+    Pool(processes=10).map(assess_fit, shared_gen)
+
+    #generation = list(shared_gen)
 
     print("|")
     print("POPULATION FITNESS ASSESSED")
     print("ASSESSMENT TIME: %ds\n" % (time.time() - start_time))
-    fits = [individual.fitness for individual in generation]
+
+    for individual in shared_gen:
+        print(individual.fitness)
+
+
+    fits = [individual.fitness for individual in shared_gen]
     return fits
+
 
 def compatibility_distance(a: Individual, b: Individual) -> float:
     return random.random()
 
-def sharing_function(value: float) -> int:
-     if value > COMPATIBILITY_THRESHOLD:
-         return 0
-     else:
-         return 1
 
-def calc_adjusted_fitness(individual: Individual, population: list) -> None:
-    print("hello")
+def sharing_function(value: float) -> int:
+    if value > COMPATIBILITY_THRESHOLD:
+        return 0
+    else:
+        return 1
+
+
+def calc_adjusted_fitness(target: Individual, population: list) -> None:
+    species_size = 0
+    for individual in population:
+        species_size += sharing_function(compatibility_distance(target, individual))
+
+    print(target.fitness)
+    print(species_size)
+
+    target.adj_fitness = target.fitness/species_size
 
 
 def mutate_node(individual: Individual) -> None:
