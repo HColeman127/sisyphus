@@ -45,6 +45,57 @@ def main():
 
 
 
+def get_compatibility_distance(ind_one: Individual, ind_two: Individual) -> float:
+
+    excess_gene_weight = 1
+    disjoint_gene_weight = 1
+    weight_diff_weight = 0.4
+    comp_distance = 0
+
+    ind_one_connections = ind_one.genome.get_connection_ids()
+    ind_two_connections = ind_two.genome.get_connection_ids()
+
+    disjoints = 0
+    excesses = 0
+
+    #print(ind_one_connections)
+    #print(ind_two_connections)
+
+    # -- calc num of disjoints and excesses
+    max_val = max(max(ind_one_connections), max(ind_two_connections))
+    min_val = min(max(ind_one_connections), max(ind_two_connections))
+
+    #print(max_val, min_val)
+
+    for count in range(min_val+1):
+        if (count in ind_one_connections) ^ (count in ind_two_connections):
+                disjoints += 1
+
+
+    ran = range(min_val+1, max_val+1)
+    one = len(set(ran).intersection(ind_one_connections))
+    two = len(set(ran).intersection(ind_two_connections))
+    #print(one,two)
+    excesses = max(one,two)
+    # -- end
+
+    # -- calc avg. weight differences of matching connections
+    matching = set(ind_one_connections).intersection(ind_two_connections)
+    number = len(matching)
+    sum = 0
+
+    for num in matching:
+        weight1 = ind_one.genome.connections[num].weight
+        weight2 = ind_two.genome.connections[num].weight
+        difference = weight1 - weight2
+        sum += difference
+
+    average = sum/number
+
+    N = max(len(ind_one_connections), len(ind_two_connections)) # N is the size of the larger genome
+    compatibility_distance = (excess_gene_weight*excesses)/N + (disjoint_gene_weight*disjoints)/N + weight_diff_weight * average
+
+    return compatibility_distance
 
 def generate_random_population(size: int) -> list:
     print("SEEDING POPULATION...")
