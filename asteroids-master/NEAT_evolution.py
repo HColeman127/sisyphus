@@ -1,7 +1,8 @@
 from NEAT_Individual import *
 import numpy as np
 import time
-from multiprocessing import Pool, Manager
+from multiprocessing import Process, Manager
+from multiprocessing.managers import BaseManager
 
 
 # individuals
@@ -18,7 +19,7 @@ MAX_GENERATIONS = 1000
 
 
 # speciation
-COMPATIBILITY_THRESHOLD = 3.0
+COMPATIBILITY_THRESHOLD = 0.7
 
 # global variables (sue me)
 global_node_number = INPUT_SIZE+OUTPUT_SIZE+1
@@ -28,21 +29,19 @@ global_connection_number = INPUT_SIZE*OUTPUT_SIZE+1
 def main():
     global global_node_number
     global global_connection_number
+
     population = generate_random_population(POPULATION_SIZE)
-
-    fits = assess_gen_fits(population)
-
-    print(fits)
 
     for individual in population:
         for i in range(10):
             mutate_node(individual)
             mutate_connection(individual)
 
-    calc_adjusted_fitness(population[0], population)
+    fits = assess_gen_fits(population)
+    adj_fits = calc_gen_adj_fits(population)
 
-    print(population[0].adj_fitness)
-
+    print(fits)
+    print(adj_fits)
 
 
 def get_compatibility_distance(ind_one: Individual, ind_two: Individual) -> float:
@@ -97,6 +96,7 @@ def get_compatibility_distance(ind_one: Individual, ind_two: Individual) -> floa
 
     return compatibility_distance
 
+
 def generate_random_population(size: int) -> list:
     print("SEEDING POPULATION...")
     population = [Individual(input_size=INPUT_SIZE, output_size=OUTPUT_SIZE) for _ in range(size)]
@@ -107,7 +107,6 @@ def generate_random_population(size: int) -> list:
 
 def assess_fit(target: Individual) -> None:
     target.assess_fitness(max_trials=NUMBER_OF_TRIALS,  max_steps=MAX_STEPS, display=False)
-    #print(target.fitness)
     print("#", end="", flush=True)
 
 
@@ -116,29 +115,15 @@ def assess_gen_fits(generation: list) -> list:
     print("ASSESSING POPULATION FITNESS...")
     print(end="|"+"-"*len(generation)+"|\n|")
 
-    shared_gen = Manager().list(generation)
-
-    print(generation)
-    print(shared_gen)
-
-    Pool(processes=10).map(assess_fit, shared_gen)
-
-    #generation = list(shared_gen)
+    for individual in generation:
+        assess_fit(individual)
 
     print("|")
     print("POPULATION FITNESS ASSESSED")
     print("ASSESSMENT TIME: %ds\n" % (time.time() - start_time))
 
-    for individual in shared_gen:
-        print(individual.fitness)
-
-
-    fits = [individual.fitness for individual in shared_gen]
+    fits = [individual.fitness for individual in generation]
     return fits
-
-
-def compatibility_distance(a: Individual, b: Individual) -> float:
-    return random.random()
 
 
 def sharing_function(value: float) -> int:
@@ -148,15 +133,26 @@ def sharing_function(value: float) -> int:
         return 1
 
 
-def calc_adjusted_fitness(target: Individual, population: list) -> None:
+def calc_adj_fit(target: Individual, population: list) -> None:
     species_size = 0
     for individual in population:
-        species_size += sharing_function(compatibility_distance(target, individual))
-
-    print(target.fitness)
-    print(species_size)
+        species_size += sharing_function(get_compatibility_distance(target, individual))
 
     target.adj_fitness = target.fitness/species_size
+
+
+def calc_gen_adj_fits(generation: list) -> list:
+    print("CALCULATING ADJUSTED FITNESSES...")
+    print(end="|" + "-" * len(generation) + "|\n|")
+    for individual in generation:
+        calc_adj_fit(individual, generation)
+        print("#", end="", flush=True)
+
+    adj_fits = [individual.adj_fitness for individual in generation]
+
+    print("|")
+    print("ADJUSTED FITNESSES CALCULATED")
+    return adj_fits
 
 
 def mutate_node(individual: Individual) -> None:
@@ -166,7 +162,8 @@ def mutate_node(individual: Individual) -> None:
         global_node_number += 1
         global_connection_number += 2
     else:
-        print("NODE FAILED")
+        pass
+        #("NODE FAILED")
 
 
 def mutate_connection(individual: Individual) -> None:
@@ -182,4 +179,4 @@ def mutate_connection(individual: Individual) -> None:
 if __name__ == '__main__':
     start_time = time.time()
     main()
-    print("TOTAL EVALUATION TIME:", time.time()-start_time)
+    print("\n\nTOTAL EVALUATION TIME:", time.time()-start_time)
