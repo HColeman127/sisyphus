@@ -1,7 +1,6 @@
 import math
 import matplotlib.pyplot as plt
 import networkx as nx
-import time
 
 
 class Connection(object):
@@ -238,7 +237,6 @@ class Genome(object):
         plt.cla()
         plt.clf()
         #plt.ioff()
-
 
 
     def create_digraph(self):
