@@ -209,7 +209,7 @@ def speciate_pop(population: list) -> list:
     return species_list
 
 
-def allocate_offspring(species_list: dict) -> list:
+def allocate_offspring(species_list: list) -> list:
     print(end="ALLOCATING SPECIES OFFSPRING...", flush=True)
 
     allocations = []
@@ -226,7 +226,7 @@ def allocate_offspring(species_list: dict) -> list:
     return allocations
 
 
-def create_next_gen(species_list: dict, allocations: list) -> list:
+def create_next_gen(species_list: list, allocations: list) -> list:
     pass
 
 
