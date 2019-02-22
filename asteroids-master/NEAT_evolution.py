@@ -2,8 +2,7 @@ from NEAT_Individual import *
 import time
 import copy
 import numpy as np
-from multiprocessing import Process, Manager
-from multiprocessing.managers import BaseManager
+
 
 
 # individuals
@@ -30,7 +29,7 @@ MUTATE_CONNECTION_CHANCE = 0.50
 
 
 # speciation
-COMPATIBILITY_THRESHOLD = 0.17
+compatibility_threshold = 0.17
 
 # global variables (sue me)
 node_number = INPUT_SIZE+OUTPUT_SIZE+1
@@ -153,17 +152,24 @@ def get_compatibility_distance(ind_one: Individual, ind_two: Individual) -> floa
     return compatibility_distance
 
 
-def sharing_function(value: float) -> int:
-    if value > COMPATIBILITY_THRESHOLD:
-        return 0
-    else:
-        return 1
-
 
 def calc_adj_fit(target: Individual, population: list) -> None:
+
+    global compatibility_threshold
     species_size = 0
+    comp_dists = []
+
+    # dynamically calculate comp threshold
+
     for individual in population:
-        species_size += sharing_function(get_compatibility_distance(target, individual))
+        comp_dist = get_compatibility_distance(target, individual)
+        comp_dists.append(comp_dist)
+
+    compatibility_threshold = sum(comp_dists)/len(comp_dists)
+
+    for dist in comp_dists:
+        if dist > compatibility_threshold:
+            species_size += 1
 
     target.adj_fitness = target.fitness/species_size
 
@@ -202,7 +208,7 @@ def speciate_pop(population: list) -> list:
     for target in population:
         target.species = -1
         for species in species_list:
-            if get_compatibility_distance(target, species[0]) < COMPATIBILITY_THRESHOLD:
+            if get_compatibility_distance(target, species[0]) < compatibility_threshold:
                 target.species = species[0].species
                 species.append(target)
                 break
@@ -309,8 +315,7 @@ def crossover(high: Individual, low: Individual) -> Individual:
 
             isExpressed = True
 
-            if (not child.genome.connections[con_id].expressed) or \
-                    (not low.genome.connections[con_id].expressed):
+            if not child.genome.connections[con_id].expressed:
                 rand = random.uniform(0, 1)
                 if rand >= RE_EXPRESSION_CHANCE:
                     isExpressed = False
@@ -319,7 +324,7 @@ def crossover(high: Individual, low: Individual) -> Individual:
             if rand == 0:
                 child.genome.connections[con_id].weight = low.genome.connections[con_id].weight
 
-            #child.genome.connections[con_id].expressed = isExpressed
+            child.genome.connections[con_id].expressed = isExpressed
 
     return child
 
