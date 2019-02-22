@@ -12,17 +12,25 @@ OUTPUT_SIZE = 4
 
 # population
 POPULATION_SIZE = 50
-NUMBER_OF_TRIALS = 3
-MAX_STEPS = 200
+NUMBER_OF_TRIALS = 10
+MAX_STEPS = 400
 MAX_GENERATIONS = 1000
 
 # evolutionary
 SURVIVOR_PROPORTION = 0.50
 RE_EXPRESSION_CHANCE = 0.25
 
+# mutation
+MUTATE_ALL_WEIGHTS_CHANCE = 0.80
+MUTATE_WEIGHT_CHANCE = 0.90
+MUTATE_WEIGHT_STRENGTH = 0.10
+
+MUTATE_NODE_CHANCE = 0.30
+MUTATE_CONNECTION_CHANCE = 0.50
+
 
 # speciation
-COMPATIBILITY_THRESHOLD = 1.0
+COMPATIBILITY_THRESHOLD = 0.17
 
 # global variables (sue me)
 node_number = INPUT_SIZE+OUTPUT_SIZE+1
@@ -39,26 +47,27 @@ def main():
 
     population = gen_rand_pop(POPULATION_SIZE)
 
+    for gen_number in range(MAX_GENERATIONS):
+        print("GENERATION:", gen_number, "\n")
+        fits = assess_pop_fits(population)
+        adj_fits = calc_pop_adj_fits(population)
 
+        f = open("test_data.txt", "a")
+        avg_fit = np.mean(adj_fits)
+        f.write("%f\n" % avg_fit)
+        f.close()
 
-    for i in range(10):
-        #speciate_pop(population)
-        for individual in population:
-            mutate_node(individual)
-            mutate_connection(individual)
+        culled_pop = cull_population(population)
+        culled_pop[-1].draw(block=False)
+        #culled_pop[-1].assess_fitness(max_trials=1,  max_steps=MAX_STEPS, display=True)
+        species_list = speciate_pop(culled_pop)
+        allocations = allocate_offspring(species_list)
 
-    fits = assess_pop_fits(population)
-    adj_fits = calc_pop_adj_fits(population)
-    culled_pop = cull_population(population)
-    species_list = speciate_pop(culled_pop)
+        population = create_next_gen(species_list, allocations)
+        print("ALLOC:", allocations)
+        print("SIZE:", len(population))
+        print("="*80+"")
 
-
-    allocations = allocate_offspring(species_list)
-    for s in species_list:
-        print(len(s), end=" ")
-    print()
-    print(allocations)
-    print(sum(allocations))
 
 
 
@@ -220,14 +229,75 @@ def allocate_offspring(species_list: list) -> list:
     total = sum(allocations)
 
     for i in range(len(allocations)):
-        allocations[i] = round(allocations[i]*POPULATION_SIZE/total)
+        allocations[i] = round(allocations[i]*POPULATION_SIZE/max(0.0000001, total))
 
     print("DONE\n")
     return allocations
 
 
 def create_next_gen(species_list: list, allocations: list) -> list:
-    pass
+    print(end="CREATING NEXT GENERATION...", flush=True)
+    next_gen = []
+
+    # i is the species number
+    for i in range(len(species_list)):
+        # create the selecition distribution for this species
+        dist = create_selection_dist(species_list[i])
+
+        # create children a number of times given in the allocations list
+        for child_count in range(allocations[i]):
+
+            # select first parent
+            value = random.uniform(0, 1)
+            k = 0
+            while value > dist[k]:
+                k += 1
+            parent1 = species_list[i][k]
+
+            # select second parent
+            value = random.uniform(0, 1)
+            k = 0
+            while value > dist[k]:
+                k += 1
+            parent2 = species_list[i][k]
+
+            # ensure parent1 is higher fitness
+            if parent2.adj_fitness > parent1.adj_fitness:
+                parent1, parent2 = parent2, parent1
+
+            # create child and add to next generation list
+            child = crossover(parent1, parent2)
+
+            # mutate child
+            if random.uniform(0, 1) < MUTATE_ALL_WEIGHTS_CHANCE:
+                child.mutate_weights(MUTATE_WEIGHT_CHANCE, MUTATE_WEIGHT_STRENGTH)
+
+            if random.uniform(0, 1) < MUTATE_NODE_CHANCE:
+                mutate_node(child)
+
+            if random.uniform(0, 1) < MUTATE_CONNECTION_CHANCE:
+                mutate_connection(child)
+
+            # add child to list
+            next_gen.append(child)
+
+    print("DONE\n")
+    # return new population
+    return next_gen
+
+
+def create_selection_dist(group: list) -> list:
+    dist = []
+    for individual in group:
+        dist.append(individual.adj_fitness)
+
+    total = sum(dist)
+    running_sum = 0
+    for i in range(len(dist)):
+        running_sum += dist[i]
+        dist[i] = running_sum/max(0.0000001, total)
+
+    return dist
 
 
 def crossover(high: Individual, low: Individual) -> Individual:
@@ -249,7 +319,7 @@ def crossover(high: Individual, low: Individual) -> Individual:
             if rand == 0:
                 child.genome.connections[con_id].weight = low.genome.connections[con_id].weight
 
-            child.genome.connections[con_id].expressed = isExpressed
+            #child.genome.connections[con_id].expressed = isExpressed
 
     return child
 
