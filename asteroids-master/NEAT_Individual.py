@@ -34,7 +34,10 @@ class Individual(object):
                 connection.weight = new_weight
 
     def mutate_node(self, global_node_number: int, global_connection_number: int) -> bool:
-        connection = random.choice(self.genome.get_expressed_connections())
+        connections = self.genome.get_expressed_connections()
+        if len(connections) < 1:
+            return False
+        connection = random.choice(connections)
 
         return self.genome.insert_node(old_connection_id=connection.id,
                                        next_node_id=global_node_number,
@@ -73,7 +76,7 @@ class Individual(object):
         avg_score = sum(scores) / len(scores)
         avg_steps = sum(steps) / len(steps)
 
-        self.fitness = avg_score * avg_steps * (hitrate ** 4)
+        self.fitness = avg_score * avg_steps * (hitrate ** 4) + 0.0001
 
         # print("  AVG SCORE: ", avg_score)
         # print("  AVG STEPS: ", avg_steps)

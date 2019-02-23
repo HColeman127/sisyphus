@@ -6,7 +6,7 @@ import numpy as np
 
 
 # individuals
-INPUT_SIZE = 11
+INPUT_SIZE = 5
 OUTPUT_SIZE = 4
 
 # population
@@ -65,12 +65,13 @@ def main():
         fits = assess_pop_fits(population)
         adj_fits = calc_pop_adj_fits(population)
 
+
         print_fits(adj_fits)
 
         print("-"*40)
         culled_pop = cull_population(population)
         culled_pop[-1].draw(block=False)
-        #culled_pop[-1].assess_fitness(max_trials=1,  max_steps=MAX_STEPS, display=True)
+        culled_pop[-1].assess_fitness(max_trials=1,  max_steps=MAX_STEPS, display=True)
         species_list = speciate_pop(culled_pop)
         allocations = allocate_offspring(species_list)
 
@@ -158,14 +159,14 @@ def get_compatibility_distance(ind_one: Individual, ind_two: Individual) -> floa
         difference = abs(weight1 - weight2)
         sum += difference
 
-    average = sum/number
+    average = sum/max(1, number)
 
     large_genome_size = max(len(ind_one_connections), len(ind_two_connections)) # N is the size of the larger genome
 
     compatibility_distance = (excess_gene_weight*excesses)/large_genome_size + \
                              (disjoint_gene_weight*disjoints)/large_genome_size + weight_diff_weight * average
 
-    print("Comp Dist: ", compatibility_distance)
+    #print("Comp Dist: ", compatibility_distance)
     return compatibility_distance
 
 
@@ -184,7 +185,7 @@ def calc_adj_fit(target: Individual, population: list) -> None:
     compatibility_threshold = sum(comp_dists)/len(comp_dists)
 
     for dist in comp_dists:
-        if dist > compatibility_threshold:
+        if dist <= compatibility_threshold:
             species_size += 1
 
     target.adj_fitness = target.fitness/species_size
@@ -224,7 +225,7 @@ def speciate_pop(population: list) -> list:
         target = population[i]
         target.species = -1
         for species in species_list:
-            if get_compatibility_distance(target, species[0]) < compatibility_threshold:
+            if get_compatibility_distance(target, species[0]) <= compatibility_threshold:
                 target.species = species[0].species
                 species.append(target)
                 break

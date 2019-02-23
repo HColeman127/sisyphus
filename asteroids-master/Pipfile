@@ -12,6 +12,7 @@ guppy = "*"
 universe = "*"
 multiprocess = "*"
 multiprocessing = "*"
+wheel = "*"
 
 [dev-packages]
 

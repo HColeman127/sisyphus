@@ -185,7 +185,7 @@ class MyGame(object):
         velocity_x = speed * math.cos(rel_vel_angle)
         velocity_y = speed * math.sin(rel_vel_angle)
 
-        rocks = self.get_closest_rocks(4)
+        rocks = self.get_closest_rocks(1)
 
         # flip display because get_closest_rocks draws dots
         if self.display:

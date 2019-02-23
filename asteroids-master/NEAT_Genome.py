@@ -137,7 +137,7 @@ class Genome(object):
                 if not input_depths:
                     node.depth = 1
                     node_queue.remove(node)
-                if min(input_depths) >= 0:
+                elif min(input_depths) >= 0:
                     # define depth and remove from queue
                     node.depth = max(input_depths)+1
                     node_queue.remove(node)
@@ -228,10 +228,10 @@ class Genome(object):
         G, pos = self.create_digraph()
         plt.ion()
 
-        edges, weights = zip(*nx.get_edge_attributes(G, 'weight').items())
+        #edges, weights = zip(*nx.get_edge_attributes(G, 'weight').items())
 
-        nx.draw(G, pos=pos, node_size=50, node_color='#5CB8B2', edgelist=edges, with_labels=False,
-                edge_color=weights, edge_cmap=plt.cm.get_cmap("bwr"))
+        nx.draw(G, pos=pos, node_size=50, node_color='#5CB8B2', with_labels=False)
+                #edgelist=edges, edge_color=weights, edge_cmap=plt.cm.get_cmap("bwr"))
         plt.gcf().set_facecolor('#555555')
         plt.subplots_adjust(top=1, bottom=0, right=1, left=0)
         #plt.draw()
@@ -239,7 +239,7 @@ class Genome(object):
         plt.pause(0.0001)
         plt.cla()
         plt.clf()
-        #plt.ioff()
+        plt.ioff()
 
 
     def create_digraph(self):
