@@ -10,7 +10,7 @@ INPUT_SIZE = 11
 OUTPUT_SIZE = 4
 
 # population
-POPULATION_SIZE = 50
+POPULATION_SIZE = 100
 NUMBER_OF_TRIALS = 10
 MAX_STEPS = 400
 MAX_GENERATIONS = 1000
@@ -24,8 +24,8 @@ MUTATE_ALL_WEIGHTS_CHANCE = 0.80
 MUTATE_WEIGHT_CHANCE = 0.90
 MUTATE_WEIGHT_STRENGTH = 0.10
 
-MUTATE_NODE_CHANCE = 0.30
-MUTATE_CONNECTION_CHANCE = 0.50
+MUTATE_NODE_CHANCE = 0.03
+MUTATE_CONNECTION_CHANCE = 0.40
 
 
 # speciation
@@ -33,17 +33,35 @@ compatibility_threshold = 0.17
 
 # global variables (sue me)
 node_number = INPUT_SIZE+OUTPUT_SIZE+1
-connection_number = INPUT_SIZE*OUTPUT_SIZE+1
+#connection_number = INPUT_SIZE*OUTPUT_SIZE+1
+connection_number = 0
+
+# filenams
+timestamp = time.strftime("%Y-%m-%d-%H%M%S", time.localtime())
+filename = "data/average_fitness_log_" + timestamp + ".txt"
+filename2 = "data/best_individual_log_" + timestamp + ".txt"
 
 # loading bars
 spacer = "_"
 bit = "/"
+inds = 2
 
 
 def main():
+    # global values
     global node_number
     global connection_number
 
+
+
+
+
+    print("-"*60)
+    print("SAVING TO FILES:")
+    print(filename)
+    print()
+
+    # generate initial population
     population = gen_rand_pop(POPULATION_SIZE)
 
     for gen_number in range(MAX_GENERATIONS):
@@ -51,11 +69,9 @@ def main():
         fits = assess_pop_fits(population)
         adj_fits = calc_pop_adj_fits(population)
 
-        f = open("test_data.txt", "a")
-        avg_fit = np.mean(adj_fits)
-        f.write("%f\n" % avg_fit)
-        f.close()
+        print_fits(adj_fits)
 
+        print("-"*40)
         culled_pop = cull_population(population)
         culled_pop[-1].draw(block=False)
         #culled_pop[-1].assess_fitness(max_trials=1,  max_steps=MAX_STEPS, display=True)
@@ -63,6 +79,7 @@ def main():
         allocations = allocate_offspring(species_list)
 
         population = create_next_gen(species_list, allocations)
+        print("COMP:", compatibility_threshold)
         print("ALLOC:", allocations)
         print("SIZE:", len(population))
         print("="*80+"")
@@ -74,24 +91,23 @@ def gen_rand_pop(size: int) -> list:
     print(end="SEEDING POPULATION...")
     population = [Individual(input_size=INPUT_SIZE, output_size=OUTPUT_SIZE) for _ in range(size)]
     print("DONE")
-    print("="*80+"\n")
+    print("="*80)
     return population
 
 
 def assess_fit(target: Individual) -> None:
     target.assess_fitness(max_trials=NUMBER_OF_TRIALS,  max_steps=MAX_STEPS, display=False)
-    print(end=bit, flush=True)
 
 
 def assess_pop_fits(population: list) -> list:
     start_time = time.time()
-    print(end=" ASSESSING POPULATION FITNESS"+spacer*22+"\n|")
-    #print(end=" " + spacer*len(population) + " \n|")
+    loading("ASSESSING POPULATION FITNESS", len(population))
 
-    for individual in population:
-        assess_fit(individual)
+    for i in range(len(population)):
+        assess_fit(population[i])
+        blip(i)
 
-    print("| %ds\n" % (time.time() - start_time))
+    end_load(start_time)
 
     fits = [individual.fitness for individual in population]
     return fits
@@ -128,7 +144,7 @@ def get_compatibility_distance(ind_one: Individual, ind_two: Individual) -> floa
     one = len(set(ran).intersection(ind_one_connections))
     two = len(set(ran).intersection(ind_two_connections))
     #print(one,two)
-    excesses = max(one,two)
+    excesses = max(one, two)
     # -- end
 
     # -- calc avg. weight differences of matching connections
@@ -150,7 +166,6 @@ def get_compatibility_distance(ind_one: Individual, ind_two: Individual) -> floa
 
     #print(compatibility_distance)
     return compatibility_distance
-
 
 
 def calc_adj_fit(target: Individual, population: list) -> None:
@@ -176,36 +191,36 @@ def calc_adj_fit(target: Individual, population: list) -> None:
 
 def calc_pop_adj_fits(population: list) -> list:
     start_time = time.time()
-    print(end=" CALCULATING ADJUSTED FITNESSES"+spacer*20+"\n|")
-    #print(end=" " + spacer*len(population) + " \n|")
-    for individual in population:
-        calc_adj_fit(individual, population)
-        print(end=bit, flush=True)
+    loading("CALCULATING ADJUSTED FITNESSES", len(population))
+
+    for i in range(len(population)):
+        calc_adj_fit(population[i], population)
+        blip(i)
 
     adj_fits = [individual.adj_fitness for individual in population]
 
-    print("| %ds\n" % (time.time() - start_time))
+    end_load(start_time)
+    print("-"*40+"\n")
     return adj_fits
 
 
 def cull_population(population: list) -> list:
-    print(end="CULLING POPULATION ["+str(SURVIVOR_PROPORTION)+"]...", flush=True)
+    print(end="    CULLING POPULATION ["+str(SURVIVOR_PROPORTION)+"]...", flush=True)
     fits = [individual.adj_fitness for individual in population]
     sorted_zip = sorted(zip(fits, range(POPULATION_SIZE), population))
     sorted_pop = [ind[2] for ind in sorted_zip]
-    print("DONE\n")
+    print("DONE")
     return sorted_pop[round(-SURVIVOR_PROPORTION*POPULATION_SIZE):]
 
 
 def speciate_pop(population: list) -> list:
+    print(end="       SPECIATING POPULATION...", flush=True)
     global species_number
     species_list = []
     species_number = 0
-    start_time = time.time()
-    print(end=" SPECIATING POPULATION"+spacer*4+"\n|")
-    #print(end=" " + spacer*len(population) + " \n|")
 
-    for target in population:
+    for i in range(len(population)):
+        target = population[i]
         target.species = -1
         for species in species_list:
             if get_compatibility_distance(target, species[0]) < compatibility_threshold:
@@ -217,10 +232,7 @@ def speciate_pop(population: list) -> list:
             species_list.append([target])
             species_number += 1
 
-        print(end=bit, flush=True)
-
-    print("| %ds\n" % (time.time() - start_time))
-
+    print("DONE")
     return species_list
 
 
@@ -237,12 +249,12 @@ def allocate_offspring(species_list: list) -> list:
     for i in range(len(allocations)):
         allocations[i] = round(allocations[i]*POPULATION_SIZE/max(0.0000001, total))
 
-    print("DONE\n")
+    print("DONE")
     return allocations
 
 
 def create_next_gen(species_list: list, allocations: list) -> list:
-    print(end="CREATING NEXT GENERATION...", flush=True)
+    print(end="    CREATING NEXT GENERATION...", flush=True)
     next_gen = []
 
     # i is the species number
@@ -287,7 +299,7 @@ def create_next_gen(species_list: list, allocations: list) -> list:
             # add child to list
             next_gen.append(child)
 
-    print("DONE\n")
+    print("DONE\n"+"-"*40+"\n")
     # return new population
     return next_gen
 
@@ -337,7 +349,6 @@ def mutate_node(individual: Individual) -> None:
         connection_number += 2
     else:
         pass
-        #("NODE FAILED")
 
 
 def mutate_connection(individual: Individual) -> None:
@@ -346,7 +357,29 @@ def mutate_connection(individual: Individual) -> None:
         connection_number += 1
     else:
         pass
-        #print("CONNECTION FAILED")
+
+# formatting shit -----------------------------------------
+def blip(value: int) -> None:
+    if value % inds == inds - 1:
+        print(end=bit, flush=True)
+
+
+def loading(title: str, length: int) -> None:
+    top = " "+title
+    top += spacer * (length // inds - len(title))
+    top += "\n|"
+    print(end=top)
+
+
+def end_load(start_time: float) -> None:
+    print("| %ds\n" % (time.time() - start_time))
+
+def print_fits(fit_list: list) ->None:
+    print("AVG ADJ FITNESS:", sum(fit_list) / len(fit_list), "\n")
+    f = open(filename, "a")
+    avg_fit = sum(fit_list) / len(fit_list)
+    f.write("%f\n" % avg_fit)
+    f.close()
 
 
 # run main

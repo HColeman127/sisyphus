@@ -134,6 +134,9 @@ class Genome(object):
                     input_depths.append(self.nodes[connection.in_node].depth)
 
                 # if all input depths are defined
+                if not input_depths:
+                    node.depth = 1
+                    node_queue.remove(node)
                 if min(input_depths) >= 0:
                     # define depth and remove from queue
                     node.depth = max(input_depths)+1

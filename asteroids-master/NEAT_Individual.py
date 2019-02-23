@@ -12,14 +12,14 @@ class Individual(object):
         self.species = -1
 
         # initialize starting dense connections
-        connection_number = 0
+        """connection_number = 0
         for i in range(input_size):
             for j in range(output_size):
                 self.genome.add_connection(in_node=(1 + i),
                                            out_node=(1 + input_size + j),
                                            weight=random.uniform(-1, 1),
                                            next_connection_id=connection_number)
-                connection_number += 1
+                connection_number += 1"""
 
     def draw(self, block: bool):
         self.genome.draw(block)
