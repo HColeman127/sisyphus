@@ -52,10 +52,6 @@ def main():
     global node_number
     global connection_number
 
-
-
-
-
     print("-"*60)
     print("SAVING TO FILES:")
     print(filename)
@@ -118,22 +114,26 @@ def get_compatibility_distance(ind_one: Individual, ind_two: Individual) -> floa
     excess_gene_weight = 1
     disjoint_gene_weight = 1
     weight_diff_weight = 0.4
-    comp_distance = 0
 
     ind_one_connections = ind_one.genome.get_connection_ids()
     ind_two_connections = ind_two.genome.get_connection_ids()
 
-    disjoints = 0
-    excesses = 0
+    # --- deal with edge case of null individual
+    if len(ind_one_connections) == 0 and len(ind_two_connections) == 0:
+        return 0
+    if len(ind_one_connections) == 0 and len(ind_two_connections) != 0:
+        return len(ind_two_connections) * excess_gene_weight
+    if len(ind_one_connections) != 0 and len(ind_two_connections) == 0:
+        return len(ind_one_connections) * excess_gene_weight
 
-    #print(ind_one_connections)
-    #print(ind_two_connections)
+    disjoints = 0
 
     # -- calc num of disjoints and excesses
+    if len(ind_one_connections) == 0: ind_one_connections.append(0)
+    if len(ind_two_connections) == 0: ind_two_connections.append(0)
+
     max_val = max(max(ind_one_connections), max(ind_two_connections))
     min_val = min(max(ind_one_connections), max(ind_two_connections))
-
-    #print(max_val, min_val)
 
     for count in range(min_val+1):
         if (count in ind_one_connections) ^ (count in ind_two_connections):
@@ -143,7 +143,7 @@ def get_compatibility_distance(ind_one: Individual, ind_two: Individual) -> floa
     ran = range(min_val+1, max_val+1)
     one = len(set(ran).intersection(ind_one_connections))
     two = len(set(ran).intersection(ind_two_connections))
-    #print(one,two)
+
     excesses = max(one, two)
     # -- end
 
@@ -160,11 +160,12 @@ def get_compatibility_distance(ind_one: Individual, ind_two: Individual) -> floa
 
     average = sum/number
 
+    large_genome_size = max(len(ind_one_connections), len(ind_two_connections)) # N is the size of the larger genome
 
-    N = max(len(ind_one_connections), len(ind_two_connections)) # N is the size of the larger genome
-    compatibility_distance = (excess_gene_weight*excesses)/N + (disjoint_gene_weight*disjoints)/N + weight_diff_weight * average
+    compatibility_distance = (excess_gene_weight*excesses)/large_genome_size + \
+                             (disjoint_gene_weight*disjoints)/large_genome_size + weight_diff_weight * average
 
-    #print(compatibility_distance)
+    print("Comp Dist: ", compatibility_distance)
     return compatibility_distance
 
 
