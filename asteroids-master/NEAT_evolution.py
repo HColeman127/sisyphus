@@ -3,6 +3,10 @@ import time
 import copy
 import numpy as np
 
+try:
+    import cPickle as pickle
+except ModuleNotFoundError:
+    import pickle
 
 
 # individuals
@@ -27,6 +31,8 @@ MUTATE_WEIGHT_STRENGTH = 0.10
 MUTATE_NODE_CHANCE = 0.03
 MUTATE_CONNECTION_CHANCE = 0.40
 
+# pickle stuff
+best_individuals = []
 
 # speciation
 compatibility_threshold = 0.17
@@ -41,6 +47,9 @@ timestamp = time.strftime("%Y-%m-%d-%H%M%S", time.localtime())
 filename = "data/average_fitness_log_" + timestamp + ".txt"
 filename2 = "data/best_individual_log_" + timestamp + ".txt"
 
+pickle_file = "data/best_individuals_" + timestamp + ".dat"
+
+
 # loading bars
 spacer = "_"
 bit = "/"
@@ -51,11 +60,13 @@ def main():
     # global values
     global node_number
     global connection_number
+    global best_individuals
 
     print("-"*60)
     print("SAVING TO FILES:")
     print(filename)
     print()
+
 
     # generate initial population
     population = gen_rand_pop(POPULATION_SIZE)
@@ -70,10 +81,23 @@ def main():
 
         print("-"*40)
         culled_pop = cull_population(population)
-        culled_pop[-1].draw(block=False)
-        culled_pop[-1].assess_fitness(max_trials=1,  max_steps=MAX_STEPS, display=True)
+        #culled_pop[-1].draw(block=False)
+        #culled_pop[-1].assess_fitness(max_trials=1,  max_steps=MAX_STEPS, display=True)
         species_list = speciate_pop(culled_pop)
         allocations = allocate_offspring(species_list)
+
+        print("SPECIES_LIST", species_list)
+
+
+
+        for species in species_list:
+            best_individuals = copy.deepcopy(species[-1])
+
+        file_pi = open(pickle_file, 'wb')
+        pickle.dump(best_individuals, file_pi)
+        #print("PICKLED BEST INDIVIDUALS")
+
+
 
         population = create_next_gen(species_list, allocations)
         print("COMP:", compatibility_threshold)
