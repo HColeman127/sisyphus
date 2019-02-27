@@ -77,7 +77,8 @@ class Individual(object):
         avg_score = sum(scores) / len(scores)
         avg_steps = sum(steps) / len(steps)
 
-        self.fitness = avg_score * avg_steps * hitrate + 0.0001
+        #self.fitness = avg_score * avg_steps * hitrate + 0.0001
+        self.fitness = avg_steps + 1
 
         # print("  AVG SCORE: ", avg_score)
         # print("  AVG STEPS: ", avg_steps)

@@ -97,8 +97,8 @@ class Spaceship(GameObject):
 
         # calculate the direction from the angle variable
 
-        self.position[0] += self.velocity[0]
-        self.position[1] += self.velocity[1]
+        self.position[0] += self.velocity[0]/4
+        self.position[1] += self.velocity[1]/4
 
     def fire(self):
         """create a new Missile and fire it!!"""
@@ -184,5 +184,5 @@ class Rock(GameObject):
     def move(self):
         """Move the rock"""
 
-        self.position[0] += self.velocity[0] * .3
-        self.position[1] += self.velocity[1] * .3
+        self.position[0] += self.velocity[0] * .1
+        self.position[1] += self.velocity[1] * .1

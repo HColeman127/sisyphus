@@ -10,13 +10,13 @@ except ModuleNotFoundError:
 
 
 # individuals
-INPUT_SIZE = 9
-OUTPUT_SIZE = 4
+INPUT_SIZE = 8
+OUTPUT_SIZE = 2
 
 # population
 POPULATION_SIZE = 100
 NUMBER_OF_TRIALS = 10
-MAX_STEPS = 1000
+MAX_STEPS = 5000
 MAX_GENERATIONS = 1000
 
 # evolutionary
@@ -192,8 +192,7 @@ def get_compatibility_distance(ind_one: Individual, ind_two: Individual) -> floa
     return compatibility_distance
 
 
-def calc_adj_fit(target: Individual, population: list) -> None:
-
+def calc_adj_fit(target: Individual, population: list) -> float:
     global compatibility_threshold
     species_size = 0
     comp_dists = []
@@ -204,24 +203,28 @@ def calc_adj_fit(target: Individual, population: list) -> None:
         comp_dist = get_compatibility_distance(target, individual)
         comp_dists.append(comp_dist)
 
-    compatibility_threshold = sum(comp_dists)/len(comp_dists)
-
     for dist in comp_dists:
         if dist <= compatibility_threshold:
             species_size += 1
 
     target.adj_fitness = target.fitness/species_size
 
+    return sum(comp_dists)/len(comp_dists)
+
 
 def calc_pop_adj_fits(population: list) -> list:
+    global compatibility_threshold
     start_time = time.time()
     loading("CALCULATING ADJUSTED FITNESSES", len(population))
+    comp_dists = []
 
     for i in range(len(population)):
-        calc_adj_fit(population[i], population)
+        comp_dists.append(calc_adj_fit(population[i], population))
         blip(i)
 
     adj_fits = [individual.adj_fitness for individual in population]
+
+    compatibility_threshold = sum(comp_dists)/len(comp_dists)
 
     end_load(start_time)
     print("-"*40+"\n")

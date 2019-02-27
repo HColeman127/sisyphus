@@ -121,8 +121,28 @@ class MyGame(object):
         if self.dead:
             self.reset()
 
-        # fire
+        # left
         if commands[0] == 1:
+            self.spaceship.angle += 1
+            self.spaceship.angle %= 360
+        # right
+        if commands[1] == 1:
+            self.spaceship.angle -= 1
+            self.spaceship.angle %= 360
+        # thrust
+        #if commands[2] == 1:
+        if True:
+            # increase the speed
+            self.spaceship.velocity[0] += 0.5 * math.sin(-math.radians(self.spaceship.angle))
+            self.spaceship.velocity[1] += 0.5 * -math.cos(math.radians(self.spaceship.angle))
+
+            # max speed
+            hypotenuse = math.sqrt(self.spaceship.velocity[0]**2 + self.spaceship.velocity[1]**2)
+            if hypotenuse > 13:
+                self.spaceship.velocity[0] = 13 * self.spaceship.velocity[0]/hypotenuse
+                self.spaceship.velocity[1] = 13 * self.spaceship.velocity[1]/hypotenuse
+                # fire
+        """if commands[3] == 1:
             if self.fire_time < 1:
             #if True:
                 # print("FIRING!")
@@ -137,26 +157,7 @@ class MyGame(object):
                 self.fire_time = 20
             else:
                 # print("RECHARGING")
-                self.fire_time -= 1
-        # left
-        if commands[1] == 1:
-            self.spaceship.angle += 10
-            self.spaceship.angle %= 360
-        # right
-        if commands[2] == 1:
-            self.spaceship.angle -= 10
-            self.spaceship.angle %= 360
-        # thrust
-        if commands[3] == 1:
-            # increase the speed
-            self.spaceship.velocity[0] += 0.5 * math.sin(-math.radians(self.spaceship.angle))
-            self.spaceship.velocity[1] += 0.5 * -math.cos(math.radians(self.spaceship.angle))
-
-            # max speed
-            hypotenuse = math.sqrt(self.spaceship.velocity[0]**2 + self.spaceship.velocity[1]**2)
-            if hypotenuse > 13:
-                self.spaceship.velocity[0] = 13 * self.spaceship.velocity[0]/hypotenuse
-                self.spaceship.velocity[1] = 13 * self.spaceship.velocity[1]/hypotenuse
+                self.fire_time -= 1"""
 
         # if there are any missiles on the screen, process them
         if len(self.spaceship.active_missiles) > 0:
@@ -172,6 +173,9 @@ class MyGame(object):
         if self.display:
             # draw everything
             self.draw()
+            command_text = self.medium_font.render(str(commands), True, (0, 155, 0))
+            draw_centered(command_text, self.screen,
+                          (command_text.get_width(), self.height - command_text.get_height()))
 
         # return
         # bool: still playing, int: score, int: velocity x, int: velocity y, int: pointing angle
@@ -184,7 +188,7 @@ class MyGame(object):
         if self.display:
             pygame.display.flip()
 
-        return [self.fire_time] + obs
+        return obs
 
     def get_distances(self):
         rays = 8
@@ -207,6 +211,17 @@ class MyGame(object):
             rock_x, rock_y = rock.position
             rock_rx = rock_x - ship_x
             rock_ry = rock_y - ship_y
+
+            # loop around screen
+            if rock_rx > self.width/2:
+                rock_rx -= self.width
+            elif rock_rx < -self.width/2:
+                rock_rx += self.width
+
+            if rock_ry > self.height/2:
+                rock_ry -= self.height
+            if rock_ry < -self.height/2:
+                rock_ry += self.height
 
             # get rock angle with origin at ship
             rock_angle = math.atan2(rock_ry, rock_rx)
@@ -260,7 +275,7 @@ class MyGame(object):
             #    pygame.draw.line(self.screen, pygame.Color(255, 255, 255, 100),
             #                     (ship_x, ship_y), (ship_x+x, ship_y+y))
 
-        obs = [dist/1000 for dist in distances]
+        obs = [1000/dist for dist in distances]
         return obs
 
     def physics(self):
