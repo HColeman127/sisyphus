@@ -214,13 +214,13 @@ class Genome(object):
                 node_values[node.id] = value
 
                 if node.tag == "output":
-                    output.append(round((node_values[node.id] + 1) / 2))
+                    output.append(round(node_values[node.id]))
 
         return output
 
     def activate(self, value: float) -> float:
         # sigmoid function
-        output = 2.0/(1 + math.e**(-max(-50, min(50, value))))-1
+        output = 1.0/(1 + math.e**(-max(-50, min(50, value))))
         return output
 
     # drawing functions ---------------------------------------------
@@ -228,10 +228,14 @@ class Genome(object):
         G, pos = self.create_digraph()
         plt.ion()
 
-        #edges, weights = zip(*nx.get_edge_attributes(G, 'weight').items())
+        if len(self.connections) > 0:
+            edges, weights = zip(*nx.get_edge_attributes(G, 'weight').items())
 
-        nx.draw(G, pos=pos, node_size=50, node_color='#5CB8B2', with_labels=False)
-                #edgelist=edges, edge_color=weights, edge_cmap=plt.cm.get_cmap("bwr"))
+            nx.draw(G, pos=pos, node_size=50, node_color='#5CB8B2', with_labels=False,
+                    edgelist=edges, edge_color=weights, edge_cmap=plt.cm.get_cmap("bwr"))
+        else:
+            nx.draw(G, pos=pos, node_size=50, node_color='#5CB8B2', with_labels=False)
+
         plt.gcf().set_facecolor('#555555')
         plt.subplots_adjust(top=1, bottom=0, right=1, left=0)
         #plt.draw()

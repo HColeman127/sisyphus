@@ -178,86 +178,90 @@ class MyGame(object):
         return not self.dead, self.score, self.hits, self.shots, self.get_observations()
 
     def get_observations(self):
-        velocity_angle = math.atan2(self.spaceship.velocity[1], self.spaceship.velocity[0]) % (2*math.pi)
-        speed = math.sqrt(self.spaceship.velocity[0]**2 + self.spaceship.velocity[1]**2)
+        obs = self.get_distances()
 
-        rel_vel_angle = (-math.radians(self.spaceship.angle) - velocity_angle) % (2 * math.pi)
-        velocity_x = speed * math.cos(rel_vel_angle)
-        velocity_y = speed * math.sin(rel_vel_angle)
-
-        rocks = self.get_closest_rocks(1)
-
-        # flip display because get_closest_rocks draws dots
+        # flip display because get_distances draws lines
         if self.display:
             pygame.display.flip()
 
-        #print(rocks)
+        return [self.fire_time] + obs
 
-        # self.spaceship.velocity[0], self.spaceship.velocity[1],
-        return [velocity_x, velocity_y, self.fire_time] + rocks
+    def get_distances(self):
+        rays = 8
+        ang_step = 2*math.pi/rays
 
-    def get_closest_rocks(self, num):
-        # distances of all rocks
-        space_x, space_y = self.spaceship.position
+        # ship info
+        ship_x, ship_y = self.spaceship.position
+        ship_angle = math.radians((-90 - self.spaceship.angle) % 360)
 
-        distances = []
-        indices = []
-        edge_positions = []
+        # ray info
+        angles = []
+        for i in range(rays):
+            angles.append(i*ang_step + ship_angle)
+            if angles[-1] >= 2*math.pi:
+                angles[-1] -= 2*math.pi
+        distances = [1000 for _ in range(rays)]
 
-        for index in range(len(self.rocks)):
-            rock = self.rocks[index]
-            x = rock.position[0] - space_x
-            if x > self.width/2:
-                x -= self.width
-            elif x < -self.width/2:
-                x += self.width
+        for rock in self.rocks:
+            # get the rock position relative to ship
+            rock_x, rock_y = rock.position
+            rock_rx = rock_x - ship_x
+            rock_ry = rock_y - ship_y
 
-            y = rock.position[1] - space_y
-            if y > self.height / 2:
-                y -= self.height
-            elif y < -self.height/2:
-                y += self.height
+            # get rock angle with origin at ship
+            rock_angle = math.atan2(rock_ry, rock_rx)
+            if rock_angle < 0:
+                rock_angle += 2*math.pi
+            if rock_angle > (2*math.pi - ang_step/2):
+                rock_angle -= 2*math.pi
 
-            dist = math.sqrt(x**2 + y**2)
-            new_distance = dist - rock.radius
-            new_x = new_distance * x / dist
-            new_y = new_distance * y / dist
+            # find which angle index the found angle is closest to
+            least_index = 0
+            for i in range(rays):
+                if abs(angles[i] - rock_angle) < abs(angles[least_index] - rock_angle):
+                    least_index = i
 
-            distances.append(new_distance)
-            edge_positions.append([new_x, new_y])
-            indices.append(index)
+            # check rays to the left and right as well
+            for index in range(least_index-1, least_index+2):
+                index = index % rays
+                # distance between centers
+                a = math.sqrt(rock_rx**2 + rock_ry**2)
+                b = rock.radius
+                B = abs(angles[index] - rock_angle)
 
-        # creates a list of tuples sorted with respect to the respective distances to the spaceship
-        sorted_rocks = [rock for rock in sorted(zip(distances, indices, edge_positions))]
+                # find value under radical in equation
+                radicand = (a**2)*(math.cos(B)**2 - 1) + b**2
 
-        observations = []
-        weight = 0
-        for _, index, pos in sorted_rocks[:num]:
-            rock = self.rocks[index]
-            observations += self.get_relative_vector(pos)
-            #observations += self.get_relative_vector(rock.velocity)
+                if radicand >= 0:
+                    term_1 = a * math.cos(B)
+                    term_2 = math.sqrt(radicand)
 
-            if self.display:
-                draw_centered(self.blip_image, self.screen, rock.position)
-                pygame.draw.line(self.screen, pygame.Color(255, 255*weight, 255*weight, 100),
-                                 self.spaceship.position, (space_x + pos[0], space_y + pos[1]))
-                weight = 1
+                    sum_1 = term_1+term_2
+                    sum_2 = term_1-term_2
 
-        # if there are less than <num> rocks add max distances
-        for _ in range(num - len(observations)//2):
-            observations += (self.width, self.height)
+                    # find the min sum that is greater than zero
+                    if sum_1 >= 0:
+                        if sum_2 >= 0:
+                            value = min(sum_1, sum_2)
+                        else:
+                            value = sum_1
+                    else:
+                        value = sum_2
 
-        return observations
+                    if value < distances[index]:
+                        distances[index] = value
+                else:
+                    pass
 
-    def get_relative_vector(self, obj_vect):
-        obj_magnitude = math.sqrt(obj_vect[0]**2 + obj_vect[1]**2)
-        obj_angle = math.atan2(obj_vect[0], obj_vect[1])
-        rel_angle = (-math.radians(self.spaceship.angle+90) + obj_angle) % (2 * math.pi)
+        for i in range(rays):
+            x = distances[i] * math.cos(angles[i])
+            y = distances[i] * math.sin(angles[i])
+            #if self.display:
+            #    pygame.draw.line(self.screen, pygame.Color(255, 255, 255, 100),
+            #                     (ship_x, ship_y), (ship_x+x, ship_y+y))
 
-        rel_x = obj_magnitude * math.cos(rel_angle)
-        rel_y = obj_magnitude * math.sin(rel_angle)
-
-        return [rel_x, rel_y]
+        obs = [dist/1000 for dist in distances]
+        return obs
 
     def physics(self):
         # call the move function of the object

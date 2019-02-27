@@ -64,6 +64,7 @@ class Individual(object):
             step_number = 0
             while playing and step_number < max_steps:
                 commands = self.genome.evaluate(node_list, obs)
+                #print(commands)
                 playing, score, hits, shots, obs = game.step(commands)
                 step_number += 1
 
@@ -76,7 +77,7 @@ class Individual(object):
         avg_score = sum(scores) / len(scores)
         avg_steps = sum(steps) / len(steps)
 
-        self.fitness = avg_score * avg_steps * (hitrate ** 4) + 0.0001
+        self.fitness = avg_score * avg_steps * hitrate + 0.0001
 
         # print("  AVG SCORE: ", avg_score)
         # print("  AVG STEPS: ", avg_steps)

@@ -2,50 +2,59 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e8fe4817-1203-46b2-8adf-5abbe027ee1c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/NEAT_test" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/asteroids-master.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/asteroids-master.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompGraph.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FitnessWrapper.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FitnessWrapper_small.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyGame.py" beforeDir="false" afterPath="$PROJECT_DIR$/MyGame.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NEAT_Genome.py" beforeDir="false" afterPath="$PROJECT_DIR$/NEAT_Genome.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NEAT_Individual.py" beforeDir="false" afterPath="$PROJECT_DIR$/NEAT_Individual.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NEAT_evolution.py" beforeDir="false" afterPath="$PROJECT_DIR$/NEAT_evolution.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NEAT_test" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/average_fitness_log_2019-02-22-125126.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/average_fitness_log_2019-02-23-100139.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/average_fitness_log_2019-02-23-115030.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/average_fitness_log_2019-02-23-115110.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/average_fitness_log_2019-02-23-115147.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/average_fitness_log_2019-02-23-115401.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/average_fitness_log_2019-02-23-115436.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/average_fitness_log_2019-02-23-115524.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/average_fitness_log_2019-02-23-115659.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/average_fitness_log_2019-02-23-115827.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/average_fitness_log_2019-02-23-115958.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/average_fitness_log_2019-02-23-120140.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/average_fitness_log_2019-02-23-120250.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/average_fitness_log_2019-02-23-120413.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/average_fitness_log_2019-02-23-120832.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/average_fitness_log_2019-02-23-121000.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/average_fitness_log_2019-02-23-121220.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/average_fitness_log_2019-02-23-121534.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/average_fitness_log_2019-02-23-121803.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/average_fitness_log_2019-02-23-121833.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/average_fitness_log_2019-02-25-113022.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/average_fitness_log_2019-02-25-113323.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/average_fitness_log_2019-02-26-104509.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/average_fitness_log_2019-02-26-110450.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/average_fitness_log_2019-02-26-110643.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/average_fitness_log_2019-02-26-110644.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/average_fitness_log_2019-02-26-111350.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/average_fitness_log_2019-02-26-112730.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/average_fitness_log_2019-02-26-113326.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/best_individuals_2019-02-26-110643.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/best_individuals_2019-02-26-110644.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/best_individuals_2019-02-26-111350.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/best_individuals_2019-02-26-112730.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/best_individuals_2019-02-26-113326.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/evolution.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fitnessTest.py" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FUSProjectUsageTrigger">
-    <session id="1127792528">
-      <usages-collector id="statistics.lifecycle.project">
-        <counts>
-          <entry key="project.open.time.17" value="1" />
-          <entry key="project.open.time.32" value="1" />
-          <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="3" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.edit">
-        <counts>
-          <entry key="NEAT_test" value="268" />
-          <entry key="py" value="912" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.edit">
-        <counts>
-          <entry key="Python" value="1180" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.open">
-        <counts>
-          <entry key="NEAT_test" value="1" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.open">
-        <counts>
-          <entry key="Python" value="1" />
-        </counts>
-      </usages-collector>
-    </session>
   </component>
   <component name="FavoritesManager">
     <favorites_list name="asteroids-master" />
@@ -55,8 +64,32 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/NEAT_evolution.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="88" column="14" selection-start-line="88" selection-start-column="14" selection-end-line="88" selection-end-column="14" />
+            <state relative-caret-position="-2684">
+              <caret line="18" column="16" selection-start-line="18" selection-start-column="16" selection-end-line="18" selection-end-column="16" />
+              <folding>
+                <element signature="e#0#29#0" expanded="true" />
+                <element signature="e#1986#2177#0" />
+                <element signature="e#2228#2315#0" />
+                <element signature="e#2369#2646#0" />
+                <element signature="e#4918#5392#0" />
+                <element signature="e#5448#5776#0" />
+                <element signature="e#6522#6721#0" />
+                <element signature="e#6232#6890#0" />
+                <element signature="e#6949#7374#0" />
+                <element signature="e#9067#9323#0" />
+                <element signature="e#9394#10010#0" />
+                <element signature="e#10066#10255#0" />
+                <element signature="e#10317#10451#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/NEAT_test.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="506">
+              <caret line="23" column="25" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
               </folding>
@@ -67,8 +100,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/NEAT_Individual.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="996">
-              <caret line="78" column="70" lean-forward="true" selection-start-line="78" selection-start-column="64" selection-end-line="78" selection-end-column="70" />
+            <state relative-caret-position="157">
+              <caret line="66" column="17" selection-start-line="66" selection-start-column="17" selection-end-line="66" selection-end-column="17" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -79,8 +112,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/NEAT_Genome.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4026">
-              <caret line="185" column="4" selection-start-line="185" selection-start-column="4" selection-end-line="185" selection-end-column="4" />
+            <state relative-caret-position="-63">
+              <caret line="216" column="62" selection-start-line="216" selection-start-column="62" selection-end-line="216" selection-end-column="62" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -91,23 +124,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MyGame.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1122">
-              <caret line="30" column="32" lean-forward="true" selection-start-line="30" selection-start-column="32" selection-end-line="30" selection-end-column="32" />
+            <state relative-caret-position="374">
+              <caret line="186" column="34" selection-start-line="186" selection-start-column="34" selection-end-line="186" selection-end-column="34" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/NEAT_test">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="26" column="18" selection-start-line="26" selection-start-column="18" selection-end-line="26" selection-end-column="18" />
-              <folding>
-                <element signature="e#1#30#0" expanded="true" />
-                <marker date="1551209465788" expanded="true" signature="151:719" ph="..." />
+                <element signature="e#2454#3433#0" />
               </folding>
             </state>
           </provider>
@@ -116,7 +137,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GameObjects.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1584">
+            <state relative-caret-position="-1584">
               <caret line="75" column="28" selection-start-line="75" selection-start-column="28" selection-end-line="75" selection-end-column="28" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
@@ -172,13 +193,14 @@
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch.py" />
         <option value="$PROJECT_DIR$/evolution.py" />
         <option value="$PROJECT_DIR$/CompGraph.py" />
-        <option value="$PROJECT_DIR$/MyGame.py" />
         <option value="$USER_HOME$/.virtualenvs/asteroids-master-rnKw9U9t/Lib/site-packages/pygame/__init__.py" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/test_file.py" />
         <option value="$PROJECT_DIR$/../../gpt-2-master/src/interactive_conditional_samples.py" />
-        <option value="$PROJECT_DIR$/NEAT_Individual.py" />
         <option value="$PROJECT_DIR$/NEAT_Genome.py" />
         <option value="$PROJECT_DIR$/NEAT_test" />
+        <option value="$PROJECT_DIR$/MyGame.py" />
+        <option value="$PROJECT_DIR$/NEAT_Individual.py" />
+        <option value="$PROJECT_DIR$/NEAT_test.py" />
         <option value="$PROJECT_DIR$/NEAT_evolution.py" />
       </list>
     </option>
@@ -195,7 +217,20 @@
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes />
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="asteroids-master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="asteroids-master" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="Python" />
@@ -229,7 +264,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.NEAT_evolution">
+  <component name="RunManager" selected="Python.NEAT_test (1)">
     <configuration name="NEAT_evolution" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="asteroids-master" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -243,6 +278,27 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/NEAT_evolution.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="NEAT_test (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="asteroids-master" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/NEAT_test.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -293,27 +349,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="generate_unconditional_samples" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="asteroids-master" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../gpt-2-master/src" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../../gpt-2-master/src/generate_unconditional_samples.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="interactive_conditional_samples" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="asteroids-master" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -337,18 +372,18 @@
     </configuration>
     <list>
       <item itemvalue="Python.NEAT_evolution" />
-      <item itemvalue="Python.generate_unconditional_samples" />
       <item itemvalue="Python.interactive_conditional_samples" />
       <item itemvalue="Python.fitnessTest" />
       <item itemvalue="Python.NEAT_test" />
+      <item itemvalue="Python.NEAT_test (1)" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.NEAT_test (1)" />
         <item itemvalue="Python.NEAT_evolution" />
         <item itemvalue="Python.NEAT_test" />
         <item itemvalue="Python.fitnessTest" />
         <item itemvalue="Python.interactive_conditional_samples" />
-        <item itemvalue="Python.generate_unconditional_samples" />
       </list>
     </recent_temporary>
   </component>
@@ -375,8 +410,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
+    <frame x="-6" y="-6" width="1933" height="1053" extended-state="6" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49836066" weight="0.1070091" />
       <window_info id="Favorites" order="1" side_tool="true" weight="0.32958803" />
@@ -390,7 +424,7 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info active="true" anchor="right" id="Run" order="3" visible="true" weight="0.410498" />
+      <window_info active="true" anchor="right" id="Run" order="3" visible="true" weight="0.41091493" />
       <window_info anchor="right" id="Python Console" order="4" weight="0.5329744" />
       <window_info anchor="right" id="TODO" order="5" weight="0.32974428" />
       <window_info anchor="right" id="Debug" order="6" weight="0.39838493" />
@@ -415,9 +449,6 @@
       <window_info anchor="right" id="Debug" order="6" weight="0.3986089" />
       <window_info anchor="right" id="Terminal" order="7" weight="0.6292135" />
     </layout-to-restore>
-  </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_1.py" />
@@ -519,8 +550,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/NEAT_Genome.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4026">
-          <caret line="185" column="4" selection-start-line="185" selection-start-column="4" selection-end-line="185" selection-end-column="4" />
+        <state relative-caret-position="-63">
+          <caret line="216" column="62" selection-start-line="216" selection-start-column="62" selection-end-line="216" selection-end-column="62" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
@@ -529,7 +560,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/GameObjects.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1584">
+        <state relative-caret-position="-1584">
           <caret line="75" column="28" selection-start-line="75" selection-start-column="28" selection-end-line="75" selection-end-column="28" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
@@ -537,43 +568,62 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/NEAT_test">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="550">
+          <caret line="26" column="18" selection-start-line="26" selection-start-column="18" selection-end-line="26" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/MyGame.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1122">
-          <caret line="30" column="32" lean-forward="true" selection-start-line="30" selection-start-column="32" selection-end-line="30" selection-end-column="32" />
+        <state relative-caret-position="374">
+          <caret line="186" column="34" selection-start-line="186" selection-start-column="34" selection-end-line="186" selection-end-column="34" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
+            <element signature="e#2454#3433#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NEAT_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="506">
+          <caret line="23" column="25" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/NEAT_Individual.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="996">
-          <caret line="78" column="70" lean-forward="true" selection-start-line="78" selection-start-column="64" selection-end-line="78" selection-end-column="70" />
+        <state relative-caret-position="157">
+          <caret line="66" column="17" selection-start-line="66" selection-start-column="17" selection-end-line="66" selection-end-column="17" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/NEAT_test">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="26" column="18" selection-start-line="26" selection-start-column="18" selection-end-line="26" selection-end-column="18" />
-          <folding>
-            <element signature="e#1#30#0" expanded="true" />
-            <marker date="1551209465788" expanded="true" signature="151:719" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/NEAT_evolution.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="88" column="14" selection-start-line="88" selection-start-column="14" selection-end-line="88" selection-end-column="14" />
+        <state relative-caret-position="-2684">
+          <caret line="18" column="16" selection-start-line="18" selection-start-column="16" selection-end-line="18" selection-end-column="16" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
+            <element signature="e#1986#2177#0" />
+            <element signature="e#2228#2315#0" />
+            <element signature="e#2369#2646#0" />
+            <element signature="e#4918#5392#0" />
+            <element signature="e#5448#5776#0" />
+            <element signature="e#6522#6721#0" />
+            <element signature="e#6232#6890#0" />
+            <element signature="e#6949#7374#0" />
+            <element signature="e#9067#9323#0" />
+            <element signature="e#9394#10010#0" />
+            <element signature="e#10066#10255#0" />
+            <element signature="e#10317#10451#0" />
           </folding>
         </state>
       </provider>

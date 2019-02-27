@@ -10,13 +10,13 @@ except ModuleNotFoundError:
 
 
 # individuals
-INPUT_SIZE = 5
+INPUT_SIZE = 9
 OUTPUT_SIZE = 4
 
 # population
 POPULATION_SIZE = 100
 NUMBER_OF_TRIALS = 10
-MAX_STEPS = 400
+MAX_STEPS = 1000
 MAX_GENERATIONS = 1000
 
 # evolutionary
@@ -28,11 +28,8 @@ MUTATE_ALL_WEIGHTS_CHANCE = 0.80
 MUTATE_WEIGHT_CHANCE = 0.90
 MUTATE_WEIGHT_STRENGTH = 0.10
 
-MUTATE_NODE_CHANCE = 0.03
-MUTATE_CONNECTION_CHANCE = 0.40
-
-# pickle stuff
-best_individuals = []
+MUTATE_NODE_CHANCE = 0.10
+MUTATE_CONNECTION_CHANCE = 0.30
 
 # speciation
 compatibility_threshold = 0.17
@@ -42,7 +39,7 @@ node_number = INPUT_SIZE+OUTPUT_SIZE+1
 #connection_number = INPUT_SIZE*OUTPUT_SIZE+1
 connection_number = 0
 
-# filenams
+# filenames
 timestamp = time.strftime("%Y-%m-%d-%H%M%S", time.localtime())
 filename = "data/average_fitness_log_" + timestamp + ".txt"
 filename2 = "data/best_individual_log_" + timestamp + ".txt"
@@ -62,47 +59,48 @@ def main():
     global connection_number
     global best_individuals
 
+    # pickle stuff
+    best_individuals = []
+
     print("-"*60)
     print("SAVING TO FILES:")
     print(filename)
+    print(pickle_file)
     print()
-
 
     # generate initial population
     population = gen_rand_pop(POPULATION_SIZE)
 
     for gen_number in range(MAX_GENERATIONS):
         print("GENERATION:", gen_number, "\n")
-        fits = assess_pop_fits(population)
+        raw_fits = assess_pop_fits(population)
         adj_fits = calc_pop_adj_fits(population)
+        sorted_pop = sort_pop(population)
 
+        fit_stats(adj_fits, sorted_pop)
 
-        print_fits(adj_fits)
-
+        # prep for next generation
         print("-"*40)
-        culled_pop = cull_population(population)
-        #culled_pop[-1].draw(block=False)
-        #culled_pop[-1].assess_fitness(max_trials=1,  max_steps=MAX_STEPS, display=True)
+        culled_pop = cull_population(sorted_pop)
         species_list = speciate_pop(culled_pop)
         allocations = allocate_offspring(species_list)
 
-        print("SPECIES_LIST", species_list)
-
-
-
+        # save best individual to file
+        best_individuals = []
         for species in species_list:
-            best_individuals = copy.deepcopy(species[-1])
+            best_individuals.append(copy.deepcopy(species[-1]))
 
         file_pi = open(pickle_file, 'wb')
         pickle.dump(best_individuals, file_pi)
         #print("PICKLED BEST INDIVIDUALS")
 
 
-
+        # creates the next generation
         population = create_next_gen(species_list, allocations)
-        print("COMP:", compatibility_threshold)
-        print("ALLOC:", allocations)
-        print("SIZE:", len(population))
+
+        print("COMPATIBILITY THRESHOLD:", compatibility_threshold)
+        print("  OFFSPRING ALLOCATIONS:", allocations)
+        print("   NEXT GENERATION SIZE:", len(population))
         print("="*80+"")
 
 
@@ -230,17 +228,24 @@ def calc_pop_adj_fits(population: list) -> list:
     return adj_fits
 
 
-def cull_population(population: list) -> list:
-    print(end="    CULLING POPULATION ["+str(SURVIVOR_PROPORTION)+"]...", flush=True)
+def sort_pop(population: list) -> list:
+    #print(end="          SORTING POPULATION...", flush=True)
     fits = [individual.adj_fitness for individual in population]
     sorted_zip = sorted(zip(fits, range(POPULATION_SIZE), population))
     sorted_pop = [ind[2] for ind in sorted_zip]
-    print("DONE")
-    return sorted_pop[round(-SURVIVOR_PROPORTION*POPULATION_SIZE):]
+    #print("DONE")
+    return sorted_pop
+
+
+def cull_population(population: list) -> list:
+    #print(end="    CULLING POPULATION [" + str(SURVIVOR_PROPORTION) + "]...", flush=True)
+    culled_pop = population[round(-SURVIVOR_PROPORTION*POPULATION_SIZE):]
+    #print("DONE")
+    return culled_pop
 
 
 def speciate_pop(population: list) -> list:
-    print(end="       SPECIATING POPULATION...", flush=True)
+    #print(end="       SPECIATING POPULATION...", flush=True)
     global species_number
     species_list = []
     species_number = 0
@@ -258,12 +263,12 @@ def speciate_pop(population: list) -> list:
             species_list.append([target])
             species_number += 1
 
-    print("DONE")
+    #print("DONE")
     return species_list
 
 
 def allocate_offspring(species_list: list) -> list:
-    print(end="ALLOCATING SPECIES OFFSPRING...", flush=True)
+    #print(end="ALLOCATING SPECIES OFFSPRING...", flush=True)
 
     allocations = []
     for species in species_list:
@@ -275,12 +280,12 @@ def allocate_offspring(species_list: list) -> list:
     for i in range(len(allocations)):
         allocations[i] = round(allocations[i]*POPULATION_SIZE/max(0.0000001, total))
 
-    print("DONE")
+    #print("DONE")
     return allocations
 
 
 def create_next_gen(species_list: list, allocations: list) -> list:
-    print(end="    CREATING NEXT GENERATION...", flush=True)
+    #print(end="    CREATING NEXT GENERATION...", flush=True)
     next_gen = []
 
     # i is the species number
@@ -325,7 +330,7 @@ def create_next_gen(species_list: list, allocations: list) -> list:
             # add child to list
             next_gen.append(child)
 
-    print("DONE\n"+"-"*40+"\n")
+    #print("DONE\n"+"-"*40+"\n")
     # return new population
     return next_gen
 
@@ -384,6 +389,7 @@ def mutate_connection(individual: Individual) -> None:
     else:
         pass
 
+
 # formatting shit -----------------------------------------
 def blip(value: int) -> None:
     if value % inds == inds - 1:
@@ -400,12 +406,16 @@ def loading(title: str, length: int) -> None:
 def end_load(start_time: float) -> None:
     print("| %ds\n" % (time.time() - start_time))
 
-def print_fits(fit_list: list) ->None:
-    print("AVG ADJ FITNESS:", sum(fit_list) / len(fit_list), "\n")
+
+def fit_stats(fit_list: list, sorted_pop: list) ->None:
+    avg_adj_fit = sum(fit_list) / len(fit_list)
+    print("AVG ADJ FITNESS:", avg_adj_fit, "\n")
     f = open(filename, "a")
-    avg_fit = sum(fit_list) / len(fit_list)
-    f.write("%f\n" % avg_fit)
+    f.write("%f\n" % avg_adj_fit)
     f.close()
+
+    print("BEST FITNESS:", sorted_pop[-1].adj_fitness)
+    print()
 
 
 # run main
