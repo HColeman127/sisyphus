@@ -183,6 +183,7 @@ class Genome(object):
             return False
         # if the depth of the in node is greater than the out node return False
         if self.nodes[in_node].depth == self.nodes[out_node].depth:
+            #print(in_node, out_node)
             return False
         else:
             if self.nodes[in_node].depth > self.nodes[out_node].depth:

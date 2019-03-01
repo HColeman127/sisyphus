@@ -33,7 +33,7 @@ class MyGame(object):
         self.width = 1200
         self.height = 900
         self.death_distances = {"big": 90, "normal": 65, "small": 40}
-        self.min_rock_distance = 350
+        self.min_rock_distance = 100
         self.display = display
 
         # pygame/display stuff
@@ -66,7 +66,8 @@ class MyGame(object):
         self.hits = 0
 
         self.rocks = []
-        for i in range(4):
+        self.make_rock(pos=(self.width/2, self.height/4))
+        for i in range(5):
             self.make_rock()
 
         self.dead = False
@@ -104,7 +105,7 @@ class MyGame(object):
     def step(self, commands=(0, 0, 0, 0)):
         if self.display:
             pygame.event.pump()
-            pygame.time.wait(round(1000/self.FPS))
+            #pygame.time.wait(round(1000/self.FPS))
 
         if self.display and False:
             commands = [0, 0, 0, 0]
@@ -123,15 +124,15 @@ class MyGame(object):
 
         # left
         if commands[0] == 1:
-            self.spaceship.angle += 1
+            self.spaceship.angle += 10
             self.spaceship.angle %= 360
         # right
         if commands[1] == 1:
-            self.spaceship.angle -= 1
+            self.spaceship.angle -= 10
             self.spaceship.angle %= 360
         # thrust
-        #if commands[2] == 1:
-        if True:
+        if commands[2] == 1:
+        #if True:
             # increase the speed
             self.spaceship.velocity[0] += 0.5 * math.sin(-math.radians(self.spaceship.angle))
             self.spaceship.velocity[1] += 0.5 * -math.cos(math.radians(self.spaceship.angle))
@@ -142,7 +143,7 @@ class MyGame(object):
                 self.spaceship.velocity[0] = 13 * self.spaceship.velocity[0]/hypotenuse
                 self.spaceship.velocity[1] = 13 * self.spaceship.velocity[1]/hypotenuse
                 # fire
-        """if commands[3] == 1:
+        if commands[3] == 1:
             if self.fire_time < 1:
             #if True:
                 # print("FIRING!")
@@ -157,7 +158,7 @@ class MyGame(object):
                 self.fire_time = 20
             else:
                 # print("RECHARGING")
-                self.fire_time -= 1"""
+                self.fire_time -= 1
 
         # if there are any missiles on the screen, process them
         if len(self.spaceship.active_missiles) > 0:
@@ -268,14 +269,15 @@ class MyGame(object):
                 else:
                     pass
 
-        for i in range(rays):
-            x = distances[i] * math.cos(angles[i])
-            y = distances[i] * math.sin(angles[i])
-            #if self.display:
-            #    pygame.draw.line(self.screen, pygame.Color(255, 255, 255, 100),
-            #                     (ship_x, ship_y), (ship_x+x, ship_y+y))
+        if self.display and False:
+            for i in range(rays):
+                x = distances[i] * math.cos(angles[i])
+                y = distances[i] * math.sin(angles[i])
 
-        obs = [1000/dist for dist in distances]
+                pygame.draw.line(self.screen, pygame.Color(255, 255, 255, 100),
+                                 (ship_x, ship_y), (ship_x+x, ship_y+y))
+
+        obs = [1/dist for dist in distances]
         return obs
 
     def physics(self):

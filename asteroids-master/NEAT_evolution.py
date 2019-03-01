@@ -11,16 +11,16 @@ except ModuleNotFoundError:
 
 # individuals
 INPUT_SIZE = 8
-OUTPUT_SIZE = 2
+OUTPUT_SIZE = 4
 
 # population
-POPULATION_SIZE = 100
-NUMBER_OF_TRIALS = 10
+POPULATION_SIZE = 200
+NUMBER_OF_TRIALS = 2
 MAX_STEPS = 5000
 MAX_GENERATIONS = 1000
 
 # evolutionary
-SURVIVOR_PROPORTION = 0.50
+SURVIVOR_PROPORTION = 0.25
 RE_EXPRESSION_CHANCE = 0.25
 
 # mutation
@@ -28,8 +28,8 @@ MUTATE_ALL_WEIGHTS_CHANCE = 0.80
 MUTATE_WEIGHT_CHANCE = 0.90
 MUTATE_WEIGHT_STRENGTH = 0.10
 
-MUTATE_NODE_CHANCE = 0.10
-MUTATE_CONNECTION_CHANCE = 0.30
+MUTATE_NODE_CHANCE = 0.01
+MUTATE_CONNECTION_CHANCE = 0.10
 
 # speciation
 compatibility_threshold = 0.17
@@ -50,7 +50,7 @@ pickle_file = "data/best_individuals_" + timestamp + ".dat"
 # loading bars
 spacer = "_"
 bit = "/"
-inds = 2
+inds = 4
 
 
 def main():
@@ -70,6 +70,7 @@ def main():
 
     # generate initial population
     population = gen_rand_pop(POPULATION_SIZE)
+
 
     for gen_number in range(MAX_GENERATIONS):
         print("GENERATION:", gen_number, "\n")
@@ -202,9 +203,7 @@ def calc_adj_fit(target: Individual, population: list) -> float:
     for individual in population:
         comp_dist = get_compatibility_distance(target, individual)
         comp_dists.append(comp_dist)
-
-    for dist in comp_dists:
-        if dist <= compatibility_threshold:
+        if comp_dist <= compatibility_threshold:
             species_size += 1
 
     target.adj_fitness = target.fitness/species_size
@@ -328,7 +327,7 @@ def create_next_gen(species_list: list, allocations: list) -> list:
                 mutate_node(child)
 
             if random.uniform(0, 1) < MUTATE_CONNECTION_CHANCE:
-                mutate_connection(child)
+                mutate_connection(child, species_list)
 
             # add child to list
             next_gen.append(child)
@@ -385,12 +384,27 @@ def mutate_node(individual: Individual) -> None:
         pass
 
 
-def mutate_connection(individual: Individual) -> None:
+def mutate_connection(individual: Individual, species_list: list) -> bool:
     global connection_number
     if individual.mutate_connection(connection_number):
+        target_con = individual.genome.connections[connection_number]
+
+        for species in species_list:
+            for ind in species:
+                for connection in ind.genome.get_connections():
+                    if connection.in_node == target_con.in_node and connection.out_node == target_con.out_node and \
+                            not connection.id == target_con.id:
+                        del individual.genome.connections[target_con.id]
+
+                        target_con.id = connection.id
+                        individual.genome.connections[target_con.id] = target_con
+
+                        return True
+
         connection_number += 1
     else:
         pass
+        #print("CONNECTION FAILED")
 
 
 # formatting shit -----------------------------------------
